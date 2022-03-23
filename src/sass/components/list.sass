@@ -1,3 +1,77 @@
-.list__item
-    &:hover .button-3
-        opacity: 1
+.list
+    &__legend
+        display: grid
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr
+        color: $text-color-light
+    
+    &__items
+        padding: 0
+        list-style-type: none
+
+    .item
+        display: grid
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr
+        padding: 10px 0
+        align-items: center
+        text-decoration: none
+        color: $text-color
+        border-bottom: 1px solid $line-color
+
+        &:hover .button-3
+            opacity: 1
+
+        &__status
+            display: flex
+            &:before
+                content: ''
+                display: inline-block
+                width: 20px
+                height: 20px
+                margin-right: 8px
+                border-radius: 32px
+                background-color: $unknown-color
+            
+            &.works
+                &::before
+                    background-color: $positive-color
+            &.notWorks
+                &::before
+                    background-color: $negative-color
+
+        &__name
+            display: flex
+
+        &__descriptionButton
+            margin: 0 8px 0 0
+            position: relative
+
+            &.inactive
+                display: none
+
+        &__descriptionText
+            padding: 24px
+            width: 348px
+            position: absolute
+            top: 0
+            left: 32px
+            background-color: $card-color
+            border-radius: 0 8px 8px
+            box-shadow: 1px 1px 10px #0000005d
+            &:before
+                content:''
+                width: 0
+                height: 0
+                position: absolute
+                left: -10px
+                top: 0
+                display: block
+                border-bottom: 10px solid transparent
+                border-top: 10px solid transparent
+                border-right: 10px solid $card-color
+                transform: rotate(0deg)
+            &.inactive
+                display: none
+
+        &__lastPingDate
+            color: $text-color-light
+        

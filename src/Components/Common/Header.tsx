@@ -5,17 +5,17 @@ const Header = () => {
     return <header className='header'>
         <div className='header__inner'>
             <img src={logo} alt="" />
-            <nav>
-                <ul>
-                    <li>
-                        <a href='#'>Серверы</a>
+            <nav className='nav'>
+                <ul className='menu'>
+                    <li className='menu__item'>
+                        <a href='#' className='link active'>Серверы</a>
                     </li>
-                    <li>
-                        <a href='#'>Логи</a>
+                    <li className='menu__item'>
+                        <a href='#' className='link'>Логи</a>
                     </li>
                 </ul>
             </nav>
-            <a href='#'>Выйти</a>
+            <a href='#' className='logout link'>Выйти</a>
         </div>
     </header>
 }

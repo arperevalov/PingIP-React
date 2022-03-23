@@ -13,6 +13,10 @@
 body
     font-family: 'Inter'
 
+.h1
+    font-size: 32px
+    font-weight: 600
+
 .button-super
     @include button-super
 
@@ -24,3 +28,16 @@ body
 
 .button-3
     @include button-3
+
+.link
+    color: $text-color
+    text-decoration: none
+    transition: ease all 0.2s
+
+    &:hover
+        opacity: 0.5
+        
+    &.active
+        color: $link-color
+        &:hover
+            opacity: 1
