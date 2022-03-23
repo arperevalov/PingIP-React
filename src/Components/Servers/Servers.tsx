@@ -1,13 +1,14 @@
 import React from 'react';
+import ListItem from '../Common/ListItem';
 import mark from './../../images/mark.svg'
 
 const Servers = () => {
-    return <div>
+    return <main className='main'>
         <div>
             <h1>Серверы</h1>
             <div>
-                <button>+ Добавить сервер</button>
-                <button>Пингануть все серверы</button>
+                <button className='button-1'>+ Добавить сервер</button>
+                <button className='button-super'>Пингануть все серверы</button>
             </div>
         </div>
 
@@ -18,18 +19,13 @@ const Servers = () => {
             <span>Последний пинг</span>
         </div>
         <ul>
-            <li>
-                <span>Работает</span>
-                <span><img src={mark}/>Объект №1</span>
-                <span>109.226.233.16</span>
-                <span>16:24 <span>19.03.2022</span></span>
-                <div>
-                    <button>Изменить</button>
-                    <button>Пинг</button>
-                </div>
-            </li>
+            <ListItem/>
+            <ListItem/>
+            <ListItem/>
+            <ListItem/>
+            <ListItem/>
         </ul>
-    </div>
+    </main>
 }
 
 export default Servers

@@ -1,0 +1,73 @@
+@mixin container
+    max-width: 1200px
+    padding: 0 40px
+    margin: 0 auto
+
+@mixin button-super
+    padding: 10px 16px
+    
+    color: $text-color-inverted
+    font-size: 14px
+    font-weight: 600
+    text-transform: uppercase
+    letter-spacing: .04rem
+
+    cursor: pointer
+    border: none
+    border-radius: 4px
+    background-color: $link-color
+    transition: ease all 0.2s
+    &:hover
+        opacity: 0.7
+
+@mixin button-1
+    padding: 10px 16px
+    
+    color: $link-color
+    font-size: 14px
+    font-weight: 600
+    text-transform: uppercase
+    letter-spacing: .04rem
+
+    cursor: pointer
+    border: none
+    border-radius: 4px
+    background-color: $bg-color
+    transition: ease all 0.2s
+    &:hover
+        opacity: 0.7
+
+@mixin button-2
+    padding: 8px 12px
+    
+    color: $link-color
+    font-size: 14px
+    font-weight: 600
+    text-transform: uppercase
+    letter-spacing: .04rem
+
+    cursor: pointer
+    border: 1px solid $link-color
+    border-radius: 4px
+    background-color: $bg-color
+    transition: ease all 0.2s
+    &:hover
+        opacity: 0.7
+
+@mixin button-3
+    padding: 8px 12px
+    
+    color: $link-color
+    font-size: 14px
+    font-weight: 600
+    text-transform: uppercase
+    letter-spacing: .04rem
+
+    opacity: 0
+    cursor: pointer
+    border: none
+    border-radius: 4px
+    background-color: $bg-color
+    transition: ease all 0.2s
+    &:hover
+        opacity: 1
