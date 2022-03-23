@@ -48,29 +48,20 @@
             &.inactive
                 display: none
 
+        &__descriptionTextWrapper
+            display: flex
+            position: absolute
+            top: 6px
+            left: 24px
+            filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.12))
+            &.inactive
+                display: none
+
         &__descriptionText
             padding: 24px
             width: 348px
-            position: absolute
-            top: 0
-            left: 32px
             background-color: $card-color
             border-radius: 0 8px 8px
-            box-shadow: 1px 1px 10px #0000005d
-            &:before
-                content:''
-                width: 0
-                height: 0
-                position: absolute
-                left: -10px
-                top: 0
-                display: block
-                border-bottom: 10px solid transparent
-                border-top: 10px solid transparent
-                border-right: 10px solid $card-color
-                transform: rotate(0deg)
-            &.inactive
-                display: none
 
         &__lastPingDate
             color: $text-color-light

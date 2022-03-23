@@ -1,17 +1,26 @@
 import React from 'react'
+import { Link, NavLink } from 'react-router-dom'
 import logo from './../../images/logo.svg'
 
 const Header = () => {
     return <header className='header'>
         <div className='header__inner'>
-            <img src={logo} alt="" />
+            <Link to='/'><img src={logo} alt="" /></Link>
             <nav className='nav'>
                 <ul className='menu'>
                     <li className='menu__item'>
-                        <a href='#' className='link active'>Серверы</a>
+                        <NavLink to="/servers"
+                            className={({ isActive }) => 
+                                (isActive ? "link active" : "link")}>
+                                Серверы
+                        </NavLink>
                     </li>
                     <li className='menu__item'>
-                        <a href='#' className='link'>Логи</a>
+                        <NavLink to="/logs"
+                            className={({ isActive }) => 
+                                (isActive ? "link active" : "link")}>
+                                Логи
+                        </NavLink>
                     </li>
                 </ul>
             </nav>
