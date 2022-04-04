@@ -3,16 +3,16 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Header from './Common/Header';
 import Servers from './Servers/Servers';
 import Server from './Servers/Server';
-import Auth from './Auth';
+import AuthContainer from './Auth/AuthContainer';
 
 function App() {
 
-    const [logged, setLogged] = useState(true)
+    const [logged, setLogged] = useState(false)
 
     return (<div>
             <Header/>
             <Routes>
-                <Route path="/" element={logged ? <Navigate replace to="/servers"/> : <Auth/>}/>
+                <Route path="/" element={logged ? <Navigate replace to="/servers"/> : <AuthContainer/>}/>
                 <Route path='/servers' element={<Servers/>}/>
                 <Route path='/servers/:id' element={<Server/>}/>
             </Routes>
