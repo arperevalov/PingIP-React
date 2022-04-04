@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import App from './Components/App';
+import AppContainer from './Components/AppContainer';
 import store from "./Redux/store";
 
 import './sass/index.sass'
@@ -10,7 +10,7 @@ import './sass/index.sass'
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <App />
+            <AppContainer />
         </BrowserRouter>
     </Provider>
     , document.getElementById('root'));
