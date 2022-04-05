@@ -29,6 +29,26 @@ body
 .button-3
     @include button-3
 
+.progressBar
+    left: 0px
+    top: 0px
+    position: absolute
+    background-color: $positive-color
+    width: 0%
+    height: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    contain: content
+    
+    &__text
+        position: absolute
+        left: 13px
+        top: 8px
+        margin: auto
+        display: block
+        color: $bg-color
+
 .link
     color: $text-color
     text-decoration: none

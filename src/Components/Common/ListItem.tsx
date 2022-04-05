@@ -63,10 +63,12 @@ const ListItem = (props:any) => {
                     <span>109.226.233.16</span>
                     <span>16:24 <span className='item__lastPingDate'>19.03.2022</span></span>
                     <div className='buttonWrapper'>
-                        <button className='button button-3'>Изменить</button>
-                        <button className='button button-2' onClick={startPing} style={{position: 'relative', contain: 'content'}}>
+                        <button className='button button-3'>Изменить</button>   
+                        <button className='button button-2' onClick={startPing}>
                             Пинг
-                            <div className='progressBar' style={{left: '0',top: '0',position: 'absolute', backgroundColor: 'green', width: `${pingProgress}%`, height: '100%', display: 'block'}}/>
+                            <div className='progressBar' style={{width: `${pingProgress}%`}}>
+                                <span className='progressBar__text'>Пинг</span>
+                            </div>
                         </button>
                     </div>
                 </Link>
