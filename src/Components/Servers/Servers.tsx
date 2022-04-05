@@ -4,6 +4,7 @@ import ListItem from '../Common/ListItem';
 let description = 'Значимость этих проблем настолько очевидна, что постоянный количественный рост и сфера нашей активности требуют определения и уточнения позиций, занимаемых участниками в отношении поставленных задач.'
 
 const Servers = () => {
+
     return <main className='main'>
         <div className='main__top'>
             <h1 className='h1'>Серверы</h1>

@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 
 const ListItem = (props:any) => {
 
-    const [displayBlock, setDisplayBlock] = useState(false)
+    const [displayBlock, setDisplayBlock] = useState(false),
+    [pingProgress, setPingProgress] = useState(0),
+    [isPinging, setIsPinging] = useState(false)
 
     const toggleDescription = (e:any) => {
         e.preventDefault()
@@ -17,6 +19,25 @@ const ListItem = (props:any) => {
         }
         console.log(displayBlock)
     }
+
+    const startPing = (e:any) => {
+        e.preventDefault()
+        
+        setIsPinging(true)
+        setPingProgress(0)
+    }
+
+    useEffect(()=>{
+        if (isPinging) {
+            if(pingProgress <= 100) {
+                setTimeout(()=>{
+                    setPingProgress(pingProgress+10)
+                }, 100)
+            } else {
+                setIsPinging(false)
+            }
+        }
+    },[ isPinging, pingProgress])
 
     return <li>
                 <Link to={'/servers/'+props.id} className='item'>
@@ -43,7 +64,10 @@ const ListItem = (props:any) => {
                     <span>16:24 <span className='item__lastPingDate'>19.03.2022</span></span>
                     <div className='buttonWrapper'>
                         <button className='button button-3'>Изменить</button>
-                        <button className='button button-2'>Пинг</button>
+                        <button className='button button-2' onClick={startPing} style={{position: 'relative', contain: 'content'}}>
+                            Пинг
+                            <div className='progressBar' style={{left: '0',top: '0',position: 'absolute', backgroundColor: 'green', width: `${pingProgress}%`, height: '100%', display: 'block'}}/>
+                        </button>
                     </div>
                 </Link>
             </li>

@@ -7,7 +7,6 @@ function Auth(props:any) {
     const formSubmit = (e:any) => {
         e.preventDefault()
         props.setBearerToken()
-        debugger
     }
 
     return (<form onSubmit={formSubmit} >
