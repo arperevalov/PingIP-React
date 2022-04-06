@@ -1,15 +1,18 @@
 import { connect } from "react-redux"
 import App from "./App"
 import { logOut } from "../Redux/AuthReducer"
+import { setDisplayPopup } from "../Redux/AppReducer"
 
 const mapStateToProps = (state:any) => {
     return {
-        hasBearer: state.AuthPage.hasBearer
+        hasBearer: state.AuthPage.hasBearer,
+        displayPopup: state.AppPage.displayPopup
     }
 }
 
 const AppContainer = connect(mapStateToProps, {
-    logOut
+    logOut,
+    setDisplayPopup
 })(App)
 
 export default AppContainer

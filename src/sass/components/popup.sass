@@ -1,0 +1,38 @@
+.popup
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    margin: auto
+    z-index: 999
+
+    &__overlay
+        background-color: #000
+        opacity: 0.5
+        display: block
+        width: 100vw
+        height: 100vh
+
+    &__container
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        margin: auto
+        z-index: 999
+        max-width: 440px
+        height: fit-content
+        padding: 40px
+        border-radius: 8px
+        background-color: $bg-color
+
+    &__top
+        display: flex
+        justify-content: space-between
+        margin: 0 0 24px
+
+    &__form
+        display: grid
+        gap: 12px

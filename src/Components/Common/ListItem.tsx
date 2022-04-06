@@ -29,7 +29,7 @@ const ListItem = (props:any) => {
 
     useEffect(()=>{
         if (isPinging) {
-            if(pingProgress <= 100) {
+            if(pingProgress < 100) {
                 setTimeout(()=>{
                     setPingProgress(pingProgress+10)
                 }, 100)
