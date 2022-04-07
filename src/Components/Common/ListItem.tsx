@@ -2,22 +2,31 @@ import React, { useEffect, useState } from 'react';
 import mark from './../../images/mark.svg'
 import markActive from './../../images/mark-active.svg'
 import { Link } from 'react-router-dom';
+import Popup from './Popup';
 
 const ListItem = (props:any) => {
 
     const [displayBlock, setDisplayBlock] = useState(false),
+    [displayPopup, setDisplayPopup] = useState(false),
     [pingProgress, setPingProgress] = useState(0),
     [isPinging, setIsPinging] = useState(false)
 
     const toggleDescription = (e:any) => {
         e.preventDefault()
-        console.log(displayBlock)
         if (!displayBlock) {
             setDisplayBlock(true)
         } else {
             setDisplayBlock(false)
         }
-        console.log(displayBlock)
+    }
+
+    const togglePopup = (e:any) => {
+        e.preventDefault()
+        if (!displayPopup) {
+            setDisplayPopup(true)
+        } else {
+            setDisplayPopup(false)
+        }
     }
 
     const startPing = (e:any) => {
@@ -63,7 +72,7 @@ const ListItem = (props:any) => {
                     <span>109.226.233.16</span>
                     <span>16:24 <span className='item__lastPingDate'>19.03.2022</span></span>
                     <div className='buttonWrapper'>
-                        <button className='button button-3'>Изменить</button>   
+                        <button className='button button-3' onClick={togglePopup}>Изменить</button>   
                         <button className='button button-2' onClick={startPing}>
                             Пинг
                             <div className='progressBar' style={{width: `${pingProgress}%`}}>
@@ -72,6 +81,7 @@ const ListItem = (props:any) => {
                         </button>
                     </div>
                 </Link>
+                {displayPopup ? <Popup setDisplayPopup = {setDisplayPopup}/> : ''}
             </li>
 }
 

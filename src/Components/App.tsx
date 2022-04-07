@@ -15,7 +15,6 @@ function App(props:any) {
                 <Route path='/servers' element={<Servers/>}/>
                 <Route path='/servers/:id' element={<Server/>}/>
             </Routes>
-            {props.displayPopup ? <Popup/> : ''}
         </div>);
 }
 

@@ -1,14 +1,14 @@
 import React from "react"
 import Input from "./Input"
 
-const Popup = () => {
+const Popup = (props:any) => {
 
     return <div className="popup">
-        <div className="popup__overlay"/>
+        <div className="popup__overlay" onClick={()=>{props.setDisplayPopup()}}/>
         <div className="popup__container">
             <div className="popup__top">
                 <h2 className="h2">Объект №1</h2>
-                <button>X</button>
+                <button onClick={()=>{props.setDisplayPopup()}}>X</button>
             </div>
             <form className="popup__form">
                 <Input nameValue='Имя'/>
