@@ -6,8 +6,8 @@ let description = 'Значимость этих проблем настольк
 
 const Servers = () => {
 
-    const params = useParams();
-    const prodId = params.id;
+    const params:any = useParams();
+    const prodId:number = params.id;
 
     return <main className='main'>
         <div className='main__top'>
@@ -26,9 +26,9 @@ const Servers = () => {
                 <span>Последний пинг</span>
             </div>
             <ul className='list__items'>
-                <ListItem status={true} description={description}/>
-                <ListItem status={true}/>
-                <ListItem status={false} description={description}/>
+                <ListItem id='322' status={true} description={description}/>
+                <ListItem id='322' status={true}/>
+                <ListItem id='322' status={false} description={description}/>
             </ul>
         </div>
     </main>

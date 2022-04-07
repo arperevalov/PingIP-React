@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Header from './Common/Header';
 import Servers from './Servers/Servers';
 import Server from './Servers/Server';
 import AuthContainer from './Auth/AuthContainer';
-import Popup from './Common/Popup';
 
-function App(props:any) {
+interface AppProps {
+    hasBearer: boolean
+}
+
+function App(props:AppProps) {
 
     return (<div>
             <Header/>

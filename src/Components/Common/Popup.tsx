@@ -1,7 +1,11 @@
 import React from "react"
 import Input from "./Input"
 
-const Popup = (props:any) => {
+interface PopupProps {
+    setDisplayPopup: CallableFunction
+}
+
+const Popup = (props:PopupProps) => {
 
     return <div className="popup">
         <div className="popup__overlay" onClick={()=>{props.setDisplayPopup()}}/>

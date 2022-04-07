@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
-import Header from '../Common/Header';
+import React from 'react';
 
-function Auth(props:any) {
+interface AuthProps {
+    setBearerToken: CallableFunction
+    hasBearer: boolean
+}
+
+function Auth(props:AuthProps) {
 
     const formSubmit = (e:any) => {
         e.preventDefault()

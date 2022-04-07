@@ -1,7 +1,11 @@
 const SET_BEARER = 'SET_BEARER',
 LOG_OUT = 'LOG_OUT'
 
-const defaultValues = {
+interface AuthReducerDefault {
+    hasBearer: boolean
+}
+
+const defaultValues: AuthReducerDefault = {
     hasBearer: false
 }
 

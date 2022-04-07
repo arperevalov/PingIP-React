@@ -1,6 +1,10 @@
 import React from "react";
 
-const Input = (props:any) => {
+interface InputProps {
+    nameValue: string
+}
+
+const Input = (props:InputProps) => {
     return <label>
         <input placeholder={props.nameValue}/>
     </label>

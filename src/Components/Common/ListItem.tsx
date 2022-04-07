@@ -4,14 +4,20 @@ import markActive from './../../images/mark-active.svg'
 import { Link } from 'react-router-dom';
 import Popup from './Popup';
 
-const ListItem = (props:any) => {
+interface ListItemProps {
+    id: string
+    status?: boolean | undefined
+    description?: string
+}
+
+const ListItem = (props:ListItemProps) => {
 
     const [displayBlock, setDisplayBlock] = useState(false),
     [displayPopup, setDisplayPopup] = useState(false),
     [pingProgress, setPingProgress] = useState(0),
     [isPinging, setIsPinging] = useState(false)
 
-    const toggleDescription = (e:any) => {
+    const toggleDescription = (e:any):void => {
         e.preventDefault()
         if (!displayBlock) {
             setDisplayBlock(true)
@@ -20,7 +26,7 @@ const ListItem = (props:any) => {
         }
     }
 
-    const togglePopup = (e:any) => {
+    const togglePopup = (e:any):void => {
         e.preventDefault()
         if (!displayPopup) {
             setDisplayPopup(true)
@@ -29,7 +35,7 @@ const ListItem = (props:any) => {
         }
     }
 
-    const startPing = (e:any) => {
+    const startPing = (e:any):void => {
         e.preventDefault()
         
         setIsPinging(true)
