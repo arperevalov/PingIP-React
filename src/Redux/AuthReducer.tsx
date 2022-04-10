@@ -5,10 +5,14 @@ enum EAuth {
 
 interface AuthReducerDefault {
     hasBearer: boolean
+    token: string | null,
+    username: string | null
 }
 
 const defaultValues: AuthReducerDefault = {
-    hasBearer: false
+    hasBearer: false,
+    token: null,
+    username: null
 }
 
 const AuthReducer = (state = defaultValues, action:any) => {
@@ -16,13 +20,17 @@ const AuthReducer = (state = defaultValues, action:any) => {
         case EAuth.SET_BEARER:
             return {
                 ...state,
-                hasBearer: true
+                hasBearer: true,
+                token: action.token,
+                username: action.username
             }
             break;
         case EAuth.LOG_OUT:
             return {
                 ...state,
-                hasBearer: false
+                hasBearer: false,
+                token: null,
+                username: null
             }
             break;
     
@@ -34,7 +42,7 @@ const AuthReducer = (state = defaultValues, action:any) => {
     }
 }
 
-export const setBearerToken = (token:string) => ({type: EAuth.SET_BEARER, token})
+export const setUser = (user:object) => ({type: EAuth.SET_BEARER, user})
 export const logOut = () => ({type: EAuth.LOG_OUT})
 
 export default AuthReducer
