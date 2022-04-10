@@ -14,15 +14,17 @@ interface AppProps {
 function App(props:AppProps) {
 
     return (<div>
-            <Header logOut={props.logOut}/>
+            {props.hasBearer ? <>
+                <Header logOut={props.logOut}/>
+                <Routes>
+                    <Route path="/" element={<Navigate replace to="/servers"/>}/>
+                    <Route path='/servers' element={<Servers/>}/>
+                    <Route path='/servers/:id' element={<Server/>}/>
+                </Routes>
+            </> : 
             <Routes>
-                <Route path="/" element={props.hasBearer ? <Navigate replace to="/servers"/> : <AuthContainer/>}/>
-                <Route path='/servers' element={<ProtectedRoute hasBearer={props.hasBearer}> <Servers/></ProtectedRoute>}/>
-                <Route path='/servers/:id' element={<ProtectedRoute hasBearer={props.hasBearer}> <Server/></ProtectedRoute>}/>
-                {/* <Route hasBearer={props.hasBearer} path='/servers/:id' element={<Server/>}/> */}
-                {/* <Route path='/servers' element={<Servers/>}/>
-                <Route path='/servers/:id' element={<Server/>}/> */}
-            </Routes>
+                <Route path="/" element={<AuthContainer/>}/>
+            </Routes>}
         </div>);
 }
 

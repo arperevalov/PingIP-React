@@ -24,7 +24,7 @@ const Header = (props:any) => {
                     </li>
                 </ul>
             </nav>
-            <a href='#' className='logout link' onClick={(e)=>{
+            <a href='/' className='logout link' onClick={(e)=>{
                 e.preventDefault
                 props.logOut()}}>Выйти</a>
         </div>
