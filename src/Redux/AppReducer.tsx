@@ -1,4 +1,6 @@
-const SET_DISPLAY_POPUP = "SET_DISPLAY_POPUP"
+enum EApp {
+    SET_DISPLAY_POPUP
+}
 
 interface AppReducerState {
     displayPopup: boolean
@@ -10,7 +12,7 @@ const defaultValues: AppReducerState = {
 
 const AppReducer = (state = defaultValues, action:any) => {
     switch (action.type) {
-        case SET_DISPLAY_POPUP:
+        case EApp.SET_DISPLAY_POPUP:
             return {
                 ...state
             }
@@ -25,6 +27,6 @@ const AppReducer = (state = defaultValues, action:any) => {
     }
 }
 
-export const setDisplayPopup = () => ({type: SET_DISPLAY_POPUP})
+export const setDisplayPopup = () => ({type: EApp.SET_DISPLAY_POPUP})
 
 export default AppReducer

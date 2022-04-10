@@ -1,5 +1,7 @@
-const SET_BEARER = 'SET_BEARER',
-LOG_OUT = 'LOG_OUT'
+enum EAuth {
+    SET_BEARER,
+    LOG_OUT
+}
 
 interface AuthReducerDefault {
     hasBearer: boolean
@@ -11,13 +13,13 @@ const defaultValues: AuthReducerDefault = {
 
 const AuthReducer = (state = defaultValues, action:any) => {
     switch (action.type) {
-        case SET_BEARER:
+        case EAuth.SET_BEARER:
             return {
                 ...state,
                 hasBearer: true
             }
             break;
-        case LOG_OUT:
+        case EAuth.LOG_OUT:
             return {
                 ...state,
                 hasBearer: false
@@ -32,7 +34,7 @@ const AuthReducer = (state = defaultValues, action:any) => {
     }
 }
 
-export const setBearerToken = (token:string) => ({type: SET_BEARER, token})
-export const logOut = () => ({type: LOG_OUT})
+export const setBearerToken = (token:string) => ({type: EAuth.SET_BEARER, token})
+export const logOut = () => ({type: EAuth.LOG_OUT})
 
 export default AuthReducer

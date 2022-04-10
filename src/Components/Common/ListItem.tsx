@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import mark from './../../images/mark.svg'
 import markActive from './../../images/mark-active.svg'
 import { Link } from 'react-router-dom';
@@ -17,7 +17,7 @@ const ListItem = (props:ListItemProps) => {
     [pingProgress, setPingProgress] = useState(0),
     [isPinging, setIsPinging] = useState(false)
 
-    const toggleDescription = (e:any):void => {
+    const toggleDescription = (e:MouseEvent):void => {
         e.preventDefault()
         if (!displayBlock) {
             setDisplayBlock(true)
@@ -26,7 +26,7 @@ const ListItem = (props:ListItemProps) => {
         }
     }
 
-    const togglePopup = (e:any):void => {
+    const togglePopup = (e:MouseEvent):void => {
         e.preventDefault()
         if (!displayPopup) {
             setDisplayPopup(true)
@@ -35,7 +35,7 @@ const ListItem = (props:ListItemProps) => {
         }
     }
 
-    const startPing = (e:any):void => {
+    const startPing = (e:MouseEvent):void => {
         e.preventDefault()
         
         setIsPinging(true)

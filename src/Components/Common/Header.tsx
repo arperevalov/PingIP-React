@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import logo from './../../images/logo.svg'
 
-const Header = () => {
+const Header = (props:any) => {
     return <header className='header'>
         <div className='header__inner'>
             <Link to='/'><img src={logo} alt="" /></Link>
@@ -24,7 +24,9 @@ const Header = () => {
                     </li>
                 </ul>
             </nav>
-            <a href='#' className='logout link'>Выйти</a>
+            <a href='#' className='logout link' onClick={(e)=>{
+                e.preventDefault
+                props.logOut()}}>Выйти</a>
         </div>
     </header>
 }
