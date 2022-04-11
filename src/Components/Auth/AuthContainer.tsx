@@ -5,7 +5,6 @@ import Auth from "./Auth"
 
 interface IAuthAPI {
     setUser: CallableFunction
-    hasBearer: boolean
 }
 
 const AuthAPI = (props:IAuthAPI) => {
@@ -42,7 +41,6 @@ const AuthAPI = (props:IAuthAPI) => {
 
 const mapStateToProps = (state:any) => {
     return {
-        hasBearer: state.AuthPage.hasBearer
     }
 }
 

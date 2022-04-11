@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef } from "react"
 import Input from "./Input"
 
 interface PopupProps {
@@ -6,6 +6,10 @@ interface PopupProps {
 }
 
 const Popup = (props:PopupProps) => {
+
+    const nameInput = useRef(null),
+    ipInput = useRef(null),
+    descriptionInput = useRef(null)
 
     return <div className="popup">
         <div className="popup__overlay" onClick={()=>{props.setDisplayPopup()}}/>
@@ -15,9 +19,9 @@ const Popup = (props:PopupProps) => {
                 <button onClick={()=>{props.setDisplayPopup()}}>X</button>
             </div>
             <form className="popup__form">
-                <Input nameValue='Имя'/>
-                <Input nameValue='IP'/>
-                <Input nameValue='Описание'/>
+                <Input reference={nameInput} placeholder="Например, Камера #1" label="Имя" type="text"/>
+                <Input reference={ipInput} placeholder="255.255.255.0" label="IP" type="number" pattern="[0-9].[0-9].[0-9]"/>
+                <Input reference={descriptionInput} placeholder="Короткое описание для важного объекта" label="Описание" type="text"/>
                 <div className="popup__buttonWrapper">
                     <button className='button button-3'>Удалить</button>   
                     <button className='button button-2'>Сохранить изменения</button>

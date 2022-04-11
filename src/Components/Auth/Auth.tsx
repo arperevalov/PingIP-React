@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
+import Input from '../Common/Input';
 
 interface AuthProps {
-    hasBearer: boolean
     requestToken: CallableFunction
 }
 
@@ -15,11 +15,10 @@ function Auth(props:AuthProps) {
         props.requestToken(loginInput.current.value, passwordInput.current.value)
     }
 
-    return (<form onSubmit={formSubmit} >
-        {props.hasBearer ? 'HAS BEARER!' : 'NO BEARER'}<br/>
-        <input ref={loginInput} name='login' type='text' placeholder='VASHE IMYA'/><br/>
-        <input ref={passwordInput} name='password' type='password' placeholder='VASH PAROL))))'/><br/>
-        <button type='submit'>Войти в систему</button>
+    return (<form onSubmit={formSubmit} className="authForm" >
+        <Input reference={loginInput} placeholder=" " label="Логин" type="text"/>
+        <Input reference={passwordInput} placeholder=" " label="Пароль" type="password"/>
+        <button className='button button-super' type='submit'>Войти</button>
         </form>);
 }
 
