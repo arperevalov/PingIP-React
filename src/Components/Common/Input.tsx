@@ -5,6 +5,7 @@ interface IInput {
     placeholder: string
     label: string
     reference: any
+    isRequired?: boolean
 }
 
 const Input = (props:IInput) => {
@@ -12,7 +13,8 @@ const Input = (props:IInput) => {
         <input className="input__input" 
             ref={props.reference} 
             type={props.type} 
-            placeholder={props.placeholder}/>
+            placeholder={props.placeholder}
+            required={props.isRequired ? true : false}/>
         <span className="input__label">{props.label}</span>
     </label>
 }

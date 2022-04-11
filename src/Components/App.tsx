@@ -24,6 +24,7 @@ function App(props:AppProps) {
             </> : 
             <Routes>
                 <Route path="/" element={<AuthContainer/>}/>
+                <Route path="*" element={<Navigate replace to="/"/>}/>
             </Routes>}
         </div>);
 }

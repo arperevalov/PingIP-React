@@ -10,7 +10,7 @@ interface IAuthAPI {
 const AuthAPI = (props:IAuthAPI) => {
 
     const requestToken = (login:string, password: string) => {
-        const url = "https://json.org/example.html"
+        const url = "https://example.com/auth/login"
         async function signIn() {
             let resp = await fetch(url, {
                 method: "POST",
@@ -19,11 +19,11 @@ const AuthAPI = (props:IAuthAPI) => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    login,
+                    username: login,
                     password
                 })
             })
-
+            
             // let respObj = await resp.json();
             let respObj = {
                 username: "admin",
@@ -32,7 +32,6 @@ const AuthAPI = (props:IAuthAPI) => {
 
             props.setUser(respObj)
         }
-
         signIn()
     }
 

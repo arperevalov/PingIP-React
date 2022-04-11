@@ -87,7 +87,7 @@ const ListItem = (props:ListItemProps) => {
                         </button>
                     </div>
                 </Link>
-                {displayPopup ? <Popup setDisplayPopup = {setDisplayPopup}/> : ''}
+                {displayPopup ? <Popup itemId={parseInt(props.id)} setDisplayPopup = {setDisplayPopup}/> : ''}
             </li>
 }
 
