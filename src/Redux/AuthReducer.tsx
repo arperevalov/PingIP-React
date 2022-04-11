@@ -18,14 +18,16 @@ const defaultValues: AuthReducerDefault = {
 const AuthReducer = (state = defaultValues, action:any) => {
     switch (action.type) {
         case EAuth.SET_BEARER:
+            document.cookie = `Bearer = ${action.user.token}`
             return {
                 ...state,
                 hasBearer: true,
-                token: action.token,
-                username: action.username
+                token: action.user.token,
+                username: action.user.username
             }
             break;
         case EAuth.LOG_OUT:
+            document.cookie = 'Bearer =; expires=Thu, 01 Jan 1970 00:00:01 GMT'
             return {
                 ...state,
                 hasBearer: false,
@@ -35,8 +37,18 @@ const AuthReducer = (state = defaultValues, action:any) => {
             break;
     
         default:
+            let hasBearerCookie: boolean
+            if(!state.hasBearer) {
+                let cookies:string = document.cookie
+                let array = cookies.split('; ')
+                for (let a = 0; a < array.length; a++) {
+                    let value = array[a].split('=')
+                    value[0] === 'Bearer' ? hasBearerCookie = true : void(0)
+                }
+            }
             return {
-                ...state
+                ...state,
+                hasBearer: hasBearerCookie
             }
             break;
     }

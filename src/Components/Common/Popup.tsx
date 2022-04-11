@@ -20,7 +20,7 @@ const Popup = (props:PopupProps) => {
             </div>
             <form className="popup__form">
                 <Input reference={nameInput} placeholder="Например, Камера #1" label="Имя" type="text"/>
-                <Input reference={ipInput} placeholder="255.255.255.0" label="IP" type="number" pattern="[0-9].[0-9].[0-9]"/>
+                <Input reference={ipInput} placeholder="255.255.255.0" label="IP" type="text"/>
                 <Input reference={descriptionInput} placeholder="Короткое описание для важного объекта" label="Описание" type="text"/>
                 <div className="popup__buttonWrapper">
                     <button className='button button-3'>Удалить</button>   

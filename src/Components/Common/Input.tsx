@@ -5,12 +5,14 @@ interface IInput {
     placeholder: string
     label: string
     reference: any
-    pattern?: string
 }
 
 const Input = (props:IInput) => {
     return <label className="input">
-        <input className="input__input" ref={props.reference} type={props.type} placeholder={props.placeholder} pattern={props.pattern ? props.pattern : ''}/>
+        <input className="input__input" 
+            ref={props.reference} 
+            type={props.type} 
+            placeholder={props.placeholder}/>
         <span className="input__label">{props.label}</span>
     </label>
 }

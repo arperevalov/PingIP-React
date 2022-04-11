@@ -29,7 +29,13 @@ $inputPadding: 12px
         &:focus + .input__label,
         &:not(:placeholder-shown) + .input__label
             top: -$inputPadding - 28px
-            left: $inputPadding - 2px
+            left: $inputPadding - 4px
             width: fit-content
             font-size: 12px
-            padding: 2px
+            padding: 2px 4px
+            border-radius: 4px
+
+        &:focus,
+        &:active
+            border: 0px solid $link-color
+            outline: 2px solid $link-color
