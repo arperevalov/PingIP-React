@@ -1,9 +1,12 @@
 import React from 'react';
+import { IServers } from '../../Redux/ServersReducer';
 import ListItem from '../Common/ListItem';
 
-let description = 'Значимость этих проблем настолько очевидна, что постоянный количественный рост и сфера нашей активности требуют определения и уточнения позиций, занимаемых участниками в отношении поставленных задач.'
+interface ServersProps {
+    servers: IServers[]
+}
 
-const Servers = () => {
+const Servers = (props: ServersProps) => {
 
     return <main className='main'>
         <div className='main__top'>
@@ -22,11 +25,15 @@ const Servers = () => {
                 <span>Последний пинг</span>
             </div>
             <ul className='list__items'>
-                <ListItem id='123' status={true} description={description}/>
-                <ListItem id='12' status={true}/>
-                <ListItem id='42' status={false} description={description}/>
-                <ListItem id='15623'/>
-                <ListItem id='45'/>
+                {props.servers ? props.servers.map((i:any) => {
+                    return <ListItem
+                        id={i.id}    
+                        itemName={i.name}
+                        description={i.description ? i.description : false}
+                        status={i.status}
+                    />
+                    }) : 'Нет серверов'
+                }
             </ul>
         </div>
     </main>

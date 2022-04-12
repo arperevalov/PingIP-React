@@ -5,6 +5,7 @@ import Input from "./Input"
 interface PopupProps {
     setDisplayPopup: CallableFunction
     itemId: number
+    popupName: string
 }
 
 const Popup = (props:PopupProps) => {
@@ -46,7 +47,7 @@ const Popup = (props:PopupProps) => {
         <div className="popup__overlay" onClick={()=>{props.setDisplayPopup()}}/>
         <div className="popup__container">
             <div className="popup__top">
-                <h2 className="h2">Объект №1</h2>
+                <h2 className="h2">{props.popupName}</h2>
                 <button onClick={()=>{props.setDisplayPopup()}}>X</button>
             </div>
             <form className="popup__form" onSubmit={submitForm}>

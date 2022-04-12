@@ -1,10 +1,9 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Header from './Common/Header';
-import Servers from './Servers/Servers';
-import Server from './Servers/Server';
+import Server from './Server/Server';
 import AuthContainer from './Auth/AuthContainer';
-import ProtectedRoute from './Common/ProtectedRoute';
+import ServersContainer from './Servers/ServersContainer';
 
 interface AppProps {
     hasBearer: boolean
@@ -18,7 +17,7 @@ function App(props:AppProps) {
                 <Header logOut={props.logOut}/>
                 <Routes>
                     <Route path="/" element={<Navigate replace to="/servers"/>}/>
-                    <Route path='/servers' element={<Servers/>}/>
+                    <Route path='/servers' element={<ServersContainer/>}/>
                     <Route path='/servers/:id' element={<Server/>}/>
                 </Routes>
             </> : 

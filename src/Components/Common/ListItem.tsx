@@ -3,10 +3,12 @@ import mark from './../../images/mark.svg'
 import markActive from './../../images/mark-active.svg'
 import { Link } from 'react-router-dom';
 import Popup from './Popup';
+import { ServerStatus } from '../../Redux/ServersReducer';
 
 interface ListItemProps {
-    id: string
-    status?: boolean | undefined
+    id: number
+    itemName: string
+    status?: ServerStatus
     description?: string
 }
 
@@ -56,8 +58,8 @@ const ListItem = (props:ListItemProps) => {
 
     return <li>
                 <Link to={'/servers/'+props.id} className='item'>
-                    <span className={`item__status ${props.status === undefined ? '' : props.status ? ' works' : ' notWorks'}`}>
-                        {props.status === undefined ? 'Неизвестно' : props.status ? 'Работает' : 'Не работает'}
+                    <span className={`item__status ${props.status === ServerStatus.pending ? '' : props.status === ServerStatus.working ? ' works' : ' notWorks'}`}>
+                        {props.status === ServerStatus.pending ? 'Неизвестно' : props.status === ServerStatus.working ? 'Работает' : 'Не работает'}
                     </span>
                     <span className='item__name'>
                         <div className={`item__descriptionButton ${props.description ? '' : ' inactive'}`} onClick={toggleDescription}>
@@ -73,7 +75,7 @@ const ListItem = (props:ListItemProps) => {
                                 </div>
                             </div>
                         </div>
-                        Объект №1
+                        {props.itemName}
                     </span>
                     <span>109.226.233.16</span>
                     <span>16:24 <span className='item__lastPingDate'>19.03.2022</span></span>
@@ -87,7 +89,9 @@ const ListItem = (props:ListItemProps) => {
                         </button>
                     </div>
                 </Link>
-                {displayPopup ? <Popup itemId={parseInt(props.id)} setDisplayPopup = {setDisplayPopup}/> : ''}
+                {displayPopup ? <Popup itemId={props.id} 
+                                    setDisplayPopup={setDisplayPopup}
+                                    popupName={props.itemName}/> : ''}
             </li>
 }
 
