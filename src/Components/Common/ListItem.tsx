@@ -3,13 +3,14 @@ import mark from './../../images/mark.svg'
 import markActive from './../../images/mark-active.svg'
 import { Link } from 'react-router-dom';
 import Popup from './Popup';
-import { ServerStatus } from '../../Redux/ServersReducer';
+import { Status } from '../../Redux/ServersReducer';
 
 interface ListItemProps {
     id: number
     itemName: string
-    status?: ServerStatus
+    status?: Status
     description?: string
+    getPing: CallableFunction
 }
 
 const ListItem = (props:ListItemProps) => {
@@ -39,7 +40,7 @@ const ListItem = (props:ListItemProps) => {
 
     const startPing = (e:MouseEvent):void => {
         e.preventDefault()
-        
+        props.getPing(props.id)
         setIsPinging(true)
         setPingProgress(0)
     }
@@ -58,8 +59,8 @@ const ListItem = (props:ListItemProps) => {
 
     return <li>
                 <Link to={'/servers/'+props.id} className='item'>
-                    <span className={`item__status ${props.status === ServerStatus.pending ? '' : props.status === ServerStatus.working ? ' works' : ' notWorks'}`}>
-                        {props.status === ServerStatus.pending ? 'Неизвестно' : props.status === ServerStatus.working ? 'Работает' : 'Не работает'}
+                    <span className={`item__status ${props.status === Status.pending ? '' : props.status === Status.working ? ' works' : ' notWorks'}`}>
+                        {props.status === Status.pending ? 'Неизвестно' : props.status === Status.working ? 'Работает' : 'Не работает'}
                     </span>
                     <span className='item__name'>
                         <div className={`item__descriptionButton ${props.description ? '' : ' inactive'}`} onClick={toggleDescription}>

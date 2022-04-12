@@ -1,5 +1,4 @@
 import React, { FormEvent, useRef } from "react"
-import { setDisplayPopup } from "../../Redux/AppReducer"
 import Input from "./Input"
 
 interface PopupProps {

@@ -4,6 +4,7 @@ import ListItem from '../Common/ListItem';
 
 interface ServersProps {
     servers: IServers[]
+    getPing: CallableFunction
 }
 
 const Servers = (props: ServersProps) => {
@@ -31,6 +32,7 @@ const Servers = (props: ServersProps) => {
                         itemName={i.name}
                         description={i.description ? i.description : false}
                         status={i.status}
+                        getPing={props.getPing}
                     />
                     }) : 'Нет серверов'
                 }

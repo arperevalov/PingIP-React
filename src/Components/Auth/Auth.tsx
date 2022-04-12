@@ -1,5 +1,6 @@
 import React, { FormEvent, useRef } from 'react';
 import Input from '../Common/Input';
+import logo from './../../images/logo.svg'
 
 interface AuthProps {
     requestToken: CallableFunction
@@ -15,11 +16,14 @@ function Auth(props:AuthProps) {
         props.requestToken(loginInput.current.value, passwordInput.current.value)
     }
 
-    return (<form onSubmit={formSubmit} className="authForm" >
+    return <div className='authPage'>
+    <img src={logo} alt="logo" className='authPage__logo'/>
+    <form onSubmit={formSubmit} className="authForm" >
         <Input reference={loginInput} placeholder=" " label="Логин" type="text" isRequired={true}/>
         <Input reference={passwordInput} placeholder=" " label="Пароль" type="password" isRequired={true}/>
         <button className='button button-super' type='submit'>Войти</button>
-        </form>);
+    </form>
+    </div>
 }
 
 export default Auth;
