@@ -1,20 +1,14 @@
+import { IServers } from "../Interfaces"
+
 enum Actions {
-    setPing = 'SET_PING'
+    setPing = 'SET_PING',
+    getServerChilren = 'GET_SERVER_CHILDREN'
 }
 
 export enum Status {
     working,
     pending,
     notworking
-}
-
-export interface IServers {
-    id: number
-    name: string
-    ip: string
-    description?: string
-    status: Status
-    lastPing?: Date
 }
 
 interface ServersReducerState {
@@ -28,7 +22,22 @@ const defaultValues: ServersReducerState = {
             name: "Node 1",
             ip: "192.168.1.1",
             description: "SomeText",
-            status: Status.working
+            status: Status.working,
+            children: [{
+                    id: 22,
+                    name: "Node 22",
+                    ip: "192.168.1.1",
+                    description: "SomeText",
+                    status: Status.working
+                },
+                {
+                        id: 24,
+                        name: "Node 24",
+                        ip: "192.168.1.1",
+                        description: "SomeText",
+                        status: Status.working
+                }
+            ]
         },
         {
             id: 2,
@@ -57,6 +66,18 @@ const ServersReducer = (state = defaultValues, action:any) => {
 
 
     switch (action.type) {
+
+        case Actions.getServerChilren :
+        
+            item = getServerID(action.id, state.servers)
+
+            state.servers[item].children = [...action.children]
+
+            return {
+                ...state,
+                servers: [...state.servers]
+            }
+            break;
         case Actions.setPing :
 
             item = getServerID(action.id, state.servers)
@@ -92,5 +113,6 @@ const ServersReducer = (state = defaultValues, action:any) => {
 }
 
 export const setPing = (id:number, response: object) => ({type: Actions.setPing, id, response})
+export const getServerChilren = (id:number, children:IServers[]) => ({type: Actions.getServerChilren, id, children})
 
 export default ServersReducer

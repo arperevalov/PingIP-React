@@ -1,5 +1,6 @@
 import React from 'react';
-import { IServers } from '../../Redux/ServersReducer';
+import { Link } from 'react-router-dom';
+import { IServers } from '../../Interfaces';
 import ListItem from '../Common/ListItem';
 
 interface ServersProps {
@@ -27,16 +28,19 @@ const Servers = (props: ServersProps) => {
             </div>
             <ul className='list__items'>
                 {props.servers ? props.servers.map((i:any) => {
-                    return <ListItem
-                        key={i.id}
-                        id={i.id}
-                        itemName={i.name}
-                        ip={i.ip}
-                        lastPing={i.lastPing}
-                        description={i.description ? i.description : false}
-                        status={i.status}
-                        getPing={props.getPing}
-                    />
+                    return <li key={i.id}>
+                        <Link to={'/servers/'+i.id} className='item'>
+                            <ListItem
+                                id={i.id}
+                                name={i.name}
+                                ip={i.ip}
+                                lastPing={i.lastPing}
+                                description={i.description ? i.description : false}
+                                status={i.status}
+                                getPing={props.getPing}
+                            />
+                        </Link>
+                    </li>
                     }) : 'Нет серверов'
                 }
             </ul>

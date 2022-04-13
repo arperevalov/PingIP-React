@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { IServers, setPing } from "../../Redux/ServersReducer";
+import { IServers } from "../../Interfaces";
+import { setPing } from "../../Redux/ServersReducer";
 import Servers from "./Servers";
 
 interface IServersAPI {
-    servers:IServers[],
+    servers: IServers[],
     setPing: CallableFunction
 }
 
@@ -22,13 +23,22 @@ const ServersAPI = (props: IServersAPI) => {
                 body: JSON.stringify({
                 })
             })
+
+            // TESTING PURPOSES
+                function getRandom() {
+                    return Math.random() > 0.5 ? true : false
+                }
+            // TESTING PURPOSES
             
             // let respObj = await resp.json();
             let respObj = {
-                "id": 1,
-                "status": true,
+                // "id": 1,
+                "id": id,
+                // "status": true,
+                "status": getRandom(),
                 "ip_address": "192.168.1.1",
-                "last_ping": "2022-04-09 22:43:03"
+                // "last_ping": "2022-04-09 22:43:03"
+                "last_ping": new Date()
             }
             props.setPing(id, respObj)
         }

@@ -1,17 +1,11 @@
 import React, { MouseEvent, useEffect, useState } from 'react';
 import mark from './../../images/mark.svg'
 import markActive from './../../images/mark-active.svg'
-import { Link } from 'react-router-dom';
 import Popup from './Popup';
 import { Status } from '../../Redux/ServersReducer';
+import { IServers } from '../../Interfaces';
 
-interface ListItemProps {
-    id: number
-    itemName: string
-    ip: string
-    lastPing?: Date
-    status?: Status
-    description?: string
+interface ListItemProps extends IServers {
     getPing: CallableFunction
 }
 
@@ -59,8 +53,7 @@ const ListItem = (props:ListItemProps) => {
         }
     },[ isPinging, pingProgress])
 
-    return <li>
-                <Link to={'/servers/'+props.id} className='item'>
+    return <>
                     <span className={`item__status ${props.status === Status.pending ? '' : props.status === Status.working ? ' works' : ' notWorks'}`}>
                         {props.status === Status.pending ? 'Неизвестно' : props.status === Status.working ? 'Работает' : 'Не работает'}
                     </span>
@@ -78,7 +71,7 @@ const ListItem = (props:ListItemProps) => {
                                 </div>
                             </div>
                         </div>
-                        {props.itemName}
+                        {props.name}
                     </span>
                     <span>{props.ip}</span>
                     <span>{props.lastPing ? props.lastPing.toLocaleTimeString() : ''}
@@ -93,11 +86,11 @@ const ListItem = (props:ListItemProps) => {
                             </div>
                         </button>
                     </div>
-                </Link>
                 {displayPopup ? <Popup itemId={props.id} 
                                     setDisplayPopup={setDisplayPopup}
-                                    popupName={props.itemName}/> : ''}
-            </li>
+                                    popupName={props.name}/> : ''}
+                </>
+
 }
 
 export default ListItem

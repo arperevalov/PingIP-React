@@ -1,18 +1,11 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { Status } from '../../Redux/ServersReducer';
 import ListItem from '../Common/ListItem';
 
-let description = 'Значимость этих проблем настолько очевидна, что постоянный количественный рост и сфера нашей активности требуют определения и уточнения позиций, занимаемых участниками в отношении поставленных задач.'
-
-const Cameras = () => {
-
-    const params:any = useParams();
-    const prodId:number = params.id;
+const Cameras = (props:any) => {
 
     return <main className='main'>
         <div className='main__top'>
-            <h1 className='h1'><span className='location'>Объект {prodId} — NEEDID</span>Камеры</h1>
+            <h1 className='h1'><span className='location'>{props.parent.name} — {props.parent.ip}</span>Камеры</h1>
             <div className='buttonWrapper'>
                 <button className='button button-1'>+ Добавить камеру</button>
                 <button className='button button-super'>Пингануть все камеры</button>
@@ -27,35 +20,27 @@ const Cameras = () => {
                 <span>Последний пинг</span>
             </div>
             <ul className='list__items'>
-                <ListItem 
-                    itemName='Объект 1' 
-                    id={322} 
-                    ip={'123.456.7.8'}
-                    lastPing={new Date()}
-                    status={Status.working} 
-                    description={description} 
-                    getPing={()=>{}}
-                />
-                <ListItem 
-                    itemName='Объект 2' 
-                    id={322} 
-                    ip={'123.456.7.8'}
-                    lastPing={new Date()}
-                    status={Status.pending} 
-                    getPing={()=>{}}
-                />
-                <ListItem 
-                    itemName='Объект 3' 
-                    id={322} 
-                    ip={'123.456.7.8'}
-                    lastPing={new Date()}
-                    status={Status.notworking} 
-                    description={description} 
-                    getPing={()=>{}}
-                />
+            {props.parent.children && props.parent.children.length > 0 ? props.parent.children.map((i:any) => {
+                    return <li key={i.id}>
+                        <div className='item'>
+                            <ListItem
+                                id={i.id}
+                                name={i.name}
+                                ip={i.ip}
+                                lastPing={i.lastPing}
+                                description={i.description ? i.description : false}
+                                status={i.status}
+                                getPing={()=>{}}
+                            />
+                        </div>
+                    </li>
+                    }) : 'Нет серверов'
+                }
             </ul>
         </div>
     </main>
+
+    
 }
 
 export default Cameras

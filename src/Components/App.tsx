@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Header from './Common/Header';
 import AuthContainer from './Auth/AuthContainer';
 import ServersContainer from './Servers/ServersContainer';
-import Cameras from './Cameras/Cameras';
+import CamerasContainer from './Cameras/CamerasContainer';
 
 interface AppProps {
     hasBearer: boolean
@@ -18,7 +18,7 @@ function App(props:AppProps) {
                 <Routes>
                     <Route path="/" element={<Navigate replace to="/servers"/>}/>
                     <Route path='/servers' element={<ServersContainer/>}/>
-                    <Route path='/servers/:id' element={<Cameras/>}/>
+                    <Route path='/servers/:id' element={<CamerasContainer/>}/>
                 </Routes>
             </> : 
             <Routes>
