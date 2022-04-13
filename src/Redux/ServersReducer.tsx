@@ -14,7 +14,7 @@ export interface IServers {
     ip: string
     description?: string
     status: Status
-    lastPing?: string
+    lastPing?: Date
 }
 
 interface ServersReducerState {
@@ -38,35 +38,43 @@ const defaultValues: ServersReducerState = {
         },
         {
             id: 3,
-            name: "Node 2",
+            name: "Node 3",
             ip: "192.168.1.1",
-            status: Status.pending
+            status: Status.notworking
         }
     ]
 }
 
 const ServersReducer = (state = defaultValues, action:any) => {
+
+    let item: number
+
+    const getServerID = (id:number, servers:IServers[]) => {
+        return servers.findIndex(i => {
+            return i.id === id
+        })
+    }
+
+
     switch (action.type) {
         case Actions.setPing :
 
-            const item:number = state.servers.findIndex(i => {
-                return i.id === action.response.id
-            })
+            item = getServerID(action.id, state.servers)
 
             let newStatus: Status
 
-            if (!action.response.status) {
-                newStatus = Status.notworking
-            } else if(action.response.status) {
+            if (action.response.status) {
                 newStatus = Status.working
+            } else {
+                newStatus = Status.notworking
             }
 
             state.servers[item] = {
                 id: action.response.id,
                 name: state.servers[item].name,
-                ip: action.response.ip,
+                ip: action.response.ip_address,
                 status: newStatus,
-                lastPing: action.response.lastPing
+                lastPing: new Date(action.response.last_ping)
             }
 
             return {

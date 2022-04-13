@@ -28,8 +28,11 @@ const Servers = (props: ServersProps) => {
             <ul className='list__items'>
                 {props.servers ? props.servers.map((i:any) => {
                     return <ListItem
-                        id={i.id}    
+                        key={i.id}
+                        id={i.id}
                         itemName={i.name}
+                        ip={i.ip}
+                        lastPing={i.lastPing}
                         description={i.description ? i.description : false}
                         status={i.status}
                         getPing={props.getPing}

@@ -27,9 +27,32 @@ const Cameras = () => {
                 <span>Последний пинг</span>
             </div>
             <ul className='list__items'>
-                <ListItem itemName='Объект 1' id={322} status={Status.working} description={description} getPing={()=>{}}/>
-                <ListItem itemName='Объект 2' id={322} status={Status.pending} getPing={()=>{}}/>
-                <ListItem itemName='Объект 3' id={322} status={Status.notworking} description={description} getPing={()=>{}}/>
+                <ListItem 
+                    itemName='Объект 1' 
+                    id={322} 
+                    ip={'123.456.7.8'}
+                    lastPing={new Date()}
+                    status={Status.working} 
+                    description={description} 
+                    getPing={()=>{}}
+                />
+                <ListItem 
+                    itemName='Объект 2' 
+                    id={322} 
+                    ip={'123.456.7.8'}
+                    lastPing={new Date()}
+                    status={Status.pending} 
+                    getPing={()=>{}}
+                />
+                <ListItem 
+                    itemName='Объект 3' 
+                    id={322} 
+                    ip={'123.456.7.8'}
+                    lastPing={new Date()}
+                    status={Status.notworking} 
+                    description={description} 
+                    getPing={()=>{}}
+                />
             </ul>
         </div>
     </main>

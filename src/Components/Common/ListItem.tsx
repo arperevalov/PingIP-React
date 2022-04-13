@@ -8,6 +8,8 @@ import { Status } from '../../Redux/ServersReducer';
 interface ListItemProps {
     id: number
     itemName: string
+    ip: string
+    lastPing?: Date
     status?: Status
     description?: string
     getPing: CallableFunction
@@ -78,8 +80,10 @@ const ListItem = (props:ListItemProps) => {
                         </div>
                         {props.itemName}
                     </span>
-                    <span>109.226.233.16</span>
-                    <span>16:24 <span className='item__lastPingDate'>19.03.2022</span></span>
+                    <span>{props.ip}</span>
+                    <span>{props.lastPing ? props.lastPing.toLocaleTimeString() : ''}
+                        <span className='item__lastPingDate'>{props.lastPing ? ' ' + props.lastPing.toLocaleDateString() : ''}</span>
+                    </span>
                     <div className='buttonWrapper'>
                         <button className='button button-3' onClick={togglePopup}>Изменить</button>   
                         <button className='button button-2' onClick={startPing}>
