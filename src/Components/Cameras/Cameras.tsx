@@ -30,7 +30,7 @@ const Cameras = (props:any) => {
                                 lastPing={i.lastPing}
                                 description={i.description ? i.description : false}
                                 status={i.status}
-                                getPing={()=>{}}
+                                getPing={props.getPing}
                             />
                         </div>
                     </li>
@@ -39,7 +39,6 @@ const Cameras = (props:any) => {
             </ul>
         </div>
     </main>
-
     
 }
 

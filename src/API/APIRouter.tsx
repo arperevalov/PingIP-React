@@ -1,15 +1,22 @@
+// TESTING PURPOSES
+const getRandom = () => {
+    return Math.random() >= 0.5 ? true : false
+}
+// TESTING PURPOSES
 
 export enum APIRouterActions {
     getAuth,
     getServers,
     pingServer,
+    pingCamera,
     getServerChildren
 }
 
 interface IParams {
     id?: number,
     login?: string,
-    password?: string
+    password?: string,
+    parentID?: number
 }
 
 export async function APIRouter(action: APIRouterActions, params:IParams) {
@@ -19,7 +26,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
     switch (action) {
         case APIRouterActions.pingServer:
 
-                resp = await fetch("https://example.com/auth/login", {
+                resp = await fetch(`https://example.com/node/${params.id}`, {
                 method: "POST",
                 mode: "no-cors",
                 headers: {
@@ -28,27 +35,52 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 body: JSON.stringify({
                 })
             })
-
-            // TESTING PURPOSES
-                const getRandom = () => {
-                    return Math.random() > 0.5 ? true : false
-                }
-            // TESTING PURPOSES
-
             // let respObj = await resp.json();
-            let respObj = {
-                // "id": 1,
+            return {
                 "id": params.id,
-                // "status": true,
                 "status": getRandom(),
                 "ip_address": "192.168.1.1",
-                // "last_ping": "2022-04-09 22:43:03"
                 "last_ping": new Date()
             }
+            break;
 
-            return respObj
+        case APIRouterActions.getServerChildren: 
+            return [{
+                    "id": params.id*2,
+                    "name": "Camera 1 at "+params.id+' node',
+                    "status": getRandom(),
+                    "ip_address": "192.168.1.1",
+                    "last_ping": new Date()
+                },
+                {
+                    "id": params.id*2+1,
+                    "name": "Camera 2 at "+params.id+' node',
+                    "status": getRandom(),
+                    "ip_address": "192.168.1.1",
+                    "last_ping": new Date()
+                }
+            ]
             break;
         
+        case APIRouterActions.pingCamera:
+
+            resp = await fetch(`https://example.com/node/${params.parentID}/${params.id}`, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                })
+            })
+            return {
+                "id": params.id,
+                "status": getRandom(),
+                "ip_address": "192.168.1.1",
+                "last_ping": new Date()
+            }
+            break;
+
         case APIRouterActions.getAuth:
 
             resp = await fetch("https://example.com/auth/login", {
@@ -62,9 +94,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                     password: params.password
                     })
             })
-            
             // let respObj = await resp.json();
-
             return {
                 username: "admin",
                 token: "sdfDF$sdfg$452gGSDf5svsfsds"

@@ -1,9 +1,10 @@
-import { Action, ActionCreator } from "redux"
+var _ = require('lodash');
 import { IServers } from "../Interfaces"
 
 enum Actions {
     setPing = 'SET_PING',
-    getServerChilren = 'GET_SERVER_CHILDREN'
+    setCameraPing = 'SET_CAMERA_PING',
+    setServerChilren = 'SET_SERVER_CHILDREN'
 }
 
 export enum Status {
@@ -68,17 +69,14 @@ const ServersReducer = (state = defaultValues, action: any) => {
 
     switch (action.type) {
 
-        case Actions.getServerChilren :
-        
+        case Actions.setServerChilren :
             item = getServerID(action.id, state.servers)
 
             state.servers[item].children = [...action.children]
 
-            return {
-                ...state,
-                servers: [...state.servers]
-            }
+            return _.cloneDeep(state)
             break;
+
         case Actions.setPing :
 
             item = getServerID(action.id, state.servers)
@@ -105,6 +103,28 @@ const ServersReducer = (state = defaultValues, action: any) => {
             }
             break;
 
+        case Actions.setCameraPing :
+            let parentServerID = getServerID(action.parentID, state.servers),
+            parentServer = state.servers[parentServerID],
+            childID = getServerID(action.id, parentServer.children)
+
+            if (action.response.status) {
+                newStatus = Status.working
+            } else {
+                newStatus = Status.notworking
+            }
+
+            parentServer.children[childID] = {
+                id: action.response.id,
+                name: parentServer.children[childID].name,
+                ip: action.response.ip_address,
+                status: newStatus,
+                lastPing: new Date(action.response.last_ping)
+            }
+
+            return _.cloneDeep(state)
+            break;
+
         default:
             return {
                 ...state
@@ -114,6 +134,7 @@ const ServersReducer = (state = defaultValues, action: any) => {
 }
 
 export const setPing = (id:number, response: object) => ({type: Actions.setPing, id, response})
-export const getServerChilren = (id:number, children:IServers[]) => ({type: Actions.getServerChilren, id, children})
+export const setCameraPing = (id:number, response: object, parentID: number) => ({type: Actions.setCameraPing, id, response, parentID})
+export const setServerChilren = (id:number, children:IServers[]) => ({type: Actions.setServerChilren, id, children})
 
 export default ServersReducer
