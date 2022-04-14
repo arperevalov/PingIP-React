@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import AppContainer from './Components/AppContainer';
 import store from "./Redux/store";
 
-import './sass/index.sass'
+import './../static/sass/index.sass'
 
 ReactDOM.render(
     <Provider store={store}>

@@ -1,6 +1,6 @@
 import React, { MouseEvent, useEffect, useState } from 'react';
-import mark from './../../images/mark.svg'
-import markActive from './../../images/mark-active.svg'
+import mark from './../../../static/images/mark.svg'
+import markActive from './../../../static/images/mark-active.svg'
 import Popup from './Popup';
 import { Status } from '../../Redux/ServersReducer';
 import { IServers } from '../../Interfaces';

@@ -1,3 +1,4 @@
+import { Action, ActionCreator } from "redux"
 import { IServers } from "../Interfaces"
 
 enum Actions {
@@ -54,7 +55,7 @@ const defaultValues: ServersReducerState = {
     ]
 }
 
-const ServersReducer = (state = defaultValues, action:any) => {
+const ServersReducer = (state = defaultValues, action: any) => {
 
     let item: number
 

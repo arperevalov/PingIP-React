@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import logo from './../../images/logo.svg'
+import logo from './../../../static/images/logo.svg'
 
 const Header = (props:any) => {
     return <header className='header'>

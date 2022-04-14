@@ -1,6 +1,6 @@
 import React, { FormEvent, useRef } from 'react';
 import Input from '../Common/Input';
-import logo from './../../images/logo.svg'
+import logo from './../../../static/images/logo.svg'
 
 interface AuthProps {
     requestToken: CallableFunction

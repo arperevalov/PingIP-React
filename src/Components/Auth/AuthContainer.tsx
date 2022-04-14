@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
+import { APIRouter, APIRouterActions } from "../../API/APIRouter"
 import { setUser } from "../../Redux/AuthReducer"
 import Auth from "./Auth"
 
@@ -10,29 +11,12 @@ interface IAuthAPI {
 const AuthAPI = (props:IAuthAPI) => {
 
     const requestToken = (login:string, password: string) => {
-        const url = "https://example.com/auth/login"
-        async function signIn() {
-            let resp = await fetch(url, {
-                method: "POST",
-                mode: "no-cors",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username: login,
-                    password
-                })
-            })
-            
-            // let respObj = await resp.json();
-            let respObj = {
-                username: "admin",
-                token: "sdfDF$sdfg$452gGSDf5svsfsds"
-              }
-
-            props.setUser(respObj)
-        }
-        signIn()
+        APIRouter(APIRouterActions.getAuth, {
+            login,
+            password
+        }).then(r => {
+            props.setUser(r)
+        })
     }
 
     return <Auth {...props} requestToken={requestToken}/>
