@@ -17,6 +17,7 @@ export interface IServers {
 }
 
 export interface IMessage {
+    id?: number
     text: string
     type: MessageType
 }

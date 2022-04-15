@@ -19,11 +19,18 @@ const ServersAPI = (props: IServersAPI) => {
             id: id
         }).then(r => {
             props.setPing(id, r)
+            message.notifyUser({
+                type: MessageType.success,
+                text: 'Чики-пуки '+id
+            })
+        }).catch(e => {
+            message.notifyUser({
+                type: MessageType.error,
+                text: 'Что-то пошло не так'
+            })
+            throw new Error(e)
         })
-        message.notifyUser({
-            type: MessageType.success,
-            text: 'Что-то пошло не так'
-        })
+        
     }
 
     return <Servers {...props} getPing={getPing} />

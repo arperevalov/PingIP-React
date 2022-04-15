@@ -42,6 +42,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 "ip_address": "192.168.1.1",
                 "last_ping": new Date()
             }
+            return resp
             break;
 
         case APIRouterActions.getServerChildren: 
