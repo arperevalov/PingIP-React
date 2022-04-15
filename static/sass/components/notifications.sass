@@ -1,0 +1,24 @@
+.notifications
+    display: grid
+    position: fixed
+    bottom: 0
+    right: 0
+    left: 0
+    margin: 0 auto 24px
+    width: 50%
+    gap: 4px
+
+    .notification
+        padding: 12px
+        border-radius: 8px
+        background-color: $bg-color
+        color: $text-color-inverted
+
+        &__error
+            background-color: $negative-color
+
+        &__success
+            background-color: $positive-color
+
+        &__regular
+            background-color: $link-color

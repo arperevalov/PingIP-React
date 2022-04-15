@@ -4,6 +4,7 @@ import Header from './Common/Header';
 import AuthContainer from './Auth/AuthContainer';
 import ServersContainer from './Servers/ServersContainer';
 import CamerasContainer from './Cameras/CamerasContainer';
+import SysMessagesProvider from '../Providers/SysMessagesProvider';
 
 interface AppProps {
     hasBearer: boolean
@@ -12,7 +13,7 @@ interface AppProps {
 
 function App(props:AppProps) {
 
-    return (<>
+    return (<SysMessagesProvider>
             {props.hasBearer ? <>
                 <Header logOut={props.logOut}/>
                 <Routes>
@@ -25,7 +26,7 @@ function App(props:AppProps) {
                 <Route path="/" element={<AuthContainer/>}/>
                 <Route path="*" element={<Navigate replace to="/"/>}/>
             </Routes>}
-        </>);
+        </SysMessagesProvider>);
 }
 
 export default App;
