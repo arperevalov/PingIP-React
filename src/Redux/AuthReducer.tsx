@@ -1,21 +1,21 @@
-enum EAuth {
+enum Actions {
     SET_BEARER,
     LOG_OUT
 }
 
-interface AuthReducerDefault {
+interface AuthReducerState {
     hasBearer: boolean
     username: string | null
 }
 
-const defaultValues: AuthReducerDefault = {
+const defaultValues: AuthReducerState = {
     hasBearer: false,
     username: null
 }
 
 const AuthReducer = (state = defaultValues, action:any) => {
     switch (action.type) {
-        case EAuth.SET_BEARER:
+        case Actions.SET_BEARER:
             localStorage.setItem('Bearer', JSON.stringify(action.user.token))
             return {
                 ...state,
@@ -23,7 +23,7 @@ const AuthReducer = (state = defaultValues, action:any) => {
                 username: action.user.username
             }
             break;
-        case EAuth.LOG_OUT:
+        case Actions.LOG_OUT:
             localStorage.removeItem('Bearer')
             return {
                 ...state,
@@ -46,7 +46,7 @@ const AuthReducer = (state = defaultValues, action:any) => {
     }
 }
 
-export const setUser = (user:object) => ({type: EAuth.SET_BEARER, user})
-export const logOut = () => ({type: EAuth.LOG_OUT})
+export const setUser = (user:object) => ({type: Actions.SET_BEARER, user})
+export const logOut = () => ({type: Actions.LOG_OUT})
 
 export default AuthReducer

@@ -1,39 +1,28 @@
 import React, { createContext, useEffect, useState } from "react"
+import { connect, MapStateToProps } from "react-redux"
 import SysMessage from "../Components/Common/SysMessage"
 import { IMessage } from "../Interfaces"
+import { setSysMessage, shiftMessage } from "../Redux/AppReducer"
 
 const SysMessagesContext = createContext(null)
 
-const SysMessagesProvider = (props:any) => {
-    const [messages, setMessages] = useState([]),
-    [indexes, setIndexes] = useState([])
+const SysMessagesProviderAPI = (props:any) => {
 
-    const shiftMessage = () =>{
-        setTimeout(()=>{
-            let newMessages = messages.slice(1)
-            setMessages(newMessages)
-        }, 2000)
-    }
 
     const notifyUser = (message: IMessage) => {
-        message.id = indexes.length
-        setIndexes([...indexes, indexes.length+1])
-        setMessages([...messages, message])
+        props.setSysMessage(message)
+        setTimeout(()=>{
+            props.shiftMessage()
+        }, 2000)
     } 
-
-    useEffect(()=>{
-        if (messages.length > 0) {       
-            shiftMessage()
-        }
-    },[messages])
 
     return <SysMessagesContext.Provider value={{
         notifyUser: notifyUser
     }}>
         
         <div className="notifications">
-            {messages.length > 0 ? messages.map((i) => {
-                return <SysMessage key={i.id} text={i.text} type={i.type}/>
+            {props.sysMessages.length > 0 ? props.sysMessages.map((i:any) => {
+                return <SysMessage text={i.text} type={i.type}/>
             }): ''}
         </div>
 
@@ -41,5 +30,17 @@ const SysMessagesProvider = (props:any) => {
     </SysMessagesContext.Provider>
 }
 
+const mapStateToProps = (store:any) => {
+    return {
+        sysMessages: store.AppPage.SysMessages
+    }
+}
+
+const SysMessagesProvider = connect(mapStateToProps, {
+    setSysMessage,
+    shiftMessage
+})(SysMessagesProviderAPI)
+
 export { SysMessagesContext }
 export default SysMessagesProvider
+
