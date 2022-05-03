@@ -83,24 +83,58 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
             break;
 
         case APIRouterActions.getAuth:
-
-            resp = await fetch("https://example.com/auth/login", {
+            resp = await fetch("https://example.com/", {
                 method: "POST",
                 mode: "no-cors",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: new Headers({
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                }),
                 body: JSON.stringify({
                     username: params.login,
                     password: params.password
-                    })
+                })
             })
-            // let respObj = await resp.json();
+
+            // if (resp.ok) {
+            //     return {
+            //         ok: true,
+            //         body: await resp.json()
+            //     }
+            // } else {
+            //     return {
+            //         ok: false
+            //     }
+            // }
             return {
-                username: "admin",
-                token: "sdfDF$sdfg$452gGSDf5svsfsds"
+                ok: true,
+                body: {
+                    username: "admin",
+                    token: "sdfDF$sdfg$452gGSDf5svsfsds"
+                }
               }
             break;
+
+        case APIRouterActions.getServers:
+            fetch(`/api/nodes/`, {
+                method: 'GET',
+                mode: 'no-cors',
+                // headers: new Headers({
+                //     'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace('"', ''),
+                //     "Accept": "application/json"
+                // })
+            })
+            .then(r => {
+                debugger
+                r.json()})
+            .then(r => {
+                debugger
+                return r})
+            .catch(e => {
+                return e
+            })
+            break;
+
         default:
             break;
     }

@@ -39,9 +39,9 @@ const CamerasAPI = (props: ICamerasAPI) => {
                 props.setServerChilren(prodId, r)
             })
         }
-    },[])
+    },[prodId])
 
-    return <Cameras getPing={getPing} parent={parent} />
+    return <Cameras servers={props.servers} getPing={getPing} parent={parent} />
 }
 
 

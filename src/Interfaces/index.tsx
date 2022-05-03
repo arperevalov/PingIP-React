@@ -21,3 +21,8 @@ export interface IMessage {
     text: string
     type: MessageType
 }
+
+export interface IAPIResponse {
+    ok: boolean
+    body: string
+}

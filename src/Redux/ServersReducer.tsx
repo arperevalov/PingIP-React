@@ -4,7 +4,8 @@ import { IServers } from "../Interfaces"
 enum Actions {
     setPing = 'SET_PING',
     setCameraPing = 'SET_CAMERA_PING',
-    setServerChilren = 'SET_SERVER_CHILDREN'
+    setServerChilren = 'SET_SERVER_CHILDREN',
+    setServers = 'SET_SERVERS'
 }
 
 export enum Status {
@@ -18,42 +19,44 @@ interface ServersReducerState {
 }
 
 const defaultValues: ServersReducerState = {
-    servers: [
-        {
-            id: 1,
-            name: "Node 1",
-            ip: "192.168.1.1",
-            description: "SomeText",
-            status: Status.working,
-            children: [{
-                    id: 22,
-                    name: "Node 22",
-                    ip: "192.168.1.1",
-                    description: "SomeText",
-                    status: Status.working
-                },
-                {
-                        id: 24,
-                        name: "Node 24",
-                        ip: "192.168.1.1",
-                        description: "SomeText",
-                        status: Status.working
-                }
-            ]
-        },
-        {
-            id: 2,
-            name: "Node 2",
-            ip: "192.168.1.1",
-            status: Status.pending
-        },
-        {
-            id: 3,
-            name: "Node 3",
-            ip: "192.168.1.1",
-            status: Status.notworking
-        }
-    ]
+    // servers: [
+    //     {
+    //         id: 1,
+    //         name: "Node 1",
+    //         ip: "192.168.1.1",
+    //         description: "SomeText",
+    //         status: Status.working,
+    //         children: [{
+    //                 id: 22,
+    //                 name: "Node 22",
+    //                 ip: "192.168.1.1",
+    //                 description: "SomeText",
+    //                 status: Status.working
+    //             },
+    //             {
+    //                     id: 24,
+    //                     name: "Node 24",
+    //                     ip: "192.168.1.1",
+    //                     description: "SomeText",
+    //                     status: Status.working
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         id: 2,
+    //         name: "Node 2",
+    //         ip: "192.168.1.1",
+    //         status: Status.pending
+    //     },
+    //     {
+    //         id: 3,
+    //         name: "Node 3",
+    //         ip: "192.168.1.1",
+    //         status: Status.notworking
+    //     }
+    // ]
+
+    servers: []
 }
 
 const ServersReducer = (state = defaultValues, action: any) => {
@@ -69,7 +72,14 @@ const ServersReducer = (state = defaultValues, action: any) => {
 
     switch (action.type) {
 
-        case Actions.setServerChilren :
+        case Actions.setServers:
+            return {
+                ...state,
+                servers: [action.servers]
+            }
+            break;
+
+        case Actions.setServerChilren:
             item = getServerID(action.id, state.servers)
 
             state.servers[item].children = [...action.children]
@@ -77,7 +87,7 @@ const ServersReducer = (state = defaultValues, action: any) => {
             return _.cloneDeep(state)
             break;
 
-        case Actions.setPing :
+        case Actions.setPing:
 
             item = getServerID(action.id, state.servers)
 
@@ -103,7 +113,7 @@ const ServersReducer = (state = defaultValues, action: any) => {
             }
             break;
 
-        case Actions.setCameraPing :
+        case Actions.setCameraPing:
             let parentServerID = getServerID(action.parentID, state.servers),
             parentServer = state.servers[parentServerID],
             childID = getServerID(action.id, parentServer.children)
@@ -136,5 +146,6 @@ const ServersReducer = (state = defaultValues, action: any) => {
 export const setPing = (id:number, response: object) => ({type: Actions.setPing, id, response})
 export const setCameraPing = (id:number, response: object, parentID: number) => ({type: Actions.setCameraPing, id, response, parentID})
 export const setServerChilren = (id:number, children:IServers[]) => ({type: Actions.setServerChilren, id, children})
+export const setServers = (servers:IServers[]) => ({type: Actions.setServerChilren, servers})
 
 export default ServersReducer

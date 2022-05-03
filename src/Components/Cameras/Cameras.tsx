@@ -1,4 +1,7 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { IServers } from '../../Interfaces';
+import { Status } from '../../Redux/ServersReducer';
 import ListItem from '../Common/ListItem';
 
 const Cameras = (props:any) => {
@@ -34,8 +37,22 @@ const Cameras = (props:any) => {
                             />
                         </div>
                     </li>
-                    }) : 'Нет серверов'
+                    }) : 'Нет камер'
                 }
+            </ul>
+        </div>
+
+        <div className='asideNav'>
+            <h2 className='asideNav__name h2'>Серверы</h2>
+            <ul className='asideNav__list'>
+                {props.servers.map((i:IServers) => {
+                    return <li className='item' key={i.id}>
+                            <NavLink to={`/servers/${i.id}`}>
+                                <span className={`item__status ${props.status === Status.pending ? '' : props.status === Status.working ? ' works' : ' notWorks'}`} />
+                                <span className='item__name'>{i.name}</span>
+                            </NavLink>
+                        </li>
+                })}
             </ul>
         </div>
     </main>

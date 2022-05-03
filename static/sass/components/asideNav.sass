@@ -1,0 +1,27 @@
+.asideNav
+    position: absolute
+    display: block
+    top: 0px
+    right: -40px
+    width: 100%
+    max-width: 240px
+    border-radius: 8px
+    background-color: $card-color
+
+    &__name
+        padding: 24px
+        width: 100%
+        border-bottom: 1px solid $line-color
+    
+    &__list
+        list-style: none
+        padding: 16px 0
+    
+    .item
+        padding: 8px 24px
+        transition: ease all 0.2s
+        &:hover
+            opacity: 0.5
+        
+        a
+            display: block

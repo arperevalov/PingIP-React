@@ -1,14 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { connect } from "react-redux";
 import { APIRouter, APIRouterActions } from "../../API/APIRouter";
-import { IServers, MessageType } from "../../Interfaces";
+import { IAPIResponse, IServers, MessageType } from "../../Interfaces";
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider";
-import { setPing } from "../../Redux/ServersReducer";
+import { setPing, setServers } from "../../Redux/ServersReducer";
 import Servers from "./Servers";
 
 interface IServersAPI {
     servers: IServers[],
-    setPing: CallableFunction
+    setPing: CallableFunction,
+    setServers: CallableFunction
 }
 
 const ServersAPI = (props: IServersAPI) => {
@@ -29,9 +30,26 @@ const ServersAPI = (props: IServersAPI) => {
                 text: 'Что-то пошло не так'
             })
             throw new Error(e)
-        })
-        
+        })   
     }
+
+    const getServers = () => {
+        APIRouter(APIRouterActions.getServers,{})
+        // .then((r) => {
+        //     debugger
+        //     props.setServers(r)})
+        // .catch(e => {
+        //     message.notifyUser({
+        //         type: MessageType.error,
+        //         text: e
+        //     })
+        //     throw new Error(e)
+        // })
+    }
+
+    useEffect(()=>{
+        getServers()
+    }, [])
 
     return <Servers {...props} getPing={getPing} />
 }
@@ -44,7 +62,8 @@ const MapStateToProps = (store: any) => {
 }
 
 const ServersContainer = connect(MapStateToProps,{
-    setPing
+    setPing,
+    setServers
 })(ServersAPI)
 
 export default ServersContainer
