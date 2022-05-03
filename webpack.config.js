@@ -12,7 +12,19 @@ module.exports = {
     devtool: 'inline-source-map',
     devServer: {
         static: './dist',
-        historyApiFallback: true
+        historyApiFallback: true,
+        port: 8000,
+        proxy: {
+            '/api': {
+                target: 'http://62.113.108.174:3200/api/v1/',
+                changeOrigin: true,
+            },
+        },
+        headers: {
+            'Access-Control-Allow-Origin': 'http://localhost:8000/',
+            'Access-Control-Allow-Methods': "GET, POST, PUT, DELETE",
+            "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+        }
     },
     module: {
         rules: [

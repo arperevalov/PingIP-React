@@ -16,10 +16,15 @@ const defaultValues: AppReducerState = {
 const AppReducer = (state = defaultValues, action:any) => {
     switch (action.type) {
         case Actions.setSysMessage:
+            let newMessage = {
+                type: action.message.type,
+                text: action.message.text.toString()
+            }
+
             return {
                 ...state,
                 SysMessages: [...state.SysMessages,
-                    action.message]
+                    newMessage]
             }
             break;
         

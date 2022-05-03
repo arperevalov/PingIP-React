@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import { connect } from "react-redux"
 import { APIRouter, APIRouterActions } from "../../API/APIRouter"
-import { IAPIResponse, MessageType } from "../../Interfaces"
+import { MessageType } from "../../Interfaces"
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider"
 import { setUser } from "../../Redux/AuthReducer"
 import Auth from "./Auth"
@@ -18,7 +18,8 @@ const AuthAPI = (props:IAuthAPI) => {
         APIRouter(APIRouterActions.getAuth, {
             login,
             password
-        }).then((r) => {props.setUser(r)})
+        }).then((r:any) => {
+            props.setUser(r.body)})
         .catch(e => {
             message.notifyUser({
                 type: MessageType.error,

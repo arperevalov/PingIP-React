@@ -33,8 +33,7 @@ const AuthReducer = (state = defaultValues, action:any) => {
             break;
     
         default:
-            let hasBearerSession: boolean,
-            token: string
+            let hasBearerSession: boolean
             if(localStorage.getItem('Bearer')){
                 hasBearerSession = true
             }
