@@ -15,43 +15,63 @@ interface IServersAPI {
 const ServersAPI = (props: IServersAPI) => {
     const message = useContext(SysMessagesContext)
 
-    const getPing = (id: number) => {
-        APIRouter(APIRouterActions.pingServer, {
-            id: id
-        }).then(r => {
-            props.setPing(id, r)
+    const pingAllServers = () => {
+        APIRouter(APIRouterActions.pingAllServers, {})
+        .then(r => {
+            props.setServers(r)
             message.notifyUser({
                 type: MessageType.success,
-                text: 'Чики-пуки '+id
+                text: 'Все сервера пинганулись'
             })
         }).catch(e => {
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Что-то пошло не так'
+                text: 'Не удалось пингануть все сервера'
+            })
+            throw new Error(e)
+        })   
+    }
+
+    const getPing = (id: number) => {
+        APIRouter(APIRouterActions.pingServer, {
+            id: id
+        }).then(r => {
+            props.setPing(r)
+            message.notifyUser({
+                type: MessageType.success,
+                text: 'Чики-пуки ' + id
+            })
+        }).catch(e => {
+            message.notifyUser({
+                type: MessageType.error,
+                text: 'Не удалось пингануть сервер ' + id
             })
             throw new Error(e)
         })   
     }
 
     const getServers = () => {
-        APIRouter(APIRouterActions.getServers,{})
-        // .then((r) => {
-        //     debugger
-        //     props.setServers(r)})
-        // .catch(e => {
-        //     message.notifyUser({
-        //         type: MessageType.error,
-        //         text: e
-        //     })
-        //     throw new Error(e)
-        // })
+        APIRouter(APIRouterActions.getServers, {})
+        .then(r => {
+            props.setServers(r)
+            message.notifyUser({
+                type: MessageType.success,
+                text: 'Серверы успешно загрузились'
+            })
+        }).catch(e => {
+            message.notifyUser({
+                type: MessageType.error,
+                text: 'Не удалось загрузить серверы'
+            })
+            throw new Error(e)
+        })  
     }
 
     useEffect(()=>{
         getServers()
     }, [])
 
-    return <Servers {...props} getPing={getPing} />
+    return <Servers {...props} getPing={getPing} pingAllServers={pingAllServers} />
 }
 
 

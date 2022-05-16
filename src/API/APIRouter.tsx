@@ -1,15 +1,10 @@
-// TESTING PURPOSES
-const getRandom = () => {
-    return Math.random() >= 0.5 ? true : false
-}
-// TESTING PURPOSES
-
 export enum APIRouterActions {
     getAuth,
     getServers,
     pingServer,
     pingCamera,
-    getServerChildren
+    getServerChildren,
+    pingAllServers
 }
 
 interface IParams {
@@ -26,37 +21,31 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
     switch (action) {
         case APIRouterActions.pingServer:
 
-                resp = await fetch(`https://example.com/node/${params.id}`, {
+            resp = await fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.id}/ping`, {
                 method: "POST",
-                mode: "no-cors",
                 headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                 })
             })
-            // let respObj = await resp.json();
-            return {
-                "id": params.id,
-                "status": getRandom(),
-                "ip_address": "192.168.1.1",
-                "last_ping": new Date()
-            }
-            return resp
+            let respObj = await resp.json();
+            return respObj
             break;
 
         case APIRouterActions.getServerChildren: 
             return [{
                     "id": params.id*2,
                     "name": "Camera 1 at "+params.id+' node',
-                    "status": getRandom(),
+                    // "status": getRandom(),
                     "ip_address": "192.168.1.1",
                     "last_ping": new Date()
                 },
                 {
                     "id": params.id*2+1,
                     "name": "Camera 2 at "+params.id+' node',
-                    "status": getRandom(),
+                    // "status": getRandom(),
                     "ip_address": "192.168.1.1",
                     "last_ping": new Date()
                 }
@@ -76,7 +65,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
             })
             return {
                 "id": params.id,
-                "status": getRandom(),
+                // "status": getRandom(),
                 "ip_address": "192.168.1.1",
                 "last_ping": new Date()
             }
@@ -116,20 +105,41 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
             break;
 
         case APIRouterActions.getServers:
-            fetch(`/api/nodes/`, {
-                method: 'GET',
-                // mode: 'no-cors',
-                headers: new Headers({
-                    "Authorization": "Bearer " + localStorage.getItem('Bearer').replace(/"/g, ''),
-                    "Accept": "application/json",
+            return new Promise ((resolve, reject) => {
+                fetch(`http://62.113.108.174:3200/api/v1/nodes/`, {
+                    method: 'GET',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(r => {
+                    return r.json()})
+                .then(r => {
+                    resolve(r)})
+                .catch(e => {
+                    reject(e)
                 })
             })
-            .then(r => {
-                r.json()})
-            .then(r => {
-                return r})
-            .catch(e => {
-                return e
+            break;
+
+        case APIRouterActions.pingAllServers:
+            return new Promise ((resolve, reject) => {
+                fetch(`http://62.113.108.174:3200/api/v1/nodes/pingAll`, {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(r => {
+                    return r.json()})
+                .then(r => {
+                    debugger
+                    resolve(r)})
+                .catch(e => {
+                    reject(e)
+                })
             })
             break;
 

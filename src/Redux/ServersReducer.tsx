@@ -8,12 +8,6 @@ enum Actions {
     setServers = 'SET_SERVERS'
 }
 
-export enum Status {
-    working,
-    pending,
-    notworking
-}
-
 interface ServersReducerState {
     servers:IServers[]
 }
@@ -69,13 +63,12 @@ const ServersReducer = (state = defaultValues, action: any) => {
         })
     }
 
-
     switch (action.type) {
 
         case Actions.setServers:
             return {
                 ...state,
-                servers: [action.servers]
+                servers: [...action.servers]
             }
             break;
 
@@ -88,22 +81,14 @@ const ServersReducer = (state = defaultValues, action: any) => {
             break;
 
         case Actions.setPing:
-
-            item = getServerID(action.id, state.servers)
-
-            let newStatus: Status
-
-            if (action.response.status) {
-                newStatus = Status.working
-            } else {
-                newStatus = Status.notworking
-            }
+            item = getServerID(action.response.id, state.servers)
 
             state.servers[item] = {
+                ...state.servers[item],
                 id: action.response.id,
                 name: state.servers[item].name,
-                ip: action.response.ip_address,
-                status: newStatus,
+                ip_address: action.response.ip_address,
+                status: action.response.status,
                 lastPing: new Date(action.response.last_ping)
             }
 
@@ -118,17 +103,11 @@ const ServersReducer = (state = defaultValues, action: any) => {
             parentServer = state.servers[parentServerID],
             childID = getServerID(action.id, parentServer.children)
 
-            if (action.response.status) {
-                newStatus = Status.working
-            } else {
-                newStatus = Status.notworking
-            }
-
             parentServer.children[childID] = {
                 id: action.response.id,
                 name: parentServer.children[childID].name,
-                ip: action.response.ip_address,
-                status: newStatus,
+                ip_address: action.response.ip_address,
+                status: action.response.status,
                 lastPing: new Date(action.response.last_ping)
             }
 
@@ -143,9 +122,9 @@ const ServersReducer = (state = defaultValues, action: any) => {
     }
 }
 
-export const setPing = (id:number, response: object) => ({type: Actions.setPing, id, response})
+export const setPing = (response: object) => ({type: Actions.setPing, response})
 export const setCameraPing = (id:number, response: object, parentID: number) => ({type: Actions.setCameraPing, id, response, parentID})
 export const setServerChilren = (id:number, children:IServers[]) => ({type: Actions.setServerChilren, id, children})
-export const setServers = (servers:IServers[]) => ({type: Actions.setServerChilren, servers})
+export const setServers = (servers:IServers[]) => ({type: Actions.setServers, servers})
 
 export default ServersReducer

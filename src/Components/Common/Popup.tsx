@@ -25,7 +25,7 @@ const Popup = (props:PopupProps) => {
                 },
                 body: JSON.stringify({
                     name: nameInput.current.value,
-                    ip_adress: ipInput.current.value,
+                    ip_address: ipInput.current.value,
                     description: descriptionInput.current.value
                 })
             })

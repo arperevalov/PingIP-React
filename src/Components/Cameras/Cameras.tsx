@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { IServers } from '../../Interfaces';
-import { Status } from '../../Redux/ServersReducer';
 import ListItem from '../Common/ListItem';
 
 const Cameras = (props:any) => {
@@ -29,7 +28,7 @@ const Cameras = (props:any) => {
                             <ListItem
                                 id={i.id}
                                 name={i.name}
-                                ip={i.ip}
+                                ip_address={i.ip_address}
                                 lastPing={i.lastPing}
                                 description={i.description ? i.description : false}
                                 status={i.status}
@@ -48,7 +47,7 @@ const Cameras = (props:any) => {
                 {props.servers.map((i:IServers) => {
                     return <li className='item' key={i.id}>
                             <NavLink to={`/servers/${i.id}`}>
-                                <span className={`item__status ${props.status === Status.pending ? '' : props.status === Status.working ? ' works' : ' notWorks'}`} />
+                                <span className={`item__status ${props.status === true ? ' works' : ' notWorks'}`} />
                                 <span className='item__name'>{i.name}</span>
                             </NavLink>
                         </li>

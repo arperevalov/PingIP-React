@@ -1,5 +1,3 @@
-import { Status } from "../Redux/ServersReducer"
-
 export enum MessageType {
     success,
     error,
@@ -9,9 +7,9 @@ export enum MessageType {
 export interface IServers {
     id: number
     name: string
-    ip: string
+    ip_address: string
     description?: string
-    status: Status
+    status: boolean
     lastPing?: Date
     children?:IServers[]
 }

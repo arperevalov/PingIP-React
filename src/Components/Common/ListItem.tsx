@@ -2,7 +2,6 @@ import React, { MouseEvent, useEffect, useState } from 'react';
 import mark from './../../../static/images/mark.svg'
 import markActive from './../../../static/images/mark-active.svg'
 import Popup from './Popup';
-import { Status } from '../../Redux/ServersReducer';
 import { IServers } from '../../Interfaces';
 
 interface ListItemProps extends IServers {
@@ -54,8 +53,8 @@ const ListItem = (props:ListItemProps) => {
     },[ isPinging, pingProgress])
 
     return <>
-                    <span className={`item__status ${props.status === Status.pending ? '' : props.status === Status.working ? ' works' : ' notWorks'}`}>
-                        {props.status === Status.pending ? 'Неизвестно' : props.status === Status.working ? 'Работает' : 'Не работает'}
+                    <span className={`item__status ${props.status === true ? ' works' : ' notWorks'}`}>
+                        {props.status === true ? 'Работает' : 'Не работает'}
                     </span>
                     <span className='item__name'>
                         <div className={`item__descriptionButton ${props.description ? '' : ' inactive'}`} onClick={toggleDescription}>
@@ -73,7 +72,7 @@ const ListItem = (props:ListItemProps) => {
                         </div>
                         {props.name}
                     </span>
-                    <span>{props.ip}</span>
+                    <span>{props.ip_address}</span>
                     <span>{props.lastPing ? props.lastPing.toLocaleTimeString() : ''}
                         <span className='item__lastPingDate'>{props.lastPing ? ' ' + props.lastPing.toLocaleDateString() : ''}</span>
                     </span>

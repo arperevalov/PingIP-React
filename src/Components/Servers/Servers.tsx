@@ -6,6 +6,7 @@ import ListItem from '../Common/ListItem';
 interface ServersProps {
     servers: IServers[]
     getPing: CallableFunction
+    pingAllServers: CallableFunction
 }
 
 const Servers = (props: ServersProps) => {
@@ -15,7 +16,7 @@ const Servers = (props: ServersProps) => {
             <h1 className='h1'>Серверы</h1>
             <div className='buttonWrapper'>
                 <button className='button button-1'>+ Добавить сервер</button>
-                <button className='button button-super'>Пингануть все серверы</button>
+                <button className='button button-super' onClick={()=>{props.pingAllServers()}}>Пингануть все серверы</button>
             </div>
         </div>
 
@@ -33,7 +34,7 @@ const Servers = (props: ServersProps) => {
                             <ListItem
                                 id={i.id}
                                 name={i.name}
-                                ip={i.ip}
+                                ip_address={i.ip_address}
                                 lastPing={i.lastPing}
                                 description={i.description ? i.description : false}
                                 status={i.status}
