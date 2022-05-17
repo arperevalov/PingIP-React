@@ -1,5 +1,5 @@
-import React, { createContext, useEffect, useState } from "react"
-import { connect, MapStateToProps } from "react-redux"
+import React, { createContext } from "react"
+import { connect } from "react-redux"
 import SysMessage from "../Components/Common/SysMessage"
 import { IMessage } from "../Interfaces"
 import { setSysMessage, shiftMessage } from "../Redux/AppReducer"

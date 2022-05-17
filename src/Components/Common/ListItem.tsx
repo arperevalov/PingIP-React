@@ -11,9 +11,7 @@ interface ListItemProps extends IServers {
 const ListItem = (props:ListItemProps) => {
 
     const [displayBlock, setDisplayBlock] = useState(false),
-    [displayPopup, setDisplayPopup] = useState(false),
-    [pingProgress, setPingProgress] = useState(0),
-    [isPinging, setIsPinging] = useState(false)
+    [displayPopup, setDisplayPopup] = useState(false)
 
     const toggleDescription = (e:MouseEvent):void => {
         e.preventDefault()
@@ -36,24 +34,10 @@ const ListItem = (props:ListItemProps) => {
     const startPing = (e:MouseEvent):void => {
         e.preventDefault()
         props.getPing(props.id)
-        setIsPinging(true)
-        setPingProgress(0)
     }
 
-    useEffect(()=>{
-        if (isPinging) {
-            if(pingProgress < 100) {
-                setTimeout(()=>{
-                    setPingProgress(pingProgress+10)
-                }, 100)
-            } else {
-                setIsPinging(false)
-            }
-        }
-    },[ isPinging, pingProgress])
-
     return <>
-                    <span className={`item__status ${props.status === true ? ' works' : ' notWorks'}`}>
+                    <span className={`item__status ${props.status === true ? 'works' : 'notWorks'}`}>
                         {props.status === true ? 'Работает' : 'Не работает'}
                     </span>
                     <span className='item__name'>
@@ -80,9 +64,6 @@ const ListItem = (props:ListItemProps) => {
                         <button className='button button-3' onClick={togglePopup}>Изменить</button>   
                         <button className='button button-2' onClick={startPing}>
                             Пинг
-                            <div className='progressBar' style={{width: `${pingProgress}%`}}>
-                                <span className='progressBar__text'>Пинг</span>
-                            </div>
                         </button>
                     </div>
                 {displayPopup ? <Popup itemId={props.id} 

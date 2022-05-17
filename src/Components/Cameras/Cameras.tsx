@@ -10,7 +10,7 @@ const Cameras = (props:any) => {
             <h1 className='h1'><span className='location'>{props.parent.name} — {props.parent.ip}</span>Камеры</h1>
             <div className='buttonWrapper'>
                 <button className='button button-1'>+ Добавить камеру</button>
-                <button className='button button-super'>Пингануть все камеры</button>
+                <button className='button button-super' onClick={()=>{props.pingAllCameras()}}>Пингануть все камеры</button>
             </div>
         </div>
 

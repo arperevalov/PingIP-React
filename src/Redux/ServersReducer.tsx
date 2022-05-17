@@ -13,43 +13,6 @@ interface ServersReducerState {
 }
 
 const defaultValues: ServersReducerState = {
-    // servers: [
-    //     {
-    //         id: 1,
-    //         name: "Node 1",
-    //         ip: "192.168.1.1",
-    //         description: "SomeText",
-    //         status: Status.working,
-    //         children: [{
-    //                 id: 22,
-    //                 name: "Node 22",
-    //                 ip: "192.168.1.1",
-    //                 description: "SomeText",
-    //                 status: Status.working
-    //             },
-    //             {
-    //                     id: 24,
-    //                     name: "Node 24",
-    //                     ip: "192.168.1.1",
-    //                     description: "SomeText",
-    //                     status: Status.working
-    //             }
-    //         ]
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "Node 2",
-    //         ip: "192.168.1.1",
-    //         status: Status.pending
-    //     },
-    //     {
-    //         id: 3,
-    //         name: "Node 3",
-    //         ip: "192.168.1.1",
-    //         status: Status.notworking
-    //     }
-    // ]
-
     servers: []
 }
 
@@ -104,6 +67,7 @@ const ServersReducer = (state = defaultValues, action: any) => {
             childID = getServerID(action.id, parentServer.children)
 
             parentServer.children[childID] = {
+                ...parentServer.children[childID],
                 id: action.response.id,
                 name: parentServer.children[childID].name,
                 ip_address: action.response.ip_address,

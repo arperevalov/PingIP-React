@@ -2,15 +2,18 @@ import { IMessage } from "../Interfaces";
 
 enum Actions {
     setSysMessage = "SET_SYSMESSAGE",
-    shiftMessage = "SHIFT_MESSAGE"
+    shiftMessage = "SHIFT_MESSAGE",
+    setFetching = "SET_FETCHING"
 }
 
 interface AppReducerState {
     SysMessages:IMessage []
+    isFetching: boolean
 }
 
 const defaultValues: AppReducerState = {
-    SysMessages: []
+    SysMessages: [],
+    isFetching: false
 }
 
 const AppReducer = (state = defaultValues, action:any) => {
@@ -34,6 +37,14 @@ const AppReducer = (state = defaultValues, action:any) => {
                 ...state,
                 SysMessages: [...state.SysMessages]
             }
+            break
+
+        case Actions.setFetching:
+            return {
+                ...state,
+                isFetching: action.fetching
+            }
+            break
     
         default:
             return {
@@ -45,5 +56,6 @@ const AppReducer = (state = defaultValues, action:any) => {
 
 export const setSysMessage = (message: IMessage) => ({type: Actions.setSysMessage, message})
 export const shiftMessage = () => ({type: Actions.shiftMessage})
+export const setFetching = (fetching: boolean) => ({type: Actions.setFetching, fetching})
 
 export default AppReducer

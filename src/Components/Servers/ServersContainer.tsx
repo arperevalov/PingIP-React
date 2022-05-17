@@ -4,26 +4,52 @@ import { APIRouter, APIRouterActions } from "../../API/APIRouter";
 import { IAPIResponse, IServers, MessageType } from "../../Interfaces";
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider";
 import { setPing, setServers } from "../../Redux/ServersReducer";
+import { setFetching } from "../../Redux/AppReducer";
 import Servers from "./Servers";
 
 interface IServersAPI {
     servers: IServers[],
     setPing: CallableFunction,
-    setServers: CallableFunction
+    setServers: CallableFunction,
+    setFetching: CallableFunction
 }
 
 const ServersAPI = (props: IServersAPI) => {
+
     const message = useContext(SysMessagesContext)
 
+    const getServers = () => {
+        props.setFetching(true)
+        APIRouter(APIRouterActions.getServers, {})
+        .then(r => {
+            props.setServers(r)
+            props.setFetching(false)
+            message.notifyUser({
+                type: MessageType.success,
+                text: 'Серверы успешно загрузились'
+            })
+        }).catch(e => {
+            props.setFetching(false)
+            message.notifyUser({
+                type: MessageType.error,
+                text: 'Не удалось загрузить серверы'
+            })
+            throw new Error(e)
+        })  
+    }
+
     const pingAllServers = () => {
+        props.setFetching(true)
         APIRouter(APIRouterActions.pingAllServers, {})
         .then(r => {
+            props.setFetching(false)
             props.setServers(r)
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Все сервера пинганулись'
             })
         }).catch(e => {
+            props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
                 text: 'Не удалось пингануть все сервера'
@@ -33,38 +59,24 @@ const ServersAPI = (props: IServersAPI) => {
     }
 
     const getPing = (id: number) => {
+        props.setFetching(true)
         APIRouter(APIRouterActions.pingServer, {
             id: id
         }).then(r => {
             props.setPing(r)
+            props.setFetching(false)
             message.notifyUser({
                 type: MessageType.success,
-                text: 'Чики-пуки ' + id
+                text: 'Успешно пинганулся сервер ' + id
             })
         }).catch(e => {
+            props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
                 text: 'Не удалось пингануть сервер ' + id
             })
             throw new Error(e)
         })   
-    }
-
-    const getServers = () => {
-        APIRouter(APIRouterActions.getServers, {})
-        .then(r => {
-            props.setServers(r)
-            message.notifyUser({
-                type: MessageType.success,
-                text: 'Серверы успешно загрузились'
-            })
-        }).catch(e => {
-            message.notifyUser({
-                type: MessageType.error,
-                text: 'Не удалось загрузить серверы'
-            })
-            throw new Error(e)
-        })  
     }
 
     useEffect(()=>{
@@ -83,7 +95,8 @@ const MapStateToProps = (store: any) => {
 
 const ServersContainer = connect(MapStateToProps,{
     setPing,
-    setServers
+    setServers,
+    setFetching
 })(ServersAPI)
 
 export default ServersContainer
