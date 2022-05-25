@@ -1,17 +1,18 @@
-import React, { MouseEvent, useEffect, useState } from 'react';
+import React, { MouseEvent, useContext, useEffect, useState } from 'react';
 import mark from './../../../static/images/mark.svg'
 import markActive from './../../../static/images/mark-active.svg'
-import Popup from './Popup';
-import { IServers } from '../../Interfaces';
+import { IServers, PopupType } from '../../Interfaces';
+import { PopupContext } from '../../Providers/PopupProvider';
 
 interface ListItemProps extends IServers {
     getPing: CallableFunction
+    parentID?: number
 }
 
 const ListItem = (props:ListItemProps) => {
 
     const [displayBlock, setDisplayBlock] = useState(false),
-    [displayPopup, setDisplayPopup] = useState(false)
+        popup = useContext(PopupContext)
 
     const toggleDescription = (e:MouseEvent):void => {
         e.preventDefault()
@@ -23,12 +24,14 @@ const ListItem = (props:ListItemProps) => {
     }
 
     const togglePopup = (e:MouseEvent):void => {
-        e.preventDefault()
-        if (!displayPopup) {
-            setDisplayPopup(true)
-        } else {
-            setDisplayPopup(false)
-        }
+        popup.setPopup({
+            type: PopupType.update,
+            id: props.id,
+            name: props.name,
+            ip_address: props.ip_address,
+            description: props.description,
+            parentID: props.parentID
+        })
     }
 
     const startPing = (e:MouseEvent):void => {
@@ -66,9 +69,6 @@ const ListItem = (props:ListItemProps) => {
                             Пинг
                         </button>
                     </div>
-                {displayPopup ? <Popup itemId={props.id} 
-                                    setDisplayPopup={setDisplayPopup}
-                                    popupName={props.name}/> : ''}
                 </>
 
 }

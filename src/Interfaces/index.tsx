@@ -4,6 +4,13 @@ export enum MessageType {
     regular
 }
 
+export enum PopupType {
+    default,
+    create,
+    update,
+    delete
+}
+
 export interface IServers {
     id: number
     name: string
@@ -18,6 +25,15 @@ export interface IMessage {
     id?: number
     text: string
     type: MessageType
+}
+
+export interface IPopup {
+    type: PopupType
+    name?: string
+    id?: number
+    ip_address?: string
+    description?: string
+    parentID?: number
 }
 
 export interface IAPIResponse {

@@ -33,6 +33,7 @@ const Cameras = (props:any) => {
                                 description={i.description ? i.description : false}
                                 status={i.status}
                                 getPing={props.getPing}
+                                parentID={props.parent.id}
                             />
                         </div>
                     </li>

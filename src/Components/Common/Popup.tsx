@@ -1,53 +1,46 @@
-import React, { FormEvent, useRef } from "react"
+import React, { FormEvent, useContext, useRef } from "react"
+import { APIRouter, APIRouterActions } from "../../API/APIRouter"
+import { IPopup, MessageType, PopupType } from "../../Interfaces"
+import { PopupContext } from "../../Providers/PopupProvider"
+import { SysMessagesContext } from "../../Providers/SysMessagesProvider"
 import Input from "./Input"
 
-interface PopupProps {
-    setDisplayPopup: CallableFunction
-    itemId: number
-    popupName: string
-}
+const Popup = (props:IPopup) => {
 
-const Popup = (props:PopupProps) => {
-
-    const nameInput = useRef(null),
-    ipInput = useRef(null),
-    descriptionInput = useRef(null)
+    const nameInput = useRef<any>(props.name),
+        ipInput = useRef<any>(props.ip_address),
+        descriptionInput = useRef<any>(props.description),
+        popup = useContext(PopupContext),
+        message = useContext(SysMessagesContext)
 
     const submitForm = (e:FormEvent) => {
-        e.preventDefault()
-        const url = "https://example.com/nodes/" + props.itemId
-        async function changeItem() {
-            let resp = await fetch(url, {
-                method: "POST",
-                mode: "no-cors",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: nameInput.current.value,
-                    ip_address: ipInput.current.value,
-                    description: descriptionInput.current.value
-                })
+        APIRouter(APIRouterActions.updateCamera, {parentID: props.parentID, 
+            id: props.id,
+            name: nameInput.current.value,
+            ip_address: ipInput.current.value,
+            description: descriptionInput.current.value})
+        .then(r => {
+            message.notifyUser({
+                type: MessageType.success,
+                text: 'Камера успешно обновлена'
             })
-            if (resp.ok) {
-                // ALERT OK
-                console.log('OK:', resp)
-            } else {
-                // ALERT NOTOK
-                console.log('NOTOK:', resp)
-            }
+        }).catch(e => {
+            message.notifyUser({
+                type: MessageType.error,
+                text: 'Не удалось обновить камеру'
+            })
+            throw new Error(e)
+        })  
 
-            props.setDisplayPopup(false)
-        }
-        changeItem()
+            popup.setPopup({type: PopupType.default})
     }
 
     return <div className="popup">
-        <div className="popup__overlay" onClick={()=>{props.setDisplayPopup()}}/>
+        <div className="popup__overlay" onClick={()=>{popup.setPopup({type: PopupType.default})}}/>
         <div className="popup__container">
             <div className="popup__top">
-                <h2 className="h2">{props.popupName}</h2>
-                <button onClick={()=>{props.setDisplayPopup()}}>X</button>
+                <h2 className="h2">{props.name}</h2>
+                <button onClick={()=>{popup.setPopup({type: PopupType.default})}}>X</button>
             </div>
             <form className="popup__form" onSubmit={submitForm}>
                 <Input reference={nameInput} placeholder="Например, Камера #1" label="Имя" type="text" isRequired={true}/>

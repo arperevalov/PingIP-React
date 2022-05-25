@@ -14,7 +14,10 @@ const Input = (props:IInput) => {
             ref={props.reference} 
             type={props.type} 
             placeholder={props.placeholder}
-            required={props.isRequired ? true : false}/>
+            required={props.isRequired ? true : false}
+            defaultValue={props.reference.current}
+            />
+            
         <span className="input__label">{props.label}</span>
     </label>
 }

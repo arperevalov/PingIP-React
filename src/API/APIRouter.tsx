@@ -5,14 +5,18 @@ export enum APIRouterActions {
     pingCamera,
     getServerChildren,
     pingAllServers,
-    pingAllCameras
+    pingAllCameras,
+    updateCamera
 }
 
 interface IParams {
     id?: number,
     login?: string,
     password?: string,
-    parentID?: number
+    parentID?: number,
+    name?: string,
+    ip_address?: string,
+    description?: string
 }
 
 export async function APIRouter(action: APIRouterActions, params:IParams) {
@@ -33,7 +37,6 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 .then(r => {
                     return r.json()})
                 .then(r => {
-                    debugger
                     resolve(r)})
                 .catch(e => {
                     reject(e)
@@ -120,6 +123,31 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
                         'Accept': 'application/json'
+                    })
+                })
+                .then(r => {
+                    return r.json()})
+                .then(r => {
+                    resolve(r)})
+                .catch(e => {
+                    reject(e)
+                })
+            })
+            break;
+
+        case APIRouterActions.updateCamera:
+            return new Promise ((resolve, reject) => {
+                fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.parentID}/clients/${params.id}/`, {
+                    method: 'PUT',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
+                        'Accept': 'application/json',
+                        "Content-Type": "application/json"
+                    }),
+                    body: JSON.stringify({
+                        name: params.name,
+                        ip_address: params.ip_address,
+                        description: params.description
                     })
                 })
                 .then(r => {
