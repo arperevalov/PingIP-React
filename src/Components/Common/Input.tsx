@@ -6,7 +6,9 @@ interface IInput {
     label: string
     reference: any
     isRequired?: boolean
+    inputDefault?: any
 }
+
 
 const Input = (props:IInput) => {
     return <label className="input">
@@ -15,7 +17,7 @@ const Input = (props:IInput) => {
             type={props.type} 
             placeholder={props.placeholder}
             required={props.isRequired ? true : false}
-            defaultValue={props.reference.current}
+            defaultValue={props.inputDefault}
             />
             
         <span className="input__label">{props.label}</span>

@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { IServers } from '../../Interfaces';
-import ListItem from '../Common/ListItem';
+import { IServers, PopupType } from '../../Interfaces';
+import { PopupContext } from '../../Providers/PopupProvider';
+import CameraItem from './CameraItem';
 
 const Cameras = (props:any) => {
+
+    const popup = useContext(PopupContext)
+
+    const togglePopup = () => {
+        popup.setPopup({
+            type: PopupType.createCamera
+        })
+    }
 
     return <main className='main'>
         <div className='main__top'>
             <h1 className='h1'><span className='location'>{props.parent.name} — {props.parent.ip}</span>Камеры</h1>
             <div className='buttonWrapper'>
-                <button className='button button-1'>+ Добавить камеру</button>
+                <button className='button button-1' onClick={togglePopup}>+ Добавить камеру</button>
                 <button className='button button-super' onClick={()=>{props.pingAllCameras()}}>Пингануть все камеры</button>
             </div>
         </div>
@@ -25,7 +34,7 @@ const Cameras = (props:any) => {
             {props.parent.children && props.parent.children.length > 0 ? props.parent.children.map((i:any) => {
                     return <li key={i.id}>
                         <div className='item'>
-                            <ListItem
+                            <CameraItem
                                 id={i.id}
                                 name={i.name}
                                 ip_address={i.ip_address}

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { IServers } from '../../Interfaces';
-import ListItem from '../Common/ListItem';
+import { IServers, PopupType } from '../../Interfaces';
+import { PopupContext } from '../../Providers/PopupProvider';
+import ServerItem from './ServerItem';
 
 interface ServersProps {
     servers: IServers[]
@@ -11,11 +12,19 @@ interface ServersProps {
 
 const Servers = (props: ServersProps) => {
 
+    const popup = useContext(PopupContext)
+
+    const togglePopup = () => {
+        popup.setPopup({
+            type: PopupType.createServer
+        })
+    }
+
     return <main className='main'>
         <div className='main__top'>
             <h1 className='h1'>Серверы</h1>
             <div className='buttonWrapper'>
-                <button className='button button-1'>+ Добавить сервер</button>
+                <button className='button button-1' onClick={togglePopup}>+ Добавить сервер</button>
                 <button className='button button-super' onClick={()=>{props.pingAllServers()}}>Пингануть все серверы</button>
             </div>
         </div>
@@ -31,7 +40,7 @@ const Servers = (props: ServersProps) => {
                 {props.servers ? props.servers.map((i:any) => {
                     return <li key={i.id}>
                         <Link to={'/servers/'+i.id} className='item'>
-                            <ListItem
+                            <ServerItem
                                 id={i.id}
                                 name={i.name}
                                 ip_address={i.ip_address}

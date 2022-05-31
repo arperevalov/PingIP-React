@@ -6,9 +6,12 @@ export enum MessageType {
 
 export enum PopupType {
     default,
-    create,
-    update,
-    delete
+    createServer,
+    updateServer,
+    deleteServer,
+    updateCamera,
+    createCamera,
+    deleteCamera
 }
 
 export interface IServers {

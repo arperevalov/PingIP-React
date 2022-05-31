@@ -1,12 +1,17 @@
 export enum APIRouterActions {
     getAuth,
     getServers,
-    pingServer,
-    pingCamera,
-    getServerChildren,
     pingAllServers,
+    pingServer,
+    getServerChildren,
+    createServer,
+    updateServer,
+    deleteServer,
+    pingCamera,
     pingAllCameras,
-    updateCamera
+    createCamera,
+    updateCamera,
+    deleteCamera
 }
 
 interface IParams {
@@ -97,6 +102,77 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
             return respObj
             break;
 
+        case APIRouterActions.createServer:
+            return new Promise ((resolve, reject) => {
+                fetch(`http://62.113.108.174:3200/api/v1/nodes/`, {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
+                        'Accept': 'application/json',
+                        "Content-Type": "application/json"
+                    }),
+                    body: JSON.stringify({
+                        name: params.name,
+                        ip_address: params.ip_address,
+                        description: params.description
+                    })
+                })
+                .then(r => {
+                    return r.json()})
+                .then(r => {
+                    debugger
+                    resolve(r)})
+                .catch(e => {
+                    reject(e)
+                })
+            })
+            break;
+
+        case APIRouterActions.updateServer:
+            return new Promise ((resolve, reject) => {
+                fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.id}`, {
+                    method: 'PUT',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
+                        'Accept': 'application/json',
+                        "Content-Type": "application/json"
+                    }),
+                    body: JSON.stringify({
+                        name: params.name,
+                        ip_address: params.ip_address,
+                        description: params.description
+                    })
+                })
+                .then(r => {
+                    return r.json()})
+                .then(r => {
+                    resolve(r)})
+                .catch(e => {
+                    reject(e)
+                })
+            })
+            break;
+
+        case APIRouterActions.deleteServer:
+            return new Promise ((resolve, reject) => {
+                fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.id}`, {
+                    method: 'DELETE',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(r => {
+                    return r.json()})
+                .then(r => {
+                    debugger
+                    resolve(r)})
+                .catch(e => {
+                    reject(e)
+                })
+            })
+            break;
+
         case APIRouterActions.pingAllCameras:
             return new Promise ((resolve, reject) => {
                 fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.id}/clients`, {
@@ -135,6 +211,32 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
             })
             break;
 
+        case APIRouterActions.createCamera:
+            return new Promise ((resolve, reject) => {
+                fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.parentID}/clients/`, {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
+                        'Accept': 'application/json',
+                        "Content-Type": "application/json"
+                    }),
+                    body: JSON.stringify({
+                        name: params.name,
+                        ip_address: params.ip_address,
+                        description: params.description
+                    })
+                })
+                .then(r => {
+                    return r.json()})
+                .then(r => {
+                    debugger
+                    resolve(r)})
+                .catch(e => {
+                    reject(e)
+                })
+            })
+            break;
+
         case APIRouterActions.updateCamera:
             return new Promise ((resolve, reject) => {
                 fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.parentID}/clients/${params.id}/`, {
@@ -160,6 +262,26 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
             })
             break;
 
+        case APIRouterActions.deleteCamera:
+            return new Promise ((resolve, reject) => {
+                fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.parentID}/clients/${params.id}`, {
+                    method: 'DELETE',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(r => {
+                    return r.json()})
+                .then(r => {
+                    debugger
+                    resolve(r)})
+                .catch(e => {
+                    reject(e)
+                })
+            })
+            break;
+            
         case APIRouterActions.getAuth:
             resp = await fetch("http://62.113.108.174:3200/api/v1/auth/login", {
                 method: "POST",
