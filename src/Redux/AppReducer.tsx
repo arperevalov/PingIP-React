@@ -8,11 +8,13 @@ enum Actions {
 
 interface AppReducerState {
     SysMessages:IMessage []
+    SysIDCounter: number
     isFetching: boolean
 }
 
 const defaultValues: AppReducerState = {
     SysMessages: [],
+    SysIDCounter: 0,
     isFetching: false
 }
 
@@ -20,6 +22,7 @@ const AppReducer = (state = defaultValues, action:any) => {
     switch (action.type) {
         case Actions.setSysMessage:
             let newMessage = {
+                id: state.SysIDCounter++,
                 type: action.message.type,
                 text: action.message.text.toString()
             }
@@ -27,7 +30,8 @@ const AppReducer = (state = defaultValues, action:any) => {
             return {
                 ...state,
                 SysMessages: [...state.SysMessages,
-                    newMessage]
+                    newMessage],
+                SysIDCounter: state.SysIDCounter++
             }
             break;
         

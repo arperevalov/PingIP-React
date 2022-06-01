@@ -21,8 +21,8 @@ const SysMessagesProviderAPI = (props:any) => {
     }}>
         
         <div className="notifications">
-            {props.sysMessages.length > 0 ? props.sysMessages.map((i:any) => {
-                return <SysMessage text={i.text} type={i.type}/>
+            {props.sysMessages.length > 0 ? props.sysMessages.map((i:IMessage) => {
+                return <SysMessage text={i.text} type={i.type} key={i.id}/>
             }): ''}
         </div>
 

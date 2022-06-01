@@ -36,3 +36,30 @@
     &__form
         display: grid
         gap: 12px
+
+    &__cross
+        background: transparent
+        border: none
+        cursor: pointer
+        transition: ease all 0.2s
+        &:hover
+            opacity: 0.7
+
+    &__buttonWrapper
+        display: flex
+        justify-content: space-between
+        margin-top: 12px
+
+    &__buttonWrapperWide
+        display: flex
+        flex-direction: column-reverse
+        justify-content: center
+        
+        .button
+            width: 100%
+            margin-top: 12px
+
+    &__text
+        font-size: 1rem
+        line-height: 150%
+        margin: -4px 0 16px

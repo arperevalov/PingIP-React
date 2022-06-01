@@ -65,10 +65,10 @@ const CameraItem = (props:CameraItemProps) => {
             <span className='item__lastPingDate'>{props.lastPing ? ' ' + props.lastPing.toLocaleDateString() : ''}</span>
         </span>
         <div className='buttonWrapper'>
-            <button className='button button-3' onClick={togglePopup}>
+            <button className='button button-3 button-list' onClick={togglePopup}>
                 Изменить
             </button>   
-            <button className='button button-2' onClick={startPing}>
+            <button className='button button-2 button-list' onClick={startPing}>
                 Пинг
             </button>
         </div>

@@ -120,7 +120,6 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 .then(r => {
                     return r.json()})
                 .then(r => {
-                    debugger
                     resolve(r)})
                 .catch(e => {
                     reject(e)
@@ -163,10 +162,8 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                     })
                 })
                 .then(r => {
-                    debugger
                     return r.json()})
                 .then(r => {
-                    debugger
                     resolve(r)})
                 .catch(e => {
                     reject(e)
@@ -230,7 +227,6 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 .then(r => {
                     return r.json()})
                 .then(r => {
-                    debugger
                     resolve(r)})
                 .catch(e => {
                     reject(e)
@@ -275,7 +271,6 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 .then(r => {
                     return r.json()})
                 .then(r => {
-                    debugger
                     resolve(r)})
                 .catch(e => {
                     reject(e)

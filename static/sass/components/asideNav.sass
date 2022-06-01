@@ -24,4 +24,20 @@
             opacity: 0.5
         
         a
-            display: block
+            color: $text-color
+            text-decoration: none
+            display: flex
+            align-items: center
+
+        &__status
+            display: inline-block
+            width: 12px
+            height: 12px
+            margin-right: 8px
+            border-radius: 32px
+            background-color: $unknown-color
+            
+            &.works
+                background-color: $positive-color
+            &.notWorks
+                background-color: $negative-color
