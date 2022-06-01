@@ -7,18 +7,18 @@
     margin: 0 auto 24px
     width: 50%
     gap: 4px
+    z-index: 99
 
     .notification
         padding: 12px
         border-radius: 8px
         background-color: $bg-color
-        color: $text-color-inverted
+        border: 1px solid $text-color-light
+        color: $text-color
+        box-shadow: 0 2px 4px $shadow-color
 
         &__error
-            background-color: $negative-color
+            border-color: $negative-color
 
         &__success
-            background-color: $positive-color
-
-        &__regular
-            background-color: $link-color
+            border-color: $positive-color

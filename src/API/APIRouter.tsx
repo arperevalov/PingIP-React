@@ -163,6 +163,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                     })
                 })
                 .then(r => {
+                    debugger
                     return r.json()})
                 .then(r => {
                     debugger

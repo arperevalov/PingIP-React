@@ -1,16 +1,13 @@
 import React, { createContext, useState } from "react"
-import { connect } from "react-redux"
 import PopupCreateCamera from "../Components/Popup/PopupCreateCamera"
 import PopupCreateServer from "../Components/Popup/PopupCreateServer"
-import PopupDeleteCamera from "../Components/Popup/PopupDeleteCamera"
-import PopupDeleteServer from "../Components/Popup/PopupDeleteServer"
 import PopupUpdateCamera from "../Components/Popup/PopupUpdateCamera"
 import PopupUpdateServer from "../Components/Popup/PopupUpdateServer"
 import { IPopup, PopupType } from "../Interfaces"
 
 const PopupContext = createContext(null)
 
-const PopupProviderAPI = (props:any) => {
+const PopupProvider = (props:any) => {
 
     const [popupData, setPopupData] = useState({
         type: PopupType.default
@@ -34,13 +31,6 @@ const PopupProviderAPI = (props:any) => {
                 {props.children}
             </PopupContext.Provider>
         break;
-        
-        case PopupType.deleteServer:
-            return <PopupContext.Provider value={{setPopup: setPopup}}>
-                <PopupDeleteServer {...popupData}/>
-                {props.children}
-            </PopupContext.Provider>
-        break;
 
         case PopupType.createCamera:
             return <PopupContext.Provider value={{setPopup: setPopup}}>
@@ -56,13 +46,6 @@ const PopupProviderAPI = (props:any) => {
             </PopupContext.Provider>
         break;
 
-        case PopupType.deleteCamera:
-            return <PopupContext.Provider value={{setPopup: setPopup}}>
-                <PopupDeleteCamera {...popupData}/>
-                {props.children}
-            </PopupContext.Provider>
-        break;
-
         default:
             return <PopupContext.Provider value={{setPopup: setPopup}}>
                 {props.children}
@@ -70,15 +53,6 @@ const PopupProviderAPI = (props:any) => {
         break;
     }
 }
-
-const mapStateToProps = (store:any) => {
-    return {
-        Popup: store.AppPage.Popup
-    }
-}
-
-const PopupProvider = connect(mapStateToProps, {
-})(PopupProviderAPI)
 
 export { PopupContext }
 export default PopupProvider

@@ -22,12 +22,12 @@ const PopupCreateServer = (props:IPopup) => {
         .then(r => {
             message.notifyUser({
                 type: MessageType.success,
-                text: 'Камера успешно обновлена'
+                text: 'Сервер успешно добавлен'
             })
         }).catch(e => {
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось обновить камеру'
+                text: 'Не удалось добавить сервер'
             })
             throw new Error(e)
         })

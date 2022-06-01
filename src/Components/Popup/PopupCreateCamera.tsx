@@ -14,20 +14,21 @@ const PopupCreateCamera = (props:IPopup) => {
         message = useContext(SysMessagesContext)
 
     const submitForm = (e:FormEvent) => {
-        APIRouter(APIRouterActions.createServer, { 
+        APIRouter(APIRouterActions.createCamera, { 
             id: props.id,
             name: nameInput.current.value,
             ip_address: ipInput.current.value,
-            description: descriptionInput.current.value})
+            description: descriptionInput.current.value,
+            parentID: props.parentID})
         .then(r => {
             message.notifyUser({
                 type: MessageType.success,
-                text: 'Камера успешно обновлена'
+                text: 'Камера успешно добавлена'
             })
         }).catch(e => {
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось обновить камеру'
+                text: 'Не удалось добавить камеру'
             })
             throw new Error(e)
         })

@@ -10,7 +10,8 @@ const Cameras = (props:any) => {
 
     const togglePopup = () => {
         popup.setPopup({
-            type: PopupType.createCamera
+            type: PopupType.createCamera,
+            parentID: props.parent.id
         })
     }
 
