@@ -1,7 +1,6 @@
 import React, { FormEvent, useContext, useRef, useState } from "react"
 import { APIRouter, APIRouterActions } from "../../API/APIRouter"
-import { IPopup, MessageType, PopupType } from "../../Interfaces"
-// import { PopupContext } from "../../Providers/PopupProvider"
+import { MessageType, PopupType } from "../../Interfaces"
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider"
 import Input from "../Common/Input"
 import cross from './../../../static/images/cross.svg'
@@ -13,6 +12,7 @@ interface PopupUpdateServerProps {
     id: number
     parentID: number
     setPopup: CallableFunction
+    setUpdates: CallableFunction
 }
 
 const PopupUpdateServer = (props:PopupUpdateServerProps) => {
@@ -21,7 +21,6 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
         ipInput = useRef<any>(props.ip_address),
         descriptionInput = useRef<any>(props.description),
         deleteInput = useRef<any>(),
-        // popup = useContext(PopupContext),
         message = useContext(SysMessagesContext),
         [deleteStatePopup, setDeleteStatePopup] = useState(false)
 
@@ -32,6 +31,7 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
             ip_address: ipInput.current.value,
             description: descriptionInput.current.value})
         .then(r => {
+            props.setUpdates()
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Сервер успешно обновлен'
@@ -49,6 +49,7 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
     const submitDeleteForm = (e:FormEvent) => {
         APIRouter(APIRouterActions.deleteServer, {id: props.id})
         .then(r => {
+            props.setUpdates()
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Сервер успешно удален'

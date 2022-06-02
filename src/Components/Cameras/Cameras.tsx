@@ -1,10 +1,17 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { IServers, PopupType } from '../../Interfaces';
-// import { PopupContext } from '../../Providers/PopupProvider';
 import CameraItem from './CameraItem';
 
-const Cameras = (props:any) => {
+interface CamerasProps {
+    setPopup: CallableFunction
+    pingAllCameras: CallableFunction
+    getPing: CallableFunction
+    servers: IServers[]
+    parent: IServers
+}
+
+const Cameras = (props:CamerasProps) => {
 
     const togglePopup = () => {
         props.setPopup({
@@ -15,7 +22,7 @@ const Cameras = (props:any) => {
 
     return <main className='main'>
         <div className='main__top'>
-            <h1 className='h1'><span className='location'>{props.parent.name} — {props.parent.ip}</span>Камеры</h1>
+            <h1 className='h1'><span className='location'>{props.parent.name} — {props.parent.ip_address}</span>Камеры</h1>
             <div className='buttonWrapper'>
                 <button className='button button-1' onClick={togglePopup}>+ Добавить камеру</button>
                 <button className='button button-super' onClick={()=>{props.pingAllCameras()}}>Пингануть все камеры</button>
@@ -57,7 +64,7 @@ const Cameras = (props:any) => {
                 {props.servers.map((i:IServers) => {
                     return <li className='item' key={i.id}>
                             <NavLink to={`/servers/${i.id}`}>
-                                <span className={`item__status ${props.status === true ? ' works' : ' notWorks'}`} />
+                                <span className={`item__status ${i.status === true ? ' works' : ' notWorks'}`} />
                                 <span className='item__name'>{i.name}</span>
                             </NavLink>
                         </li>

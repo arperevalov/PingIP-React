@@ -13,6 +13,7 @@ interface PopupUpdateCameraProps {
     id: number
     parentID: number
     setPopup: CallableFunction
+    setUpdates: CallableFunction
 }
 
 const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
@@ -31,6 +32,7 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
             ip_address: ipInput.current.value,
             description: descriptionInput.current.value})
         .then(r => {
+            props.setUpdates()
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Камера успешно обновлена'
@@ -50,6 +52,7 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
             parentID: props.parentID,
             id: props.id})
         .then(r => {
+            props.setUpdates()
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Камера успешно удалена'

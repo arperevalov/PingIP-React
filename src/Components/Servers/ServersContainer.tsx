@@ -9,9 +9,10 @@ import { setPopup } from "../../Redux/AppReducer";
 import Servers from "./Servers";
 
 interface IServersAPI {
-    servers: IServers[],
-    setPing: CallableFunction,
-    setServers: CallableFunction,
+    servers: IServers[]
+    updates: number
+    setPing: CallableFunction
+    setServers: CallableFunction
     setFetching: CallableFunction
     setPopup: CallableFunction
 }
@@ -83,15 +84,21 @@ const ServersAPI = (props: IServersAPI) => {
 
     useEffect(()=>{
         getServers()
-    }, [])
+    }, [props.updates])
 
-    return <Servers {...props} getPing={getPing} pingAllServers={pingAllServers} setPopup={props.setPopup}/>
+    return <Servers 
+                {...props} 
+                getPing={getPing} 
+                pingAllServers={pingAllServers} 
+                setPopup={props.setPopup}
+            />
 }
 
 
 const MapStateToProps = (store: any) => {
     return {
-        servers: store.ServersPage.servers
+        servers: store.ServersPage.servers,
+        updates: store.ServersPage.updates
     }
 }
 

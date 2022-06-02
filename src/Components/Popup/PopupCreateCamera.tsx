@@ -13,6 +13,7 @@ interface PopupCreateCameraProps {
     id: number
     parentID: number
     setPopup: CallableFunction
+    setUpdates: CallableFunction
 }
 
 const PopupCreateCamera = (props:PopupCreateCameraProps) => {
@@ -30,6 +31,7 @@ const PopupCreateCamera = (props:PopupCreateCameraProps) => {
             description: descriptionInput.current.value,
             parentID: props.parentID})
         .then(r => {
+            props.setUpdates()
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Камера успешно добавлена'

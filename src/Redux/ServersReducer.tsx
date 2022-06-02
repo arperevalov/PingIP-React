@@ -5,15 +5,18 @@ enum Actions {
     setPing = 'SET_PING',
     setCameraPing = 'SET_CAMERA_PING',
     setServerChilren = 'SET_SERVER_CHILDREN',
-    setServers = 'SET_SERVERS'
+    setServers = 'SET_SERVERS',
+    setUpdates = 'SET_UPDATES'
 }
 
 interface ServersReducerState {
     servers:IServers[]
+    updates: number
 }
 
 const defaultValues: ServersReducerState = {
-    servers: []
+    servers: [],
+    updates: 0
 }
 
 const ServersReducer = (state = defaultValues, action: any) => {
@@ -77,6 +80,13 @@ const ServersReducer = (state = defaultValues, action: any) => {
 
             return _.cloneDeep(state)
             break;
+        
+        case Actions.setUpdates:
+            return {
+                ...state,
+                updates: state.updates+1
+            }
+            break;
 
         default:
             return {
@@ -90,5 +100,6 @@ export const setPing = (response: object) => ({type: Actions.setPing, response})
 export const setCameraPing = (id:number, response: object, parentID: number) => ({type: Actions.setCameraPing, id, response, parentID})
 export const setServerChilren = (id:number, children:IServers[]) => ({type: Actions.setServerChilren, id, children})
 export const setServers = (servers:IServers[]) => ({type: Actions.setServers, servers})
+export const setUpdates = () => ({type: Actions.setUpdates})
 
 export default ServersReducer

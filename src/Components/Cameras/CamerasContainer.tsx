@@ -10,10 +10,11 @@ import { setPopup } from "../../Redux/AppReducer";
 import Cameras from "./Cameras";
 
 interface ICamerasAPI {
-    servers: IServers[],
-    setCameraPing: CallableFunction,
-    setServerChilren: CallableFunction,
-    setFetching: CallableFunction,
+    servers: IServers[]
+    updates: number
+    setCameraPing: CallableFunction
+    setServerChilren: CallableFunction
+    setFetching: CallableFunction
     setPopup: CallableFunction
 }
 
@@ -90,15 +91,22 @@ const CamerasAPI = (props: ICamerasAPI) => {
                 throw new Error(e)
             })  
         }
-    },[prodId])
+    },[prodId, props.updates])
 
-    return <Cameras servers={props.servers} getPing={getPing} pingAllCameras={pingAllCameras} parent={parent} setPopup={props.setPopup} />
+    return <Cameras 
+                servers={props.servers} 
+                getPing={getPing} 
+                pingAllCameras={pingAllCameras} 
+                parent={parent} 
+                setPopup={props.setPopup} 
+            />
 }
 
 
 const MapStateToProps = (store: any) => {
     return {
-        servers: store.ServersPage.servers
+        servers: store.ServersPage.servers,
+        updates: store.ServersPage.updates
     }
 }
 

@@ -11,6 +11,7 @@ interface PopupCreateServerProps {
     description: string
     id: number
     setPopup: CallableFunction
+    setUpdates: CallableFunction
 }
 
 const PopupCreateServer = (props:PopupCreateServerProps) => {
@@ -27,6 +28,7 @@ const PopupCreateServer = (props:PopupCreateServerProps) => {
             ip_address: ipInput.current.value,
             description: descriptionInput.current.value})
         .then(r => {
+            props.setUpdates()
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Сервер успешно добавлен'
