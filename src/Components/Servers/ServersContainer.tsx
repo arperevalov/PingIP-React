@@ -5,6 +5,7 @@ import { IAPIResponse, IServers, MessageType } from "../../Interfaces";
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider";
 import { setPing, setServers } from "../../Redux/ServersReducer";
 import { setFetching } from "../../Redux/AppReducer";
+import { setPopup } from "../../Redux/AppReducer";
 import Servers from "./Servers";
 
 interface IServersAPI {
@@ -12,6 +13,7 @@ interface IServersAPI {
     setPing: CallableFunction,
     setServers: CallableFunction,
     setFetching: CallableFunction
+    setPopup: CallableFunction
 }
 
 const ServersAPI = (props: IServersAPI) => {
@@ -83,7 +85,7 @@ const ServersAPI = (props: IServersAPI) => {
         getServers()
     }, [])
 
-    return <Servers {...props} getPing={getPing} pingAllServers={pingAllServers} />
+    return <Servers {...props} getPing={getPing} pingAllServers={pingAllServers} setPopup={props.setPopup}/>
 }
 
 
@@ -96,7 +98,8 @@ const MapStateToProps = (store: any) => {
 const ServersContainer = connect(MapStateToProps,{
     setPing,
     setServers,
-    setFetching
+    setFetching,
+    setPopup
 })(ServersAPI)
 
 export default ServersContainer

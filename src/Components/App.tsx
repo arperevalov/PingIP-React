@@ -16,7 +16,7 @@ interface AppProps {
 function App(props:AppProps) {
 
     return (<SysMessagesProvider>
-            <PopupProvider>
+                <PopupProvider/>
                 <PreloaderProvider/>
                 {props.hasBearer ? <>
                     <Header logOut={props.logOut}/>
@@ -30,7 +30,6 @@ function App(props:AppProps) {
                     <Route path="/" element={<AuthContainer/>}/>
                     <Route path="*" element={<Navigate replace to="/"/>}/>
                 </Routes>}
-            </PopupProvider>
         </SysMessagesProvider>);
 }
 

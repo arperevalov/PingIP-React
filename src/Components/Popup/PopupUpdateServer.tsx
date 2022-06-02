@@ -1,18 +1,27 @@
 import React, { FormEvent, useContext, useRef, useState } from "react"
 import { APIRouter, APIRouterActions } from "../../API/APIRouter"
 import { IPopup, MessageType, PopupType } from "../../Interfaces"
-import { PopupContext } from "../../Providers/PopupProvider"
+// import { PopupContext } from "../../Providers/PopupProvider"
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider"
 import Input from "../Common/Input"
 import cross from './../../../static/images/cross.svg'
 
-const PopupUpdateServer = (props:IPopup) => {
+interface PopupUpdateServerProps {
+    name: string
+    ip_address: string
+    description: string
+    id: number
+    parentID: number
+    setPopup: CallableFunction
+}
+
+const PopupUpdateServer = (props:PopupUpdateServerProps) => {
 
     const nameInput = useRef<any>(props.name),
         ipInput = useRef<any>(props.ip_address),
         descriptionInput = useRef<any>(props.description),
         deleteInput = useRef<any>(),
-        popup = useContext(PopupContext),
+        // popup = useContext(PopupContext),
         message = useContext(SysMessagesContext),
         [deleteStatePopup, setDeleteStatePopup] = useState(false)
 
@@ -34,7 +43,7 @@ const PopupUpdateServer = (props:IPopup) => {
             })
             throw new Error(e)
         })
-        popup.setPopup({type: PopupType.default})
+        props.setPopup({type: PopupType.default})
     }
 
     const submitDeleteForm = (e:FormEvent) => {
@@ -51,16 +60,20 @@ const PopupUpdateServer = (props:IPopup) => {
             })
             throw new Error(e)
         })
-        popup.setPopup({type: PopupType.default})
+        props.setPopup({type: PopupType.default})
     }
 
     if(deleteStatePopup) {
         return <div className="popup">
-            <div className="popup__overlay" onClick={()=>{popup.setPopup({type: PopupType.default})}}/>
+            <div className="popup__overlay" onClick={()=>{
+                props.setPopup({type: PopupType.default})
+                }}/>
             <div className="popup__container">
                 <div className="popup__top">
                     <h2 className="h2">Удалить {props.name}</h2>
-                    <button className="popup__cross" onClick={()=>{popup.setPopup({type: PopupType.default})}}>
+                    <button className="popup__cross" onClick={()=>{
+                        props.setPopup({type: PopupType.default})
+                        }}>
                         <img src={cross} alt="" />
                     </button>
                 </div>
@@ -77,11 +90,15 @@ const PopupUpdateServer = (props:IPopup) => {
     }
 
     return <div className="popup">
-        <div className="popup__overlay" onClick={()=>{popup.setPopup({type: PopupType.default})}}/>
+        <div className="popup__overlay" onClick={()=>{
+            props.setPopup({type: PopupType.default})
+            }}/>
         <div className="popup__container">
             <div className="popup__top">
                 <h2 className="h2">Изменить {props.name}</h2>
-                <button className="popup__cross" onClick={()=>{popup.setPopup({type: PopupType.default})}}>
+                <button className="popup__cross" onClick={()=>{
+                    props.setPopup({type: PopupType.default})
+                    }}>
                     <img src={cross} alt="" />
                 </button>
             </div>

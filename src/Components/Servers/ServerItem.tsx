@@ -2,17 +2,16 @@ import React, { MouseEvent, useContext, useEffect, useState } from 'react';
 import mark from './../../../static/images/mark.svg'
 import markActive from './../../../static/images/mark-active.svg'
 import { IServers, PopupType } from '../../Interfaces';
-import { PopupContext } from '../../Providers/PopupProvider';
 
 interface ServerItemProps extends IServers {
     getPing: CallableFunction
     parentID?: number
+    setPopup: CallableFunction
 }
 
 const ServerItem = (props:ServerItemProps) => {
 
-    const [displayBlock, setDisplayBlock] = useState(false),
-        popup = useContext(PopupContext)
+    const [displayBlock, setDisplayBlock] = useState(false)
 
     const toggleDescription = (e:MouseEvent):void => {
         e.preventDefault()
@@ -25,7 +24,7 @@ const ServerItem = (props:ServerItemProps) => {
 
     const togglePopup = (e:MouseEvent):void => {
         e.preventDefault()
-        popup.setPopup({
+        props.setPopup({
             type: PopupType.updateServer,
             id: props.id,
             name: props.name,

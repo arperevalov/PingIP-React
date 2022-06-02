@@ -6,13 +6,15 @@ import { IServers, MessageType } from "../../Interfaces";
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider";
 import { setServerChilren, setCameraPing } from "../../Redux/ServersReducer";
 import { setFetching } from "../../Redux/AppReducer";
+import { setPopup } from "../../Redux/AppReducer";
 import Cameras from "./Cameras";
 
 interface ICamerasAPI {
     servers: IServers[],
     setCameraPing: CallableFunction,
     setServerChilren: CallableFunction,
-    setFetching: CallableFunction
+    setFetching: CallableFunction,
+    setPopup: CallableFunction
 }
 
 const CamerasAPI = (props: ICamerasAPI) => {
@@ -90,7 +92,7 @@ const CamerasAPI = (props: ICamerasAPI) => {
         }
     },[prodId])
 
-    return <Cameras servers={props.servers} getPing={getPing} pingAllCameras={pingAllCameras} parent={parent} />
+    return <Cameras servers={props.servers} getPing={getPing} pingAllCameras={pingAllCameras} parent={parent} setPopup={props.setPopup} />
 }
 
 
@@ -103,7 +105,8 @@ const MapStateToProps = (store: any) => {
 const CamerasContainer = connect(MapStateToProps,{
     setCameraPing,
     setServerChilren,
-    setFetching
+    setFetching,
+    setPopup
 })(CamerasAPI)
 
 export default CamerasContainer

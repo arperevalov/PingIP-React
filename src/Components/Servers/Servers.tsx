@@ -1,21 +1,20 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { IServers, PopupType } from '../../Interfaces';
-import { PopupContext } from '../../Providers/PopupProvider';
+// import { PopupContext } from '../../Providers/PopupProvider';
 import ServerItem from './ServerItem';
 
 interface ServersProps {
     servers: IServers[]
     getPing: CallableFunction
     pingAllServers: CallableFunction
+    setPopup: CallableFunction
 }
 
 const Servers = (props: ServersProps) => {
 
-    const popup = useContext(PopupContext)
-
     const togglePopup = () => {
-        popup.setPopup({
+        props.setPopup({
             type: PopupType.createServer
         })
     }
@@ -48,6 +47,7 @@ const Servers = (props: ServersProps) => {
                                 description={i.description ? i.description : false}
                                 status={i.status}
                                 getPing={props.getPing}
+                                setPopup={props.setPopup}
                             />
                         </Link>
                     </li>

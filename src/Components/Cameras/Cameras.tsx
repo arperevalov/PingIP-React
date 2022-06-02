@@ -1,15 +1,13 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { IServers, PopupType } from '../../Interfaces';
-import { PopupContext } from '../../Providers/PopupProvider';
+// import { PopupContext } from '../../Providers/PopupProvider';
 import CameraItem from './CameraItem';
 
 const Cameras = (props:any) => {
 
-    const popup = useContext(PopupContext)
-
     const togglePopup = () => {
-        popup.setPopup({
+        props.setPopup({
             type: PopupType.createCamera,
             parentID: props.parent.id
         })
@@ -44,6 +42,7 @@ const Cameras = (props:any) => {
                                 status={i.status}
                                 getPing={props.getPing}
                                 parentID={props.parent.id}
+                                setPopup={props.setPopup}
                             />
                         </div>
                     </li>
