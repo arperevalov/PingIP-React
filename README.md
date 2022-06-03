@@ -5,9 +5,14 @@ npm install && npm run start
 
 ## TODO
 - [x] Fix notifications lag, when timeout
-- [ ] Refactor popups to PopupProvider
-- [ ] Make Create-server/camera-popup
-- [ ] Create aside-servers view at Cameras Component
+- [x] Refactor popups to PopupProvider
+- [x] Make Create-server/camera-popup
+- [x] Create aside-servers view at Cameras Component
 - [ ] Create logs-page
 - [ ] Refactor fetching
-- [ ] Write Ping-all-servers/cameras request
+- [x] Write Ping-all-servers/cameras request
+- [ ] Write media queries
+- [ ] Masking to IP-address inputs
+- [ ] Validating IP-address inputs
+- [ ] Refactor TypeScript interfaces and enums
+- [ ] Unit-tests

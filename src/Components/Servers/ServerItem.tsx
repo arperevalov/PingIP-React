@@ -2,6 +2,7 @@ import React, { MouseEvent, useContext, useEffect, useState } from 'react';
 import mark from './../../../static/images/mark.svg'
 import markActive from './../../../static/images/mark-active.svg'
 import { IServers, PopupType } from '../../Interfaces';
+import ListDescription from '../Common/ListDescription';
 
 interface ServerItemProps extends IServers {
     getPing: CallableFunction
@@ -10,17 +11,6 @@ interface ServerItemProps extends IServers {
 }
 
 const ServerItem = (props:ServerItemProps) => {
-
-    const [displayBlock, setDisplayBlock] = useState(false)
-
-    const toggleDescription = (e:MouseEvent):void => {
-        e.preventDefault()
-        if (!displayBlock) {
-            setDisplayBlock(true)
-        } else {
-            setDisplayBlock(false)
-        }
-    }
 
     const togglePopup = (e:MouseEvent):void => {
         e.preventDefault()
@@ -44,19 +34,7 @@ const ServerItem = (props:ServerItemProps) => {
             {props.status === true ? 'Работает' : 'Не работает'}
         </span>
         <span className='item__name'>
-            <div className={`item__descriptionButton ${props.description ? '' : ' inactive'}`} onClick={toggleDescription}>
-                <img src={displayBlock ? markActive : mark}/>
-                <div className={`item__descriptionTextWrapper ${displayBlock ? '' : ' inactive'}`}>
-                    <svg className='item__descriptionCorner' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M24 0H0L24 24V0Z" fill="#f5f5f5"/>
-                    </svg>
-                    <div className='item__descriptionText'>
-                        <p>
-                            {props.description}
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <ListDescription description={props.description}/>
             {props.name}
         </span>
         <span>{props.ip_address}</span>
