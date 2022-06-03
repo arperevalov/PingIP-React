@@ -7,6 +7,21 @@
     max-width: 240px
     border-radius: 8px
     background-color: $card-color
+    transition: ease all 0.2s
+
+    @media screen and (max-width: 1740px)
+        right: -240px
+
+    &__show-btn
+        display: none
+        width: 20px
+        height: 20px
+        background-color: $link-color
+        border: none
+        position: absolute
+        left: -20px
+        @media screen and (max-width: 1740px)
+            display: block
 
     &__name
         padding: 24px

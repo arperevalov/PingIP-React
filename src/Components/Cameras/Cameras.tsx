@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { IServers, PopupType } from '../../Interfaces';
+import AsideNav from '../Common/AsideNav';
 import CameraItem from './CameraItem';
 
 interface CamerasProps {
@@ -58,19 +59,7 @@ const Cameras = (props:CamerasProps) => {
             </ul>
         </div>
 
-        <div className='asideNav'>
-            <h2 className='asideNav__name h2'>Серверы</h2>
-            <ul className='asideNav__list'>
-                {props.servers.map((i:IServers) => {
-                    return <li className='item' key={i.id}>
-                            <NavLink to={`/servers/${i.id}`}>
-                                <span className={`item__status ${i.status === true ? ' works' : ' notWorks'}`} />
-                                <span className='item__name'>{i.name}</span>
-                            </NavLink>
-                        </li>
-                })}
-            </ul>
-        </div>
+        <AsideNav items={props.servers}/>
     </main>
     
 }
