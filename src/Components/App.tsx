@@ -7,7 +7,7 @@ import CamerasContainer from './Cameras/CamerasContainer';
 import SysMessagesProvider from '../Providers/SysMessagesProvider';
 import PreloaderProvider from '../Providers/PreloaderProvider';
 import PopupProvider from '../Providers/PopupProvider';
-import LogsPage from './LogsPage/LogsPage';
+import LogsPageContainer from './LogsPage/LogsPageContainer';
 
 interface AppProps {
     hasBearer: boolean
@@ -25,7 +25,7 @@ function App(props:AppProps) {
                         <Route path="/" element={<Navigate replace to="/servers"/>}/>
                         <Route path='/servers' element={<ServersContainer/>}/>
                         <Route path='/servers/:id' element={<CamerasContainer/>}/>
-                        <Route path='/logs' element={<LogsPage/>}/>
+                        <Route path='/logs' element={<LogsPageContainer/>}/>
                     </Routes>
                 </> : 
                 <Routes>

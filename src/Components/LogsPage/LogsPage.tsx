@@ -1,6 +1,6 @@
 import React from "react";
 
-const Logs = () => {
+const LogsPage = () => {
     return <main className='main'>
     <div className='main__top'>
         <h1 className='h1'>Логи</h1>
@@ -81,4 +81,4 @@ const Logs = () => {
     </main>
 }
 
-export default Logs
+export default LogsPage

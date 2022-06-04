@@ -162,9 +162,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                     })
                 })
                 .then(r => {
-                    return r.json()})
-                .then(r => {
-                    resolve(r)})
+                    if (r.ok) resolve(r)})
                 .catch(e => {
                     reject(e)
                 })
@@ -269,9 +267,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                     })
                 })
                 .then(r => {
-                    return r.json()})
-                .then(r => {
-                    resolve(r)})
+                    if (r.ok) resolve(r)})
                 .catch(e => {
                     reject(e)
                 })

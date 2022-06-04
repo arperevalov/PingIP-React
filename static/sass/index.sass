@@ -10,52 +10,85 @@
 @import './components/notifications'
 @import './components/asideNav'
 @import './components/preloader'
-@import './components/logs'
+@import './components/logsPage'
 
 *
     margin: 0
     padding: 0
     box-sizing: border-box
 
+html
+    font-size: 16px
+    @media screen and (max-width: 1200px)
+        font-size: 14px
+
 body
     font-family: 'Inter'
     overflow-x: hidden
 
 .h1
-    font-size: 32px
+    font-size: 2rem
     font-weight: 600
 
 .h2
-    font-size: 20px
+    font-size: 1.25rem
     font-weight: 600
     line-height: 120%
 
 .button 
     font-family: 'Inter'
     height: 40px
+    padding: 8px 12px
+    
+    font-size: 0.875rem
+    font-weight: 600
+    text-transform: uppercase
+    letter-spacing: 0.04rem
+
+    cursor: pointer
+    border: none
+    border-radius: 4px
+    transition: ease all 0.2s
+    color: $text-color-inverted
+    background-color: $link-color
+    &:hover
+        opacity: 0.7
+
+    &-super
+        padding: 10px 16px  
+        color: $text-color-inverted
+        background-color: $link-color
+    
+    &-1
+        padding: 10px 16px
+        color: $link-color
+        background-color: $bg-color
+    
+    &-2
+        color: $link-color
+        position: relative
+        contain: content
+        border: 1px solid $link-color
+        background-color: $bg-color
+
+    &-3
+        color: $link-color
+        opacity: 0
+        background-color: transparent
+
+    &-4
+        color: $negative-color
+        opacity: 1
+        background-color: transparent
+
+    &-5
+        color: $text-color-inverted
+        opacity: 1
+        background-color: $negative-color
 
 .button-list
     height: 32px
     line-height: 100%
-
-
-.button-super
-    @include button-super
-
-.button-1
-    @include button-1
-
-.button-2
-    @include button-2
-
-.button-3
-    @include button-3
-
-.button-4
-    @include button-4
-
-.button-5
-    @include button-5
 
 .progressBar
     left: 0px

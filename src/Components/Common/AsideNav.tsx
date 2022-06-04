@@ -13,7 +13,7 @@ const AsideNav = (props:AsideNavProps) => {
     showNavButton = useRef(null)
 
     const handleOutsideClick = (event: Event) => {
-        if (showNavButton && !showNavButton.current.contains(event.target)){
+        if (showNavButton.current && !showNavButton.current.contains(event.target)){
             setDisplayBlock(false)
         }
     }

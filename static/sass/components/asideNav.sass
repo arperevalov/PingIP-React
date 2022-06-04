@@ -1,8 +1,8 @@
 .asideNav
-    position: absolute
+    position: fixed
     display: block
     top: 120px
-    right: 40px
+    right: -240px
     width: 100%
     max-width: 240px
     border-radius: 0 8px 8px
@@ -13,13 +13,9 @@
         right: 40px
         box-shadow: 0 4px 8px $shadow-color
 
-    @media screen and (max-width: 1740px)
-        right: -240px
-        position: fixed
-
     &__show-btn-container
-        top: 0
-        left: 0
+        top: -1px
+        left: 1px
         position: absolute
         transform: rotate(-90deg)
         height: 1px
@@ -34,19 +30,20 @@
         height: 22px
         text-align: center
         color: $text-color-inverted
-        font-size: 20px
+        font-size: 0.75rem
         background-color: $link-color
-        border: none
+        border: 1px solid transparent
         cursor: pointer
         transition: ease all 0.2s
         
         @media screen and (max-width: 1740px)
             top: -22px
             left: -72px
-            font-size: 12px
 
         &:hover
-            opacity: 0.7
+            background-color: $bg-color
+            border: 1px solid $link-color
+            color: $link-color
         
         border-radius: 4px 4px 0 0
 
