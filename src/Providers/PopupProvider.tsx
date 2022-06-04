@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { connect } from "react-redux"
 import PopupCreateCamera from "../Components/Popup/PopupCreateCamera"
 import PopupCreateServer from "../Components/Popup/PopupCreateServer"
@@ -9,6 +9,14 @@ import { PopupType } from "../Interfaces"
 import { setUpdates } from "../Redux/ServersReducer"
 
 const PopupProviderAPI = (props:any) => {
+
+    useEffect(()=>{
+        window.addEventListener("keydown", function (event) {
+            if (event.key === 'Escape') {
+              props.setPopup(PopupType.default)
+            }
+        })
+    },[])
 
     switch (props.popupData.type) {
         case PopupType.createServer:

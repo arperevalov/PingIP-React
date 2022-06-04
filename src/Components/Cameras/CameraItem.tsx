@@ -36,8 +36,9 @@ const CameraItem = (props:CameraItemProps) => {
             {props.name}
         </span>
         <span>{props.ip_address}</span>
-        <span>{props.lastPing ? props.lastPing.toLocaleTimeString() : ''}
-            <span className='item__lastPingDate'>{props.lastPing ? ' ' + props.lastPing.toLocaleDateString() : ''}</span>
+        <span>
+            {props.last_ping ? new Date(props.last_ping).toLocaleTimeString() : ''}
+            <span className='item__lastPingDate'>{props.last_ping ? ' ' + new Date(props.last_ping).toLocaleDateString() : ''}</span>
         </span>
         <div className='buttonWrapper'>
             <button className='button button-3 button-list' onClick={togglePopup}>

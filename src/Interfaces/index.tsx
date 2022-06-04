@@ -18,7 +18,7 @@ export interface IServers {
     ip_address: string
     description?: string
     status: boolean
-    lastPing?: Date
+    last_ping?: string
     children?:IServers[]
 }
 

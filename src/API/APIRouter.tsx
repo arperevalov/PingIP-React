@@ -11,7 +11,8 @@ export enum APIRouterActions {
     pingAllCameras,
     createCamera,
     updateCamera,
-    deleteCamera
+    deleteCamera,
+    getLogs
 }
 
 interface IParams {
@@ -297,6 +298,27 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                     ok: false
                 }
             }
+            break;
+
+        case APIRouterActions.getLogs:
+            return new Promise ((resolve, reject) => {
+                fetch(`http://62.113.108.174:3200/api/v1/log/`, {
+                    method: 'GET',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(r => {
+                    debugger
+                    return r.json()})
+                .then(r => {
+                    debugger
+                    resolve(r)})
+                .catch(e => {
+                    reject(e)
+                })
+            })
             break;
 
         default:

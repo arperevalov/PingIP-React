@@ -55,7 +55,7 @@ const ServersReducer = (state = defaultValues, action: any) => {
                 name: state.servers[item].name,
                 ip_address: action.response.ip_address,
                 status: action.response.status,
-                lastPing: new Date(action.response.last_ping)
+                last_ping: action.response.last_ping
             }
 
             return {
@@ -75,7 +75,7 @@ const ServersReducer = (state = defaultValues, action: any) => {
                 name: parentServer.children[childID].name,
                 ip_address: action.response.ip_address,
                 status: action.response.status,
-                lastPing: new Date(action.response.last_ping)
+                last_ping: action.response.last_ping
             }
 
             return _.cloneDeep(state)

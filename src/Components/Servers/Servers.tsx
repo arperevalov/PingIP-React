@@ -12,7 +12,6 @@ interface ServersProps {
 }
 
 const Servers = (props: ServersProps) => {
-
     const togglePopup = () => {
         props.setPopup({
             type: PopupType.createServer
@@ -43,7 +42,7 @@ const Servers = (props: ServersProps) => {
                                 id={i.id}
                                 name={i.name}
                                 ip_address={i.ip_address}
-                                lastPing={i.lastPing}
+                                last_ping={i.last_ping}
                                 description={i.description ? i.description : false}
                                 status={i.status}
                                 getPing={props.getPing}

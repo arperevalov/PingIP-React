@@ -22,7 +22,8 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
         descriptionInput = useRef<any>(props.description),
         deleteInput = useRef<any>(),
         message = useContext(SysMessagesContext),
-        [deleteStatePopup, setDeleteStatePopup] = useState(false)
+        [deleteStatePopup, setDeleteStatePopup] = useState(false),
+        [disabledDeleteBtn, setDisabledDeleteBtn] = useState(true)
 
     const submitForm = (e:FormEvent) => {
         APIRouter(APIRouterActions.updateServer, {
@@ -44,6 +45,11 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
             throw new Error(e)
         })
         props.setPopup({type: PopupType.default})
+    }
+
+    const deleteInputChange = () => {
+        setDisabledDeleteBtn(true)
+        if (deleteInput.current.value === props.name.toString()) setDisabledDeleteBtn(false)
     }
 
     const submitDeleteForm = (e:FormEvent) => {
@@ -80,10 +86,15 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
                 </div>
                 <p className="popup__text">Пожалуйста, введите <strong>{props.name}</strong> в поле ввода, чтобы подтвердить удаление.</p>
                 <form className="popup__form" onSubmit={submitDeleteForm}>
-                    <Input reference={deleteInput} placeholder=" " label="Введите название сервера" type="text" isRequired={true}/>
+                    <Input  reference={deleteInput} 
+                            placeholder=" " 
+                            label="Введите название сервера" 
+                            type="text" 
+                            isRequired={true}
+                            onChangeAction={deleteInputChange}/>
                     <div className="popup__buttonWrapperWide">
                         <button className='button button-1' type="button" onClick={()=>{setDeleteStatePopup(false)}}>Отменить</button>   
-                        <button className='button button-5' type="submit">Удалить сервер</button>
+                        <button className='button button-5' type="submit" disabled={disabledDeleteBtn ? true : false}>Удалить сервер</button>
                     </div>
                 </form>
             </div>

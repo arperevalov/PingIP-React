@@ -45,7 +45,7 @@ const Cameras = (props:CamerasProps) => {
                                 id={i.id}
                                 name={i.name}
                                 ip_address={i.ip_address}
-                                lastPing={i.lastPing}
+                                last_ping={i.last_ping}
                                 description={i.description ? i.description : false}
                                 status={i.status}
                                 getPing={props.getPing}

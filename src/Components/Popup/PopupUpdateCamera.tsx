@@ -23,7 +23,8 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
         descriptionInput = useRef<any>(props.description),
         deleteInput = useRef<any>(),
         message = useContext(SysMessagesContext),
-        [deleteStatePopup, setDeleteStatePopup] = useState(false)
+        [deleteStatePopup, setDeleteStatePopup] = useState(false),
+        [disabledDeleteBtn, setDisabledDeleteBtn] = useState(true)
 
     const submitForm = (e:FormEvent) => {
         APIRouter(APIRouterActions.updateCamera, {parentID: props.parentID, 
@@ -47,6 +48,12 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
         props.setPopup({type: PopupType.default})
     }
 
+
+    const deleteInputChange = () => {
+        setDisabledDeleteBtn(true)
+        if (deleteInput.current.value === props.name.toString()) setDisabledDeleteBtn(false)
+    }
+
     const submitDeleteForm = (e:FormEvent) => {
         APIRouter(APIRouterActions.deleteCamera, {
             parentID: props.parentID,
@@ -67,6 +74,7 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
         props.setPopup({type: PopupType.default})
     }
 
+
     if(deleteStatePopup) {
         return <div className="popup">
             <div className="popup__overlay" onClick={()=>{
@@ -83,10 +91,15 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
                 </div>
                 <p className="popup__text">Пожалуйста, введите <strong>{props.name}</strong> в поле ввода, чтобы подтвердить удаление.</p>
                 <form className="popup__form" onSubmit={submitDeleteForm}>
-                    <Input reference={deleteInput} placeholder=" " label="Введите название камеры" type="text" isRequired={true}/>
+                    <Input  reference={deleteInput} 
+                            placeholder=" " 
+                            label="Введите название камеры" 
+                            type="text" 
+                            isRequired={true}
+                            onChangeAction={deleteInputChange}/>
                     <div className="popup__buttonWrapperWide">
                         <button className='button button-1' type="button" onClick={()=>{setDeleteStatePopup(false)}}>Отменить</button>   
-                        <button className='button button-5' type="submit">Удалить камеру</button>
+                        <button className='button button-5' type="submit" disabled={disabledDeleteBtn ? true : false}>Удалить камеру</button>
                     </div>
                 </form>
             </div>
