@@ -32,7 +32,9 @@ const AsideNav = (props:AsideNavProps) => {
             <ul className='asideNav__list'>
                 {props.items.map((i:IServers) => {
                     return <li className='item' key={i.id}>
-                            <NavLink to={`/servers/${i.id}`}>
+                            <NavLink to={`/servers/${i.id}`}
+                                className={({ isActive }) => (isActive ? "asideNav__link active" : "asideNav__link")}
+                            >
                                 <span className={`item__status ${i.status === true ? ' works' : ' notWorks'}`} />
                                 <span className='item__name'>{i.name}</span>
                             </NavLink>

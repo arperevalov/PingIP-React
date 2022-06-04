@@ -1,4 +1,4 @@
-# PingIP-React
+# PingIP
 ```
 npm install && npm run start
 ```
@@ -8,7 +8,7 @@ npm install && npm run start
 - [x] Refactor popups to PopupProvider
 - [x] Make Create-server/camera-popup
 - [x] Create aside-servers view at Cameras Component
-- [ ] Create logs-page
+- [x] Create logs-page
 - [ ] Refactor fetching
 - [x] Write Ping-all-servers/cameras request
 - [ ] Write media queries
