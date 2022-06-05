@@ -2,14 +2,14 @@ import React from "react";
 import { useContext, useEffect } from "react";
 import { connect } from "react-redux";
 import { APIRouter, APIRouterActions } from "../../API/APIRouter";
-import { MessageType } from "../../Interfaces";
+import { ILogs, MessageType } from "../../Interfaces";
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider";
 import { setLogs } from "../../Redux/LogsReducer";
 import { setFetching } from "../../Redux/AppReducer";
 import LogsPage from "./LogsPage";
 
 interface LogsPageAPIProps  {
-    logs: [],
+    logs: ILogs[],
     setFetching: CallableFunction,
     setLogs: CallableFunction
 }
@@ -42,7 +42,7 @@ const LogsPageAPI = (props: LogsPageAPIProps) => {
         getLogs()        
     },[])
 
-    return <LogsPage/>
+    return <LogsPage logs={props.logs}/>
 }
 
 

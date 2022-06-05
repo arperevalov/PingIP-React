@@ -16,7 +16,7 @@ const LogsReducer = (state = defaultValues, action:any) => {
 
             return {
                 ...state,
-                ...action.logs
+                logs: [...action.logs]
             }
             break;
     

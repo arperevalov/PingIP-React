@@ -41,3 +41,9 @@ export interface IAPIResponse {
     ok: boolean
     body: string
 }
+
+export interface ILogs {
+    date: string
+    id: number
+    path: string
+}
