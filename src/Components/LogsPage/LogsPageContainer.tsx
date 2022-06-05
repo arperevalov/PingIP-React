@@ -2,14 +2,14 @@ import React from "react";
 import { useContext, useEffect } from "react";
 import { connect } from "react-redux";
 import { APIRouter, APIRouterActions } from "../../API/APIRouter";
-import { MessageType } from "../../Interfaces";
+import { ILogs, MessageType } from "../../Interfaces";
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider";
 import { setLogs } from "../../Redux/LogsReducer";
 import { setFetching } from "../../Redux/AppReducer";
 import LogsPage from "./LogsPage";
 
 interface LogsPageAPIProps  {
-    logs: [],
+    logs: ILogs[],
     setFetching: CallableFunction,
     setLogs: CallableFunction
 }
@@ -26,13 +26,13 @@ const LogsPageAPI = (props: LogsPageAPIProps) => {
             props.setLogs(r)
             message.notifyUser({
                 type: MessageType.success,
-                text: 'Все сервера пинганулись'
+                text: 'Все логи загрузились'
             })
         }).catch(e => {
             props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось пингануть все сервера'
+                text: 'Не удалось загрузить все логи'
             })
             throw new Error(e)
         })   
@@ -42,7 +42,7 @@ const LogsPageAPI = (props: LogsPageAPIProps) => {
         getLogs()        
     },[])
 
-    return <LogsPage/>
+    return <LogsPage logs={props.logs}/>
 }
 
 

@@ -1,6 +1,20 @@
 import React from "react";
+import { ILogs } from "../../Interfaces";
+import { APIRouter, APIRouterActions } from "../../API/APIRouter";
 
-const LogsPage = () => {
+interface LogsPageProps {
+    logs: ILogs[]
+}
+
+const LogsPage = (props: LogsPageProps) => {
+
+    const downloadFile = (id:number, name: string) => {
+        APIRouter(APIRouterActions.downloadFile, {id, name})
+        .catch(e => {
+            throw new Error(e)
+        })   
+    }
+
     return <main className='main'>
     <div className='main__top'>
         <h1 className='h1'>Логи</h1>
@@ -9,36 +23,13 @@ const LogsPage = () => {
     <div className="logs">
         <div className="logs__table">
             <ul className="logs__items">
-                <li className="logs__item">
-                    <a href="#" className="logs__link">
-                        <span className="logs__name">Объект №1</span>
-                        <span className="logs__date">16:24 19.03.2022</span>
-                    </a>
-                </li>
-                <li className="logs__item">
-                    <a href="#" className="logs__link">
-                        <span className="logs__name">Объект №2</span>
-                        <span className="logs__date">16:24 19.03.2022</span>
-                    </a>
-                </li>
-                <li className="logs__item">
-                    <a href="#" className="logs__link">
-                        <span className="logs__name">Объект №3</span>
-                        <span className="logs__date">16:24 19.03.2022</span>
-                    </a>
-                </li>
-                <li className="logs__item">
-                    <a href="#" className="logs__link">
-                        <span className="logs__name">Объект №4</span>
-                        <span className="logs__date">16:24 19.03.2022</span>
-                    </a>
-                </li>
-                <li className="logs__item">
-                    <a href="#" className="logs__link">
-                        <span className="logs__name">Объект №5</span>
-                        <span className="logs__date">16:24 19.03.2022</span>
-                    </a>
-                </li>
+                {props.logs.map(i=>{
+                    return  <li className="logs__item">
+                        <a onClick={()=>{downloadFile(i.id, i.date)}} className="logs__link">
+                            <span className="logs__name">{new Date(i.date).toLocaleDateString() + ' ' + new Date(i.date).toLocaleTimeString()}</span>
+                        </a>
+                    </li>
+                })}
             </ul>
         </div>
     </div>
