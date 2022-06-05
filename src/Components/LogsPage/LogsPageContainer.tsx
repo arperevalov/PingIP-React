@@ -26,13 +26,13 @@ const LogsPageAPI = (props: LogsPageAPIProps) => {
             props.setLogs(r)
             message.notifyUser({
                 type: MessageType.success,
-                text: 'Все сервера пинганулись'
+                text: 'Все логи загрузились'
             })
         }).catch(e => {
             props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось пингануть все сервера'
+                text: 'Не удалось загрузить все логи'
             })
             throw new Error(e)
         })   

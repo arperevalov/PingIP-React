@@ -12,7 +12,8 @@ export enum APIRouterActions {
     createCamera,
     updateCamera,
     deleteCamera,
-    getLogs
+    getLogs,
+    downloadFile
 }
 
 interface IParams {
@@ -182,6 +183,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 .then(r => {
                     return r.json()})
                 .then(r => {
+                    debugger
                     resolve(r)})
                 .catch(e => {
                     reject(e)
@@ -316,6 +318,37 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 .catch(e => {
                     reject(e)
                 })
+            })
+            break;
+
+        case APIRouterActions.downloadFile:
+            return new Promise ((resolve, reject) => {
+                fetch(`http://62.113.108.174:3200/api/v1/log/${params.id}/download`, {
+                    method: 'GET',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then((response) => response.blob())
+                .then((blob) => {
+                    const url = window.URL.createObjectURL(
+                    new Blob([blob]),
+                    );
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute(
+                    'download',
+                    `${params.name}.csv`,
+                    );
+                    document.body.appendChild(link);
+                    link.click();
+                    link.parentNode.removeChild(link);
+                    resolve(blob)
+                })
+                .catch(e=>{
+                    reject(e)
+                });
             })
             break;
 
