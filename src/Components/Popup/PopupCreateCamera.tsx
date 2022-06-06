@@ -1,7 +1,6 @@
 import React, { FormEvent, useContext, useEffect, useRef } from "react"
 import { APIRouter, APIRouterActions } from "../../API/APIRouter"
 import { IPopup, MessageType, PopupType } from "../../Interfaces"
-// import { PopupContext } from "../../Providers/PopupProvider"
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider"
 import Input from "../Common/Input"
 import cross from './../../../static/images/cross.svg'
@@ -14,6 +13,7 @@ interface PopupCreateCameraProps {
     parentID: number
     setPopup: CallableFunction
     setUpdates: CallableFunction
+    setFetching: CallableFunction
 }
 
 const PopupCreateCamera = (props:PopupCreateCameraProps) => {
@@ -24,6 +24,7 @@ const PopupCreateCamera = (props:PopupCreateCameraProps) => {
         message = useContext(SysMessagesContext)
 
     const submitForm = (e:FormEvent) => {
+        props.setFetching(true)
         APIRouter(APIRouterActions.createCamera, { 
             id: props.id,
             name: nameInput.current.value,
@@ -31,18 +32,21 @@ const PopupCreateCamera = (props:PopupCreateCameraProps) => {
             description: descriptionInput.current.value,
             parentID: props.parentID})
         .then(r => {
+            props.setFetching(false)
             props.setUpdates()
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Камера успешно добавлена'
             })
         }).catch(e => {
+            props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
                 text: 'Не удалось добавить камеру'
             })
             throw new Error(e)
         })
+        
         props.setPopup({type: PopupType.default})
     }
 

@@ -12,6 +12,7 @@ interface PopupCreateServerProps {
     id: number
     setPopup: CallableFunction
     setUpdates: CallableFunction
+    setFetching: CallableFunction
 }
 
 const PopupCreateServer = (props:PopupCreateServerProps) => {
@@ -22,18 +23,21 @@ const PopupCreateServer = (props:PopupCreateServerProps) => {
         message = useContext(SysMessagesContext)
 
     const submitForm = (e:FormEvent) => {
+        props.setFetching(true)
         APIRouter(APIRouterActions.createServer, { 
             id: props.id,
             name: nameInput.current.value,
             ip_address: ipInput.current.value,
             description: descriptionInput.current.value})
         .then(r => {
+            props.setFetching(false)
             props.setUpdates()
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Сервер успешно добавлен'
             })
         }).catch(e => {
+            props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
                 text: 'Не удалось добавить сервер'

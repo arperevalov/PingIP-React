@@ -10,6 +10,7 @@ interface CamerasProps {
     getPing: CallableFunction
     servers: IServers[]
     parent: IServers
+    isFetching: boolean
 }
 
 const Cameras = (props:CamerasProps) => {
@@ -19,6 +20,23 @@ const Cameras = (props:CamerasProps) => {
             type: PopupType.createCamera,
             parentID: props.parent.id
         })
+    }
+
+    if(props.parent.children && props.parent.children.length < 1 && !props.isFetching) {
+        return <main className='main'>
+            <div className='main__top'>
+                <h1 className='h1'><span className='location'>{props.parent.name} — {props.parent.ip_address}</span>Камеры</h1>
+            </div>
+            <div className='empty'>
+                <h2 className='h2'>Мы не нашли добавленных камер</h2>
+                <p className='empty__text'>
+                    Если вы уверены, что они должны быть, обратитесь к разработчикам сайта.
+                </p>
+                <button className='button button-super empty__button' onClick={togglePopup}>+ Добавить камеру</button>
+            </div>
+
+            <AsideNav items={props.servers}/>
+        </main> 
     }
 
     return <main className='main'>

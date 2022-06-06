@@ -13,6 +13,7 @@ interface PopupUpdateServerProps {
     parentID: number
     setPopup: CallableFunction
     setUpdates: CallableFunction
+    setFetching: CallableFunction
 }
 
 const PopupUpdateServer = (props:PopupUpdateServerProps) => {
@@ -26,18 +27,21 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
         [disabledDeleteBtn, setDisabledDeleteBtn] = useState(true)
 
     const submitForm = (e:FormEvent) => {
+        props.setFetching(true)
         APIRouter(APIRouterActions.updateServer, {
             id: props.id,
             name: nameInput.current.value,
             ip_address: ipInput.current.value,
             description: descriptionInput.current.value})
         .then(r => {
+            props.setFetching(false)
             props.setUpdates()
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Сервер успешно обновлен'
             })
         }).catch(e => {
+            props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
                 text: 'Не удалось обновить сервер'
@@ -53,14 +57,17 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
     }
 
     const submitDeleteForm = (e:FormEvent) => {
+        props.setFetching(true)
         APIRouter(APIRouterActions.deleteServer, {id: props.id})
         .then(r => {
+            props.setFetching(false)
             props.setUpdates()
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Сервер успешно удален'
             })
         }).catch(e => {
+            props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
                 text: 'Не удалось удалить сервер'

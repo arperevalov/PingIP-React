@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { connect } from "react-redux";
 import { APIRouter, APIRouterActions } from "../../API/APIRouter";
-import { IAPIResponse, IServers, MessageType } from "../../Interfaces";
+import { IServers, MessageType } from "../../Interfaces";
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider";
 import { setPing, setServers } from "../../Redux/ServersReducer";
 import { setFetching } from "../../Redux/AppReducer";
@@ -11,6 +11,7 @@ import Servers from "./Servers";
 interface IServersAPI {
     servers: IServers[]
     updates: number
+    isFetching: boolean
     setPing: CallableFunction
     setServers: CallableFunction
     setFetching: CallableFunction
@@ -91,6 +92,7 @@ const ServersAPI = (props: IServersAPI) => {
                 getPing={getPing} 
                 pingAllServers={pingAllServers} 
                 setPopup={props.setPopup}
+                isFetching={props.isFetching}
             />
 }
 
@@ -98,7 +100,8 @@ const ServersAPI = (props: IServersAPI) => {
 const MapStateToProps = (store: any) => {
     return {
         servers: store.ServersPage.servers,
-        updates: store.ServersPage.updates
+        updates: store.ServersPage.updates,
+        isFetching: store.AppPage.isFetching
     }
 }
 

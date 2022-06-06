@@ -14,6 +14,7 @@ interface PopupUpdateCameraProps {
     parentID: number
     setPopup: CallableFunction
     setUpdates: CallableFunction
+    setFetching: CallableFunction
 }
 
 const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
@@ -27,18 +28,21 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
         [disabledDeleteBtn, setDisabledDeleteBtn] = useState(true)
 
     const submitForm = (e:FormEvent) => {
+        props.setFetching(true)
         APIRouter(APIRouterActions.updateCamera, {parentID: props.parentID, 
             id: props.id,
             name: nameInput.current.value,
             ip_address: ipInput.current.value,
             description: descriptionInput.current.value})
         .then(r => {
+            props.setFetching(false)
             props.setUpdates()
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Камера успешно обновлена'
             })
         }).catch(e => {
+            props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
                 text: 'Не удалось обновить камеру'
@@ -55,22 +59,26 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
     }
 
     const submitDeleteForm = (e:FormEvent) => {
+        props.setFetching(true)
         APIRouter(APIRouterActions.deleteCamera, {
             parentID: props.parentID,
             id: props.id})
         .then(r => {
+            props.setFetching(false)
             props.setUpdates()
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Камера успешно удалена'
             })
         }).catch(e => {
+            props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
                 text: 'Не удалось удалить камеру'
             })
             throw new Error(e)
         })
+        props.setFetching(false)
         props.setPopup({type: PopupType.default})
     }
 

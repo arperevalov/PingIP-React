@@ -11,6 +11,7 @@
 @import './components/asideNav'
 @import './components/preloader'
 @import './components/logsPage'
+@import './components/empty'
 
 *
     margin: 0
@@ -21,6 +22,8 @@ html
     font-size: 16px
     @media screen and (max-width: 1200px)
         font-size: 14px
+    @media screen and (max-width: 768px)
+        font-size: 12px
 
 body
     font-family: 'Inter'
@@ -37,8 +40,8 @@ body
 
 .button 
     font-family: 'Inter'
-    height: 40px
-    padding: 8px 12px
+    height: 2.5rem
+    padding: 0.5rem 0.75rem
     
     font-size: 0.875rem
     font-weight: 600
@@ -59,12 +62,12 @@ body
         cursor: no-drop
 
     &-super
-        padding: 10px 16px  
+        padding: 0.625rem 1rem  
         color: $text-color-inverted
         background-color: $link-color
     
     &-1
-        padding: 10px 16px
+        padding: 0.625rem 1rem
         color: $link-color
         background-color: $bg-color
     
@@ -92,9 +95,9 @@ body
         opacity: 1
         background-color: $negative-color
 
-.button-list
-    height: 32px
-    line-height: 100%
+    &-list
+        height: 2rem
+        line-height: 100%
 
 .progressBar
     left: 0px

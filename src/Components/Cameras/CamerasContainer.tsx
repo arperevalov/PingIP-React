@@ -16,6 +16,7 @@ interface ICamerasAPI {
     setServerChilren: CallableFunction
     setFetching: CallableFunction
     setPopup: CallableFunction
+    isFetching: boolean
 }
 
 const CamerasAPI = (props: ICamerasAPI) => {
@@ -98,7 +99,8 @@ const CamerasAPI = (props: ICamerasAPI) => {
                 getPing={getPing} 
                 pingAllCameras={pingAllCameras} 
                 parent={parent} 
-                setPopup={props.setPopup} 
+                setPopup={props.setPopup}
+                isFetching={props.isFetching}
             />
 }
 
@@ -106,7 +108,8 @@ const CamerasAPI = (props: ICamerasAPI) => {
 const MapStateToProps = (store: any) => {
     return {
         servers: store.ServersPage.servers,
-        updates: store.ServersPage.updates
+        updates: store.ServersPage.updates,
+        isFetching: store.AppPage.isFetching
     }
 }
 

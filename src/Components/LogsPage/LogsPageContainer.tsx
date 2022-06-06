@@ -12,6 +12,7 @@ interface LogsPageAPIProps  {
     logs: ILogs[],
     setFetching: CallableFunction,
     setLogs: CallableFunction
+    isFetching: boolean
 }
 
 const LogsPageAPI = (props: LogsPageAPIProps) => {
@@ -42,13 +43,14 @@ const LogsPageAPI = (props: LogsPageAPIProps) => {
         getLogs()        
     },[])
 
-    return <LogsPage logs={props.logs}/>
+    return <LogsPage logs={props.logs} isFetching={props.isFetching}/>
 }
 
 
 const mapStateToProps = (store: any) => {
     return {
-        logs: store.LogsPage.logs
+        logs: store.LogsPage.logs,
+        isFetching: store.AppPage.isFetching
     }
 }
 
