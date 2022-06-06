@@ -38,7 +38,9 @@ const Cameras = (props:CamerasProps) => {
                 <span>Последний пинг</span>
             </div>
             <ul className='list__items'>
-            {props.parent.children && props.parent.children.length > 0 ? props.parent.children.map((i:any) => {
+            {props.parent.children && props.parent.children.length > 0 ? props.parent.children
+            .sort((a,b) => { return a.id - b.id})
+            .map((i:any) => {
                     return <li key={i.id}>
                         <div className='item'>
                             <CameraItem

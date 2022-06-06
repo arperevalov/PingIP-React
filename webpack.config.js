@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     mode: 'development',
@@ -50,5 +51,6 @@ module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
     },
-    plugins: [new HtmlWebpackPlugin({template: './index.html'})]
+    plugins: [new HtmlWebpackPlugin({template: './index.html'}),
+    new Dotenv()]
 }
