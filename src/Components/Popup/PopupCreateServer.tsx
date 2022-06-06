@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext, useRef } from "react"
+import React, { FormEvent, useContext, useEffect, useRef } from "react"
 import { APIRouter, APIRouterActions } from "../../API/APIRouter"
 import { MessageType, PopupType } from "../../Interfaces"
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider"
@@ -42,6 +42,12 @@ const PopupCreateServer = (props:PopupCreateServerProps) => {
         })
         props.setPopup({type: PopupType.default})
     }
+
+    useEffect(()=>{
+        let form = document.getElementsByClassName('popup__form') as HTMLCollectionOf<HTMLElement>,
+        formChild = form[0].children[0] as HTMLInputElement;
+        formChild.focus()
+    },[])
 
     return <div className="popup">
         <div className="popup__overlay" onClick={()=>{

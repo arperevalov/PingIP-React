@@ -23,9 +23,10 @@ const LogsPage = (props: LogsPageProps) => {
     <div className="logs">
         <div className="logs__table">
             <ul className="logs__items">
-                {props.logs.map(i=>{
-                    return  <li className="logs__item">
-                        <a onClick={()=>{downloadFile(i.id, i.date)}} className="logs__link">
+                {props.logs.sort((a,b) => {debugger
+                    return new Date(b.date).getTime() - new Date(a.date).getTime()}).map(i=>{
+                    return  <li className="logs__item" key={i.id}>
+                        <a href="#" onClick={()=>{downloadFile(i.id, i.date)}} className="logs__link">
                             <span className="logs__name">{new Date(i.date).toLocaleDateString() + ' ' + new Date(i.date).toLocaleTimeString()}</span>
                         </a>
                     </li>

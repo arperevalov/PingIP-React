@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext, useRef, useState } from "react"
+import React, { FormEvent, useContext, useEffect, useRef, useState } from "react"
 import { APIRouter, APIRouterActions } from "../../API/APIRouter"
 import { IPopup, MessageType, PopupType } from "../../Interfaces"
 // import { PopupContext } from "../../Providers/PopupProvider"
@@ -73,6 +73,12 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
         })
         props.setPopup({type: PopupType.default})
     }
+
+    useEffect(()=>{
+        let form = document.getElementsByClassName('popup__form') as HTMLCollectionOf<HTMLElement>,
+        formChild = form[0].children[0] as HTMLInputElement;
+        formChild.focus()
+    },[])
 
 
     if(deleteStatePopup) {
