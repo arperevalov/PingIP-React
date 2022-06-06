@@ -30,7 +30,9 @@ const AsideNav = (props:AsideNavProps) => {
         <div className="asideNav__content">
             <h2 className='asideNav__name h2'>Серверы</h2>
             <ul className='asideNav__list'>
-                {props.items.map((i:IServers) => {
+                {props.items
+                .sort((a,b) => { return a.id - b.id})
+                .map((i:IServers) => {
                     return <li className='item' key={i.id}>
                             <NavLink to={`/servers/${i.id}`}
                                 className={({ isActive }) => (isActive ? "asideNav__link active" : "asideNav__link")}

@@ -34,7 +34,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
         case APIRouterActions.getServers:
             return new Promise ((resolve, reject) => {
-                fetch(`http://62.113.108.174:3200/api/v1/nodes/`, {
+                fetch(process.env.REACT_APP_API+`/api/v1/nodes/`, {
                     method: 'GET',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -53,7 +53,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
         case APIRouterActions.pingAllServers:
             return new Promise ((resolve, reject) => {
-                fetch(`http://62.113.108.174:3200/api/v1/nodes/pingAll`, {
+                fetch(process.env.REACT_APP_API+`/api/v1/nodes/pingAll`, {
                     method: 'POST',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -72,7 +72,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
         case APIRouterActions.getServerChildren: 
             return new Promise ((resolve, reject) => {
-                fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.id}/clients`, {
+                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}/clients`, {
                     method: 'GET',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -90,8 +90,8 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
             break;
 
         case APIRouterActions.pingServer:
-
-            resp = await fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.id}/ping`, {
+            return new Promise ((resolve, reject) => {
+            fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}/ping`, {
                 method: "POST",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -100,13 +100,19 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 body: JSON.stringify({
                 })
             })
-            let respObj = await resp.json();
-            return respObj
+            .then(r => {
+                return r.json()})
+            .then(r => {
+                resolve(r)})
+            .catch(e => {
+                reject(e)
+            })
+            })
             break;
 
         case APIRouterActions.createServer:
             return new Promise ((resolve, reject) => {
-                fetch(`http://62.113.108.174:3200/api/v1/nodes/`, {
+                fetch(process.env.REACT_APP_API+`/api/v1/nodes/`, {
                     method: 'POST',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -131,7 +137,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
         case APIRouterActions.updateServer:
             return new Promise ((resolve, reject) => {
-                fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.id}`, {
+                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}`, {
                     method: 'PUT',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -156,7 +162,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
         case APIRouterActions.deleteServer:
             return new Promise ((resolve, reject) => {
-                fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.id}`, {
+                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}`, {
                     method: 'DELETE',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -173,7 +179,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
         case APIRouterActions.pingAllCameras:
             return new Promise ((resolve, reject) => {
-                fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.id}/clients`, {
+                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}/clients`, {
                     method: 'GET',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -183,7 +189,6 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 .then(r => {
                     return r.json()})
                 .then(r => {
-                    debugger
                     resolve(r)})
                 .catch(e => {
                     reject(e)
@@ -193,7 +198,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
         
         case APIRouterActions.pingCamera:
             return new Promise ((resolve, reject) => {
-                fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.parentID}/clients/${params.id}/ping`, {
+                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.parentID}/clients/${params.id}/ping`, {
                     method: 'POST',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -212,7 +217,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
         case APIRouterActions.createCamera:
             return new Promise ((resolve, reject) => {
-                fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.parentID}/clients/`, {
+                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.parentID}/clients/`, {
                     method: 'POST',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -237,7 +242,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
         case APIRouterActions.updateCamera:
             return new Promise ((resolve, reject) => {
-                fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.parentID}/clients/${params.id}/`, {
+                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.parentID}/clients/${params.id}/`, {
                     method: 'PUT',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -262,7 +267,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
         case APIRouterActions.deleteCamera:
             return new Promise ((resolve, reject) => {
-                fetch(`http://62.113.108.174:3200/api/v1/nodes/${params.parentID}/clients/${params.id}`, {
+                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.parentID}/clients/${params.id}`, {
                     method: 'DELETE',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -278,33 +283,32 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
             break;
             
         case APIRouterActions.getAuth:
-            resp = await fetch("http://62.113.108.174:3200/api/v1/auth/login", {
-                method: "POST",
-                headers: new Headers({
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                }),
-                body: JSON.stringify({
-                    username: params.login,
-                    password: params.password
+            return new Promise ((resolve, reject) => {
+                fetch(process.env.REACT_APP_API+"/api/v1/auth/login", {
+                    method: "POST",
+                    headers: new Headers({
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }),
+                    body: JSON.stringify({
+                        username: params.login,
+                        password: params.password
+                    })
+                })
+
+                .then(r => {
+                    return r.json()})
+                .then(r => {
+                    resolve(r)})
+                .catch(e => {
+                    reject(e)
                 })
             })
-
-            if (resp.ok) {
-                return {
-                    ok: true,
-                    body: await resp.json()
-                }
-            } else {
-                return {
-                    ok: false
-                }
-            }
             break;
 
         case APIRouterActions.getLogs:
             return new Promise ((resolve, reject) => {
-                fetch(`http://62.113.108.174:3200/api/v1/log/`, {
+                fetch(process.env.REACT_APP_API+`/api/v1/log/`, {
                     method: 'GET',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -323,7 +327,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
         case APIRouterActions.downloadFile:
             return new Promise ((resolve, reject) => {
-                fetch(`http://62.113.108.174:3200/api/v1/log/${params.id}/download`, {
+                fetch(process.env.REACT_APP_API+`/api/v1/log/${params.id}/download`, {
                     method: 'GET',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),

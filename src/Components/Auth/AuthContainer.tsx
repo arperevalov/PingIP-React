@@ -19,7 +19,7 @@ const AuthAPI = (props:IAuthAPI) => {
             login,
             password
         }).then((r:any) => {
-            props.setUser(r.body)})
+            props.setUser(r)})
         .catch(e => {
             message.notifyUser({
                 type: MessageType.error,
