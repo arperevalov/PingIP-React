@@ -165,7 +165,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
         case APIRouterActions.pingAllCameras:
             try {
-                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}/clients/pingAll`, {
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}/clients/pingall`, {
                     method: 'POST',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
