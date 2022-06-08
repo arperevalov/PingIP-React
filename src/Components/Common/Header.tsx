@@ -9,7 +9,7 @@ interface HeaderProps {
 const Header = (props:HeaderProps) => {
     return <header className='header'>
         <div className='header__inner'>
-            <Link to='/'><img src={logo} alt="" /></Link>
+            <Link to='/'><img className='header__logo' src={logo} alt="" /></Link>
             <nav className='nav'>
                 <ul className='menu'>
                     <li className='menu__item'>

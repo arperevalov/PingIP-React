@@ -165,15 +165,16 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
         case APIRouterActions.pingAllCameras:
             try {
-                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}/clients`, {
-                    method: 'GET',
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}/clients/pingAll`, {
+                    method: 'POST',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
                         'Accept': 'application/json'
                     })
                 })
-
+                debugger
                 const data = await response.json();
+                debugger
                 return data
             } catch (e) {
                 throw e

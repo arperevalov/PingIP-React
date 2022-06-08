@@ -1,3 +1,4 @@
+import { AnyAction } from "redux";
 import { IMessage, IPopup, PopupType } from "../Interfaces";
 
 enum Actions {
@@ -23,7 +24,7 @@ const defaultValues: AppReducerState = {
     }
 }
 
-const AppReducer = (state = defaultValues, action:any) => {
+const AppReducer = (state = defaultValues, action:AnyAction) => {
     switch (action.type) {
         case Actions.setSysMessage:
             let newMessage = {

@@ -54,6 +54,7 @@ body
     transition: ease all 0.2s
     color: $text-color-inverted
     background-color: $link-color
+    
     &:hover
         opacity: 0.7
 
@@ -83,6 +84,8 @@ body
         opacity: 0
         background-color: transparent
         &:focus
+            opacity: 1
+        @media (hover:none)
             opacity: 1
 
     &-4

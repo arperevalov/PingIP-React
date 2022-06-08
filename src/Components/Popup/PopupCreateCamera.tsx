@@ -1,6 +1,6 @@
 import React, { FormEvent, useContext, useEffect, useRef } from "react"
 import { APIRouter, APIRouterActions } from "../../API/APIRouter"
-import { IPopup, MessageType, PopupType } from "../../Interfaces"
+import { MessageType, PopupType } from "../../Interfaces"
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider"
 import Input from "../Common/Input"
 import cross from './../../../static/images/cross.svg'
@@ -18,9 +18,9 @@ interface PopupCreateCameraProps {
 
 const PopupCreateCamera = (props:PopupCreateCameraProps) => {
 
-    const nameInput = useRef<any>(props.name),
-        ipInput = useRef<any>(props.ip_address),
-        descriptionInput = useRef<any>(props.description),
+    const nameInput = useRef<HTMLInputElement>(null),
+        ipInput = useRef<HTMLInputElement>(null),
+        descriptionInput = useRef<HTMLInputElement>(null),
         message = useContext(SysMessagesContext)
 
     const submitForm = (e:FormEvent) => {

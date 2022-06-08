@@ -1,8 +1,11 @@
 import React from "react"
 import { connect } from "react-redux"
-import { setFetching } from "../Redux/AppReducer"
 
-const PreloaderProviderAPI = (props:any) => {
+interface PreloaderProviderAPIProps {
+    isFetching: boolean
+}
+
+const PreloaderProviderAPI = (props:PreloaderProviderAPIProps) => {
 
     if( props.isFetching ){
         return <div className="preloader"/>
@@ -18,7 +21,6 @@ const mapStateToProps = (store:any) => {
 }
 
 const PreloaderProvider = connect(mapStateToProps, {
-    setFetching
 })(PreloaderProviderAPI)
 
 export default PreloaderProvider

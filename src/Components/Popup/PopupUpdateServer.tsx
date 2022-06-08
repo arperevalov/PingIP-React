@@ -18,10 +18,10 @@ interface PopupUpdateServerProps {
 
 const PopupUpdateServer = (props:PopupUpdateServerProps) => {
 
-    const nameInput = useRef<any>(props.name),
-        ipInput = useRef<any>(props.ip_address),
-        descriptionInput = useRef<any>(props.description),
-        deleteInput = useRef<any>(),
+    const nameInput = useRef<HTMLInputElement>(null),
+        ipInput = useRef<HTMLInputElement>(null),
+        descriptionInput = useRef<HTMLInputElement>(null),
+        deleteInput = useRef<HTMLInputElement>(null),
         message = useContext(SysMessagesContext),
         [deleteStatePopup, setDeleteStatePopup] = useState(false),
         [disabledDeleteBtn, setDisabledDeleteBtn] = useState(true)

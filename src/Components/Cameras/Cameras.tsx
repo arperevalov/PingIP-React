@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import React from 'react';
 import { IServers, PopupType } from '../../Interfaces';
 import AsideNav from '../Common/AsideNav';
 import CameraItem from './CameraItem';

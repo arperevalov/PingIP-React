@@ -1,3 +1,6 @@
+import { AnyAction } from "redux";
+import { ILogs } from "../Interfaces";
+
 enum Actions {
     setLogs = "SET_LOGS",
 }
@@ -10,7 +13,7 @@ const defaultValues: LogsReducerState = {
     logs: []
 }
 
-const LogsReducer = (state = defaultValues, action:any) => {
+const LogsReducer = (state = defaultValues, action:AnyAction) => {
     switch (action.type) {
         case Actions.setLogs:
 
@@ -28,6 +31,6 @@ const LogsReducer = (state = defaultValues, action:any) => {
     }
 }
 
-export const setLogs = (logs:any) => ({type: Actions.setLogs, logs})
+export const setLogs = (logs:ILogs) => ({type: Actions.setLogs, logs})
 
 export default LogsReducer

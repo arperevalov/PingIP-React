@@ -6,7 +6,14 @@ import { setSysMessage, shiftMessage } from "../Redux/AppReducer"
 
 const SysMessagesContext = createContext(null)
 
-const SysMessagesProviderAPI = (props:any) => {
+interface SysMessagesProviderAPIProps {
+    sysMessages: IMessage[]
+    setSysMessage: CallableFunction
+    shiftMessage: CallableFunction
+    children: any
+}
+
+const SysMessagesProviderAPI = (props:SysMessagesProviderAPIProps) => {
 
 
     const notifyUser = (message: IMessage) => {

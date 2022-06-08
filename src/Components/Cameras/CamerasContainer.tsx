@@ -104,7 +104,6 @@ const CamerasAPI = (props: ICamerasAPI) => {
             />
 }
 
-
 const MapStateToProps = (store: any) => {
     return {
         servers: store.ServersPage.servers,

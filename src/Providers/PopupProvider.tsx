@@ -5,7 +5,7 @@ import PopupCreateServer from "../Components/Popup/PopupCreateServer"
 import PopupUpdateCamera from "../Components/Popup/PopupUpdateCamera"
 import PopupUpdateServer from "../Components/Popup/PopupUpdateServer"
 import { setPopup, setFetching } from "../Redux/AppReducer"
-import { IPopup, PopupType } from "../Interfaces"
+import { PopupType } from "../Interfaces"
 import { setUpdates } from "../Redux/ServersReducer"
 
 const PopupProviderAPI = (props: any) => {

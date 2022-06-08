@@ -1,4 +1,5 @@
 var _ = require('lodash');
+import { AnyAction } from "redux";
 import { IServers } from "../Interfaces"
 
 enum Actions {
@@ -19,7 +20,7 @@ const defaultValues: ServersReducerState = {
     updates: 0
 }
 
-const ServersReducer = (state = defaultValues, action: any) => {
+const ServersReducer = (state = defaultValues, action: AnyAction) => {
 
     let item: number
 

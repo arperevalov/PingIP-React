@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { IServers, PopupType } from '../../Interfaces';
 import ServerItem from './ServerItem';

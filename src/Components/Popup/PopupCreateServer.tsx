@@ -17,9 +17,9 @@ interface PopupCreateServerProps {
 
 const PopupCreateServer = (props:PopupCreateServerProps) => {
 
-    const nameInput = useRef<any>(props.name),
-        ipInput = useRef<any>(props.ip_address),
-        descriptionInput = useRef<any>(props.description),
+    const nameInput = useRef<HTMLInputElement>(null),
+        ipInput = useRef<HTMLInputElement>(null),
+        descriptionInput = useRef<HTMLInputElement>(null),
         message = useContext(SysMessagesContext)
 
     const submitForm = (e:FormEvent) => {

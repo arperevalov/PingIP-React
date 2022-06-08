@@ -1,3 +1,5 @@
+import { AnyAction } from "redux"
+
 enum Actions {
     SET_BEARER,
     LOG_OUT
@@ -13,7 +15,7 @@ const defaultValues: AuthReducerState = {
     username: null
 }
 
-const AuthReducer = (state = defaultValues, action:any) => {
+const AuthReducer = (state = defaultValues, action:AnyAction) => {
     switch (action.type) {
         case Actions.SET_BEARER:
             localStorage.setItem('Bearer', JSON.stringify(action.user.token))

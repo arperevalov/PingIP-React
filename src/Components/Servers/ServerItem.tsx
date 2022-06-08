@@ -1,6 +1,4 @@
-import React, { MouseEvent, useContext, useEffect, useState } from 'react';
-import mark from './../../../static/images/mark.svg'
-import markActive from './../../../static/images/mark-active.svg'
+import React, { MouseEvent } from 'react';
 import { IServers, PopupType } from '../../Interfaces';
 import ListDescription from '../Common/ListDescription';
 

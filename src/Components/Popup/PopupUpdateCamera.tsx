@@ -1,7 +1,6 @@
 import React, { FormEvent, useContext, useEffect, useRef, useState } from "react"
 import { APIRouter, APIRouterActions } from "../../API/APIRouter"
-import { IPopup, MessageType, PopupType } from "../../Interfaces"
-// import { PopupContext } from "../../Providers/PopupProvider"
+import { MessageType, PopupType } from "../../Interfaces"
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider"
 import Input from "../Common/Input"
 import cross from './../../../static/images/cross.svg'
@@ -19,10 +18,10 @@ interface PopupUpdateCameraProps {
 
 const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
 
-    const nameInput = useRef<any>(props.name),
-        ipInput = useRef<any>(props.ip_address),
-        descriptionInput = useRef<any>(props.description),
-        deleteInput = useRef<any>(),
+    const nameInput = useRef<HTMLInputElement>(null),
+        ipInput = useRef<HTMLInputElement>(null),
+        descriptionInput = useRef<HTMLInputElement>(null),
+        deleteInput = useRef<HTMLInputElement>(null),
         message = useContext(SysMessagesContext),
         [deleteStatePopup, setDeleteStatePopup] = useState(false),
         [disabledDeleteBtn, setDisabledDeleteBtn] = useState(true)

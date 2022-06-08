@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, VoidFunctionComponent } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import mark from './../../../static/images/mark.svg'
 import markActive from './../../../static/images/mark-active.svg'
 
