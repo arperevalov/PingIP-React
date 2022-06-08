@@ -3,7 +3,7 @@ import mark from './../../../static/images/mark.svg'
 import markActive from './../../../static/images/mark-active.svg'
 
 interface ListDescriptionProps {
-    description: string
+    description: string | boolean
 }
 
 const ListDescription = (props: ListDescriptionProps) => {

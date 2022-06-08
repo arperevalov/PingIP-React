@@ -52,7 +52,7 @@ const Servers = (props: ServersProps) => {
             <ul className='list__items'>
                 {props.servers ? props.servers
                 .sort((a,b) => { return a.id - b.id})
-                .map((i:any) => {
+                .map((i:IServers) => {
                     return <li key={i.id}>
                         <Link to={'/servers/'+i.id} className='item'>
                             <ServerItem

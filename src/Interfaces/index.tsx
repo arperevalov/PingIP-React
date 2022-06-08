@@ -16,7 +16,7 @@ export interface IServers {
     id: number
     name: string
     ip_address: string
-    description?: string
+    description?: string | boolean
     status: boolean
     last_ping?: string
     children?:IServers[]

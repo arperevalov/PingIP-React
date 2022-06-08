@@ -58,7 +58,7 @@ const Cameras = (props:CamerasProps) => {
             <ul className='list__items'>
             {props.parent.children && props.parent.children.length > 0 ? props.parent.children
             .sort((a,b) => { return a.id - b.id})
-            .map((i:any) => {
+            .map((i:IServers) => {
                     return <li key={i.id}>
                         <div className='item'>
                             <CameraItem

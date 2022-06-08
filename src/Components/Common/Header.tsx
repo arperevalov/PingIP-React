@@ -2,7 +2,11 @@ import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import logo from './../../../static/images/logo.svg'
 
-const Header = (props:any) => {
+interface HeaderProps {
+    logOut: CallableFunction
+}
+
+const Header = (props:HeaderProps) => {
     return <header className='header'>
         <div className='header__inner'>
             <Link to='/'><img src={logo} alt="" /></Link>

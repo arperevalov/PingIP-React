@@ -18,7 +18,7 @@ const AuthAPI = (props:IAuthAPI) => {
         APIRouter(APIRouterActions.getAuth, {
             login,
             password
-        }).then((r:any) => {
+        }).then((r) => {
             props.setUser(r)})
         .catch(e => {
             message.notifyUser({

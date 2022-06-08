@@ -28,91 +28,82 @@ interface IParams {
 
 export async function APIRouter(action: APIRouterActions, params:IParams) {
 
-    let resp: Response
-
     switch (action) {
 
         case APIRouterActions.getServers:
-            return new Promise ((resolve, reject) => {
-                fetch(process.env.REACT_APP_API+`/api/v1/nodes/`, {
+            try {
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/`, {
                     method: 'GET',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
                         'Accept': 'application/json'
                     })
                 })
-                .then(r => {
-                    return r.json()})
-                .then(r => {
-                    resolve(r)})
-                .catch(e => {
-                    reject(e)
-                })
-            })
+
+                const data = await response.json();
+                return data
+
+            } catch (e) {
+                throw e
+            }
             break;
 
         case APIRouterActions.pingAllServers:
-            return new Promise ((resolve, reject) => {
-                fetch(process.env.REACT_APP_API+`/api/v1/nodes/pingAll`, {
+            try {
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/pingAll`, {
                     method: 'POST',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
                         'Accept': 'application/json'
                     })
                 })
-                .then(r => {
-                    return r.json()})
-                .then(r => {
-                    resolve(r)})
-                .catch(e => {
-                    reject(e)
-                })
-            })
+
+                const data = await response.json();
+                return data
+            } catch (e) {
+                throw e
+            }
             break;
 
         case APIRouterActions.getServerChildren: 
-            return new Promise ((resolve, reject) => {
-                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}/clients`, {
+            try {
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}/clients`, {
                     method: 'GET',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
                         'Accept': 'application/json'
                     })
                 })
-                .then(r => {
-                    return r.json()})
-                .then(r => {
-                    resolve(r)})
-                .catch(e => {
-                    reject(e)
-                })
-            })
+
+                const data = await response.json();
+                return data
+            } catch (e) {
+                throw e
+            }
             break;
 
         case APIRouterActions.pingServer:
-            return new Promise ((resolve, reject) => {
-            fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}/ping`, {
-                method: "POST",
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
+            try {
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}/ping`, {
+                    method: "POST",
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                    })
                 })
-            })
-            .then(r => {
-                return r.json()})
-            .then(r => {
-                resolve(r)})
-            .catch(e => {
-                reject(e)
-            })
-            })
+
+                const data = await response.json();
+                return data
+            } catch (e) {
+                throw e
+            }
             break;
 
         case APIRouterActions.createServer:
-            return new Promise ((resolve, reject) => {
-                fetch(process.env.REACT_APP_API+`/api/v1/nodes/`, {
+            try {
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/`, {
                     method: 'POST',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -125,19 +116,17 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                         description: params.description
                     })
                 })
-                .then(r => {
-                    return r.json()})
-                .then(r => {
-                    resolve(r)})
-                .catch(e => {
-                    reject(e)
-                })
-            })
+
+                const data = await response.json();
+                return data
+            } catch (e) {
+                throw e
+            }
             break;
 
         case APIRouterActions.updateServer:
-            return new Promise ((resolve, reject) => {
-                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}`, {
+            try {
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}`, {
                     method: 'PUT',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -150,74 +139,67 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                         description: params.description
                     })
                 })
-                .then(r => {
-                    return r.json()})
-                .then(r => {
-                    resolve(r)})
-                .catch(e => {
-                    reject(e)
-                })
-            })
+
+                const data = await response.json();
+                return data
+            } catch (e) {
+                throw e
+            }
             break;
 
         case APIRouterActions.deleteServer:
-            return new Promise ((resolve, reject) => {
-                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}`, {
+            try {
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}`, {
                     method: 'DELETE',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
                         'Accept': 'application/json'
                     })
                 })
-                .then(r => {
-                    if (r.ok) resolve(r)})
-                .catch(e => {
-                    reject(e)
-                })
-            })
+
+                if (response.ok) return response
+            } catch (e) {
+                throw e
+            }
             break;
 
         case APIRouterActions.pingAllCameras:
-            return new Promise ((resolve, reject) => {
-                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}/clients`, {
+            try {
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}/clients`, {
                     method: 'GET',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
                         'Accept': 'application/json'
                     })
                 })
-                .then(r => {
-                    return r.json()})
-                .then(r => {
-                    resolve(r)})
-                .catch(e => {
-                    reject(e)
-                })
-            })
+
+                const data = await response.json();
+                return data
+            } catch (e) {
+                throw e
+            }
             break;
         
         case APIRouterActions.pingCamera:
-            return new Promise ((resolve, reject) => {
-                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.parentID}/clients/${params.id}/ping`, {
+            try {
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.parentID}/clients/${params.id}/ping`, {
                     method: 'POST',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
                         'Accept': 'application/json'
                     })
                 })
-                .then(r => {
-                    return r.json()})
-                .then(r => {
-                    resolve(r)})
-                .catch(e => {
-                    reject(e)
-                })
-            })
+
+                const data = await response.json();
+                return data
+            } catch (e) {
+                throw e
+            }
             break;
 
         case APIRouterActions.createCamera:
-            return new Promise ((resolve, reject) => {
-                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.parentID}/clients/`, {
+            try {
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.parentID}/clients/`, {
                     method: 'POST',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -230,19 +212,17 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                         description: params.description
                     })
                 })
-                .then(r => {
-                    return r.json()})
-                .then(r => {
-                    resolve(r)})
-                .catch(e => {
-                    reject(e)
-                })
-            })
+
+                const data = await response.json();
+                return data
+            } catch (e) {
+                throw e
+            }
             break;
 
         case APIRouterActions.updateCamera:
-            return new Promise ((resolve, reject) => {
-                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.parentID}/clients/${params.id}/`, {
+            try {
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.parentID}/clients/${params.id}/`, {
                     method: 'PUT',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
@@ -255,36 +235,33 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                         description: params.description
                     })
                 })
-                .then(r => {
-                    return r.json()})
-                .then(r => {
-                    resolve(r)})
-                .catch(e => {
-                    reject(e)
-                })
-            })
+
+                const data = await response.json();
+                return data
+            } catch (e) {
+                throw e
+            }
             break;
 
         case APIRouterActions.deleteCamera:
-            return new Promise ((resolve, reject) => {
-                fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.parentID}/clients/${params.id}`, {
+            try {
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.parentID}/clients/${params.id}`, {
                     method: 'DELETE',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
                         'Accept': 'application/json'
                     })
                 })
-                .then(r => {
-                    if (r.ok) resolve(r)})
-                .catch(e => {
-                    reject(e)
-                })
-            })
+
+                if (response.ok) return response
+            } catch (e) {
+                throw e
+            }
             break;
             
         case APIRouterActions.getAuth:
-            return new Promise ((resolve, reject) => {
-                fetch(process.env.REACT_APP_API+"/api/v1/auth/login", {
+            try {
+                const response = await fetch(process.env.REACT_APP_API+"/api/v1/auth/login", {
                     method: "POST",
                     headers: new Headers({
                         "Content-Type": "application/json",
@@ -294,66 +271,61 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                         username: params.login,
                         password: params.password
                     })
-                })
+                });
 
-                .then(r => {
-                    return r.json()})
-                .then(r => {
-                    resolve(r)})
-                .catch(e => {
-                    reject(e)
-                })
-            })
+                const data = await response.json();
+                return data
+            } catch (e) {
+                throw e
+            }
             break;
 
         case APIRouterActions.getLogs:
-            return new Promise ((resolve, reject) => {
-                fetch(process.env.REACT_APP_API+`/api/v1/log/`, {
+            try {
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/log/`, {
                     method: 'GET',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
                         'Accept': 'application/json'
                     })
                 })
-                .then(r => {
-                    return r.json()})
-                .then(r => {
-                    resolve(r)})
-                .catch(e => {
-                    reject(e)
-                })
-            })
+
+                const data = await response.json();
+                return data
+
+            } catch (e) {
+                throw e
+            }
             break;
 
         case APIRouterActions.downloadFile:
-            return new Promise ((resolve, reject) => {
-                fetch(process.env.REACT_APP_API+`/api/v1/log/${params.id}/download`, {
+            try {
+                const response = await fetch(process.env.REACT_APP_API+`/api/v1/log/${params.id}/download`, {
                     method: 'GET',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('Bearer').replace(/"/g, ''),
                         'Accept': 'application/json'
                     })
                 })
-                .then((response) => response.blob())
-                .then((blob) => {
-                    const url = window.URL.createObjectURL(
-                    new Blob([blob]),
+
+                const data = await response.blob();
+
+                const url = window.URL.createObjectURL(
+                    new Blob([data]),
                     );
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.setAttribute(
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute(
                     'download',
                     `${params.name}.csv`,
                     );
-                    document.body.appendChild(link);
-                    link.click();
-                    link.parentNode.removeChild(link);
-                    resolve(blob)
-                })
-                .catch(e=>{
-                    reject(e)
-                });
-            })
+                document.body.appendChild(link);
+                link.click();
+                link.parentNode.removeChild(link);
+                return data
+            } catch (e) {
+                throw e
+            }
             break;
 
         default:

@@ -11,7 +11,7 @@ import LogsPageContainer from './LogsPage/LogsPageContainer';
 
 interface AppProps {
     hasBearer: boolean
-    logOut: any
+    logOut: CallableFunction
 }
 
 function App(props:AppProps) {

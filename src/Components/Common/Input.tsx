@@ -4,9 +4,9 @@ interface IInput {
     type: string
     placeholder: string
     label: string
-    reference: any
     isRequired?: boolean
-    inputDefault?: any
+    reference: any
+    inputDefault?: string | number
     onChangeAction?: any
 }
 
