@@ -24,6 +24,7 @@ const PopupCreateCamera = (props:PopupCreateCameraProps) => {
         message = useContext(SysMessagesContext)
 
     const submitForm = (e:FormEvent) => {
+        e.preventDefault()
         props.setFetching(true)
         APIRouter(APIRouterActions.createCamera, { 
             id: props.id,
@@ -34,6 +35,7 @@ const PopupCreateCamera = (props:PopupCreateCameraProps) => {
         .then(r => {
             props.setFetching(false)
             props.setUpdates()
+            props.setPopup({type: PopupType.default})
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Камера успешно добавлена'
@@ -42,12 +44,10 @@ const PopupCreateCamera = (props:PopupCreateCameraProps) => {
             props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось добавить камеру'
+                text: e
             })
             throw new Error(e)
         })
-        
-        props.setPopup({type: PopupType.default})
     }
 
     useEffect(()=>{

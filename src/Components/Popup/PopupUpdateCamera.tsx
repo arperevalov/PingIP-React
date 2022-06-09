@@ -27,6 +27,7 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
         [disabledDeleteBtn, setDisabledDeleteBtn] = useState(true)
 
     const submitForm = (e:FormEvent) => {
+        e.preventDefault()
         props.setFetching(true)
         APIRouter(APIRouterActions.updateCamera, {parentID: props.parentID, 
             id: props.id,
@@ -36,6 +37,7 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
         .then(r => {
             props.setFetching(false)
             props.setUpdates()
+            props.setPopup({type: PopupType.default})
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Камера успешно обновлена'
@@ -44,11 +46,10 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
             props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось обновить камеру'
+                text: e
             })
             throw new Error(e)
         })
-        props.setPopup({type: PopupType.default})
     }
 
 
@@ -58,6 +59,7 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
     }
 
     const submitDeleteForm = (e:FormEvent) => {
+        e.preventDefault()
         props.setFetching(true)
         APIRouter(APIRouterActions.deleteCamera, {
             parentID: props.parentID,
@@ -65,6 +67,7 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
         .then(r => {
             props.setFetching(false)
             props.setUpdates()
+            props.setPopup({type: PopupType.default})
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Камера успешно удалена'
@@ -73,12 +76,10 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
             props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось удалить камеру'
+                text: e
             })
             throw new Error(e)
         })
-        props.setFetching(false)
-        props.setPopup({type: PopupType.default})
     }
 
     useEffect(()=>{

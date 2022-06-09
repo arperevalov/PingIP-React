@@ -41,7 +41,8 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 })
 
                 const data = await response.json();
-                return data
+                if (response.ok) return data
+                throw JSON.stringify(data.errors)
 
             } catch (e) {
                 throw e
@@ -59,7 +60,8 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 })
 
                 const data = await response.json();
-                return data
+                if (response.ok) return data
+                throw JSON.stringify(data.errors)
             } catch (e) {
                 throw e
             }
@@ -76,7 +78,8 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 })
 
                 const data = await response.json();
-                return data
+                if (response.ok) return data
+                throw JSON.stringify(data.errors)
             } catch (e) {
                 throw e
             }
@@ -95,7 +98,8 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 })
 
                 const data = await response.json();
-                return data
+                if (response.ok) return data
+                throw JSON.stringify(data.errors)
             } catch (e) {
                 throw e
             }
@@ -118,7 +122,8 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 })
 
                 const data = await response.json();
-                return data
+                if (response.ok) return data
+                throw JSON.stringify(data.errors)
             } catch (e) {
                 throw e
             }
@@ -141,7 +146,8 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 })
 
                 const data = await response.json();
-                return data
+                if (response.ok) return data
+                throw JSON.stringify(data.errors)
             } catch (e) {
                 throw e
             }
@@ -157,7 +163,10 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                     })
                 })
 
+                const data = await response.json()
+
                 if (response.ok) return response
+                throw data.errors
             } catch (e) {
                 throw e
             }
@@ -172,10 +181,9 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                         'Accept': 'application/json'
                     })
                 })
-                debugger
                 const data = await response.json();
-                debugger
-                return data
+                if (response.ok) return data
+                throw JSON.stringify(data.errors)
             } catch (e) {
                 throw e
             }
@@ -192,7 +200,8 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 })
 
                 const data = await response.json();
-                return data
+                if (response.ok) return data
+                throw JSON.stringify(data.errors)
             } catch (e) {
                 throw e
             }
@@ -215,7 +224,8 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 })
 
                 const data = await response.json();
-                return data
+                if (response.ok) return data
+                throw JSON.stringify(data.errors)
             } catch (e) {
                 throw e
             }
@@ -238,7 +248,8 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 })
 
                 const data = await response.json();
-                return data
+                if (response.ok) return data
+                throw JSON.stringify(data.errors)
             } catch (e) {
                 throw e
             }
@@ -254,7 +265,10 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                     })
                 })
 
+                const data = await response.json()
+
                 if (response.ok) return response
+                throw data.errors
             } catch (e) {
                 throw e
             }
@@ -275,7 +289,8 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 });
 
                 const data = await response.json();
-                return data
+                if (response.ok) return data
+                throw JSON.stringify(data.errors)
             } catch (e) {
                 throw e
             }
@@ -292,7 +307,8 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 })
 
                 const data = await response.json();
-                return data
+                if (response.ok) return data
+                throw JSON.stringify(data.errors)
 
             } catch (e) {
                 throw e
@@ -310,6 +326,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 })
 
                 const data = await response.blob();
+                const dataJSON = await response.json();
 
                 const url = window.URL.createObjectURL(
                     new Blob([data]),
@@ -323,7 +340,9 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 document.body.appendChild(link);
                 link.click();
                 link.parentNode.removeChild(link);
-                return data
+
+                if (response.ok) return data
+                throw JSON.stringify(dataJSON.errors)
             } catch (e) {
                 throw e
             }

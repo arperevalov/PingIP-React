@@ -23,6 +23,7 @@ const PopupCreateServer = (props:PopupCreateServerProps) => {
         message = useContext(SysMessagesContext)
 
     const submitForm = (e:FormEvent) => {
+        e.preventDefault()
         props.setFetching(true)
         APIRouter(APIRouterActions.createServer, { 
             id: props.id,
@@ -32,6 +33,7 @@ const PopupCreateServer = (props:PopupCreateServerProps) => {
         .then(r => {
             props.setFetching(false)
             props.setUpdates()
+            props.setPopup({type: PopupType.default})
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Сервер успешно добавлен'
@@ -40,11 +42,10 @@ const PopupCreateServer = (props:PopupCreateServerProps) => {
             props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось добавить сервер'
+                text: e
             })
             throw new Error(e)
         })
-        props.setPopup({type: PopupType.default})
     }
 
     useEffect(()=>{

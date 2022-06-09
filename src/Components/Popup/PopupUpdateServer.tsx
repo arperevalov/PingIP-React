@@ -27,6 +27,7 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
         [disabledDeleteBtn, setDisabledDeleteBtn] = useState(true)
 
     const submitForm = (e:FormEvent) => {
+        e.preventDefault()
         props.setFetching(true)
         APIRouter(APIRouterActions.updateServer, {
             id: props.id,
@@ -36,6 +37,7 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
         .then(r => {
             props.setFetching(false)
             props.setUpdates()
+            props.setPopup({type: PopupType.default})
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Сервер успешно обновлен'
@@ -44,11 +46,10 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
             props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось обновить сервер'
+                text: e
             })
             throw new Error(e)
         })
-        props.setPopup({type: PopupType.default})
     }
 
     const deleteInputChange = () => {
@@ -57,11 +58,13 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
     }
 
     const submitDeleteForm = (e:FormEvent) => {
+        e.preventDefault()
         props.setFetching(true)
         APIRouter(APIRouterActions.deleteServer, {id: props.id})
         .then(r => {
             props.setFetching(false)
             props.setUpdates()
+            props.setPopup({type: PopupType.default})
             message.notifyUser({
                 type: MessageType.success,
                 text: 'Сервер успешно удален'
@@ -70,11 +73,10 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
             props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось удалить сервер'
+                text: e
             })
             throw new Error(e)
         })
-        props.setPopup({type: PopupType.default})
     }
 
     useEffect(()=>{

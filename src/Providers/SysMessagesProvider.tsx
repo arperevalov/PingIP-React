@@ -20,7 +20,7 @@ const SysMessagesProviderAPI = (props:SysMessagesProviderAPIProps) => {
         props.setSysMessage(message)
         setTimeout(()=>{
             props.shiftMessage()
-        }, 2000)
+        }, 3000)
     } 
 
     return <SysMessagesContext.Provider value={{
