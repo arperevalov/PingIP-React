@@ -34,10 +34,6 @@ const PopupCreateServer = (props:PopupCreateServerProps) => {
             props.setFetching(false)
             props.setUpdates()
             props.setPopup({type: PopupType.default})
-            message.notifyUser({
-                type: MessageType.success,
-                text: 'Сервер успешно добавлен'
-            })
         }).catch(e => {
             props.setFetching(false)
             message.notifyUser({

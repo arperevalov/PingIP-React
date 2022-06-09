@@ -38,10 +38,6 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
             props.setFetching(false)
             props.setUpdates()
             props.setPopup({type: PopupType.default})
-            message.notifyUser({
-                type: MessageType.success,
-                text: 'Сервер успешно обновлен'
-            })
         }).catch(e => {
             props.setFetching(false)
             message.notifyUser({
@@ -65,10 +61,6 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
             props.setFetching(false)
             props.setUpdates()
             props.setPopup({type: PopupType.default})
-            message.notifyUser({
-                type: MessageType.success,
-                text: 'Сервер успешно удален'
-            })
         }).catch(e => {
             props.setFetching(false)
             message.notifyUser({

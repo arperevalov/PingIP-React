@@ -42,7 +42,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
                 const data = await response.json();
                 if (response.ok) return data
-                throw JSON.stringify(data.errors)
+                throw data.errors
 
             } catch (e) {
                 throw e
@@ -61,7 +61,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
                 const data = await response.json();
                 if (response.ok) return data
-                throw JSON.stringify(data.errors)
+                throw data.errors
             } catch (e) {
                 throw e
             }
@@ -79,7 +79,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
                 const data = await response.json();
                 if (response.ok) return data
-                throw JSON.stringify(data.errors)
+                throw data.errors
             } catch (e) {
                 throw e
             }
@@ -99,7 +99,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
                 const data = await response.json();
                 if (response.ok) return data
-                throw JSON.stringify(data.errors)
+                throw data.errors
             } catch (e) {
                 throw e
             }
@@ -123,7 +123,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
                 const data = await response.json();
                 if (response.ok) return data
-                throw JSON.stringify(data.errors)
+                throw data.errors
             } catch (e) {
                 throw e
             }
@@ -147,7 +147,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
                 const data = await response.json();
                 if (response.ok) return data
-                throw JSON.stringify(data.errors)
+                throw data.errors
             } catch (e) {
                 throw e
             }
@@ -183,7 +183,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                 })
                 const data = await response.json();
                 if (response.ok) return data
-                throw JSON.stringify(data.errors)
+                throw data.errors
             } catch (e) {
                 throw e
             }
@@ -201,7 +201,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
                 const data = await response.json();
                 if (response.ok) return data
-                throw JSON.stringify(data.errors)
+                throw data.errors
             } catch (e) {
                 throw e
             }
@@ -225,7 +225,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
                 const data = await response.json();
                 if (response.ok) return data
-                throw JSON.stringify(data.errors)
+                throw data.errors
             } catch (e) {
                 throw e
             }
@@ -249,7 +249,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
                 const data = await response.json();
                 if (response.ok) return data
-                throw JSON.stringify(data.errors)
+                throw data.errors
             } catch (e) {
                 throw e
             }
@@ -290,7 +290,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
                 const data = await response.json();
                 if (response.ok) return data
-                throw JSON.stringify(data.errors)
+                throw data.errors
             } catch (e) {
                 throw e
             }
@@ -308,7 +308,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
 
                 const data = await response.json();
                 if (response.ok) return data
-                throw JSON.stringify(data.errors)
+                throw data.errors
 
             } catch (e) {
                 throw e

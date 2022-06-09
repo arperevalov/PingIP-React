@@ -38,15 +38,11 @@ const CamerasAPI = (props: ICamerasAPI) => {
         .then(r => {
             props.setCameraPing(id, r, parent.id)
             props.setFetching(false)
-            message.notifyUser({
-                type: MessageType.success,
-                text: 'Успешно пинганулась камера ' + id
-            })
         }).catch(e => {
             props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось пингануть камеру'
+                text: e
             })
             throw new Error(e)
         })  
@@ -58,15 +54,11 @@ const CamerasAPI = (props: ICamerasAPI) => {
         .then(r => {
             props.setServerChilren(prodId, r)
             props.setFetching(false)
-            message.notifyUser({
-                type: MessageType.success,
-                text: 'Все камеры пинганулись'
-            })
         }).catch(e => {
             props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось пингануть все камеры'
+                text: e
             })
             throw new Error(e)
         })  
@@ -79,15 +71,11 @@ const CamerasAPI = (props: ICamerasAPI) => {
             .then(r => {
                 props.setServerChilren(prodId, r)
                 props.setFetching(false)
-                message.notifyUser({
-                    type: MessageType.success,
-                    text: 'Камеры успешно загрузились'
-                })
             }).catch(e => {
                 props.setFetching(false)
                 message.notifyUser({
                     type: MessageType.error,
-                    text: 'Не удалось загрузить камеры'
+                    text: e
                 })
                 throw new Error(e)
             })  

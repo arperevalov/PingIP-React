@@ -36,10 +36,6 @@ const PopupCreateCamera = (props:PopupCreateCameraProps) => {
             props.setFetching(false)
             props.setUpdates()
             props.setPopup({type: PopupType.default})
-            message.notifyUser({
-                type: MessageType.success,
-                text: 'Камера успешно добавлена'
-            })
         }).catch(e => {
             props.setFetching(false)
             message.notifyUser({

@@ -25,15 +25,11 @@ const LogsPageAPI = (props: LogsPageAPIProps) => {
         .then(r => {
             props.setFetching(false)
             props.setLogs(r)
-            message.notifyUser({
-                type: MessageType.success,
-                text: 'Все логи загрузились'
-            })
         }).catch(e => {
             props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось загрузить все логи'
+                text: e
             })
             throw new Error(e)
         })   

@@ -11,12 +11,14 @@ enum Actions {
 interface AppReducerState {
     SysMessages:IMessage []
     SysIDCounter: number
+    SysMessagesQueue: number[]
     isFetching: boolean
     popupItem: IPopup
 }
 
 const defaultValues: AppReducerState = {
     SysMessages: [],
+    SysMessagesQueue: [],
     SysIDCounter: 0,
     isFetching: false,
     popupItem: {
@@ -27,25 +29,32 @@ const defaultValues: AppReducerState = {
 const AppReducer = (state = defaultValues, action:AnyAction) => {
     switch (action.type) {
         case Actions.setSysMessage:
-            let newMessage = {
-                id: state.SysIDCounter++,
-                type: action.message.type,
-                text: action.message.text.toString()
+            let messages = [];
+
+            for (let key in action.message.text) {
+                messages.push({
+                    id: state.SysIDCounter++,
+                    type: action.message.type,
+                    text: action.message.text[key]
+                })
             }
 
             return {
                 ...state,
                 SysMessages: [...state.SysMessages,
-                    newMessage],
-                SysIDCounter: state.SysIDCounter++
+                    ...messages],
+                SysIDCounter: state.SysIDCounter + messages.length,
+                SysMessagesQueue: [...state.SysMessagesQueue, messages.length]
             }
             break;
         
         case Actions.shiftMessage:
-            state.SysMessages.shift()
+            state.SysMessages.splice(0, state.SysMessagesQueue[0])
+            state.SysMessagesQueue.shift()
             return {
                 ...state,
-                SysMessages: [...state.SysMessages]
+                SysMessages: [...state.SysMessages],
+                SysMessagesQueue: [...state.SysMessagesQueue]
             }
             break
 

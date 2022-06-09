@@ -38,10 +38,6 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
             props.setFetching(false)
             props.setUpdates()
             props.setPopup({type: PopupType.default})
-            message.notifyUser({
-                type: MessageType.success,
-                text: 'Камера успешно обновлена'
-            })
         }).catch(e => {
             props.setFetching(false)
             message.notifyUser({
@@ -68,10 +64,6 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
             props.setFetching(false)
             props.setUpdates()
             props.setPopup({type: PopupType.default})
-            message.notifyUser({
-                type: MessageType.success,
-                text: 'Камера успешно удалена'
-            })
         }).catch(e => {
             props.setFetching(false)
             message.notifyUser({

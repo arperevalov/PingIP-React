@@ -28,15 +28,11 @@ const ServersAPI = (props: IServersAPI) => {
         .then(r => {
             props.setServers(r)
             props.setFetching(false)
-            message.notifyUser({
-                type: MessageType.success,
-                text: 'Серверы успешно загрузились'
-            })
         }).catch(e => {
             props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось загрузить серверы'
+                text: e
             })
             throw new Error(e)
         })  
@@ -48,15 +44,11 @@ const ServersAPI = (props: IServersAPI) => {
         .then(r => {
             props.setFetching(false)
             props.setServers(r)
-            message.notifyUser({
-                type: MessageType.success,
-                text: 'Все сервера пинганулись'
-            })
         }).catch(e => {
             props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось пингануть все сервера'
+                text: e
             })
             throw new Error(e)
         })   
@@ -69,15 +61,11 @@ const ServersAPI = (props: IServersAPI) => {
         }).then(r => {
             props.setPing(r)
             props.setFetching(false)
-            message.notifyUser({
-                type: MessageType.success,
-                text: 'Успешно пинганулся сервер ' + id
-            })
         }).catch(e => {
             props.setFetching(false)
             message.notifyUser({
                 type: MessageType.error,
-                text: 'Не удалось пингануть сервер ' + id
+                text: e
             })
             throw new Error(e)
         })   
