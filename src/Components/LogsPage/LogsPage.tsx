@@ -1,6 +1,7 @@
 import React from "react";
 import { ILogs } from "../../Interfaces";
 import { APIRouter, APIRouterActions } from "../../API/APIRouter";
+import Empty from "../Common/Empty";
 
 interface LogsPageProps {
     logs: ILogs[]
@@ -21,12 +22,7 @@ const LogsPage = (props: LogsPageProps) => {
             <div className='main__top'>
                 <h1 className='h1'>Логи</h1>
             </div>
-            <div className='empty'>
-                <h2 className='h2'>Мы не нашли логов</h2>
-                <p className='empty__text'>
-                    Логи появляются, когда на сервере есть серверы/камеры. Пожалуйста, проверьте их наличие.
-                </p>
-            </div>
+            <Empty text='Логи появляются, когда на сервере есть серверы/камеры. Пожалуйста, проверьте их наличие.'/>
         </main>
     }
 

@@ -36,6 +36,8 @@ const CameraItem = (props:CameraItemProps) => {
             {props.name}
         </span>
         <span>{props.ip_address}</span>
+        {/* <span>{props.mac}</span> */}
+        <span>123.123.123.123</span>
         <span>
             {props.last_ping ? new Date(props.last_ping.replace(" ", "T")).toLocaleTimeString() : ''}
             <span className='item__lastPingDate'>{props.last_ping ? ' ' + new Date(props.last_ping.replace(" ", "T")).toLocaleDateString() : ''}</span>

@@ -56,6 +56,7 @@ const ServersReducer = (state = defaultValues, action: AnyAction) => {
                 name: state.servers[item].name,
                 ip_address: action.response.ip_address,
                 status: action.response.status,
+                mac: '123',
                 last_ping: action.response.last_ping
             }
 
@@ -76,6 +77,7 @@ const ServersReducer = (state = defaultValues, action: AnyAction) => {
                 name: parentServer.children[childID].name,
                 ip_address: action.response.ip_address,
                 status: action.response.status,
+                mac: '123',
                 last_ping: action.response.last_ping
             }
 
