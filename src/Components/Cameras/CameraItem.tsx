@@ -35,10 +35,12 @@ const CameraItem = (props:CameraItemProps) => {
             <ListDescription description={props.description}/>
             {props.name}
         </span>
-        <span>{props.ip_address}</span>
-        {/* <span>{props.mac}</span> */}
-        <span>123.123.123.123</span>
+        <span className='item__descriptionMobile'>{props.description}</span>
+        <span> <span className='item__meaning'>IP</span> {props.ip_address}</span>
+        {/* <span> <span className='item__meaning'>MAC</span> {props.mac}</span> */}
+        <span> <span className='item__meaning'>MAC</span> 123.123.123.123</span>
         <span>
+            <span className='item__meaning'>Последний пинг</span>
             {props.last_ping ? new Date(props.last_ping.replace(" ", "T")).toLocaleTimeString() : ''}
             <span className='item__lastPingDate'>{props.last_ping ? ' ' + new Date(props.last_ping.replace(" ", "T")).toLocaleDateString() : ''}</span>
         </span>

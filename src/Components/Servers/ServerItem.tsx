@@ -35,18 +35,22 @@ const ServerItem = (props:ServerItemProps) => {
             <ListDescription description={props.description}/>
             {props.name}
         </span>
-        <span>{props.ip_address}</span>
-        {/* <span>{props.mac}</span> */}
-        <span>123.123.123.123</span>
-        <span>
-            {props.last_ping ? new Date(props.last_ping.replace(" ", "T")).toLocaleTimeString() : ''}
-            <span className='item__lastPingDate'>{props.last_ping ? ' ' + new Date(props.last_ping.replace(" ", "T")).toLocaleDateString() : ''}</span>
-        </span>
+        <span className='item__descriptionMobile'>{props.description}</span>
+        <div className='item__dataWrap'>
+            <span className='item__data'> <span className='item__meaning'>IP</span> {props.ip_address}</span>
+            {/* <span className='item__data'> <span className='item__meaning'>MAC</span> {props.mac}</span> */}
+            <span className='item__data'> <span className='item__meaning'>MAC</span> 123.123.123.123</span>
+            <span className='item__data'>
+                <span className='item__meaning'>Последний пинг</span>
+                {props.last_ping ? new Date(props.last_ping.replace(" ", "T")).toLocaleTimeString() : ''}
+                <span className='item__lastPingDate'>{props.last_ping ? ' ' + new Date(props.last_ping.replace(" ", "T")).toLocaleDateString() : ''}</span>
+            </span>
+        </div>
         <div className='buttonWrapper'>
-            <button className='button button-3 button-list' onClick={togglePopup}>
+            <button className='button button-3 button-list button-change' onClick={togglePopup}>
                 Изменить
             </button>   
-            <button className='button button-2 button-list' onClick={startPing}>
+            <button className='button button-2 button-list button-ping' onClick={startPing}>
                 Пинг
             </button>
         </div>
