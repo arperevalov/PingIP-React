@@ -12,6 +12,11 @@ export enum PopupType {
     createCamera,
 }
 
+export enum ListType {
+    Servers= 'ase',
+    Cameras = 'sdsa'
+}
+
 export interface IServers {
     id: number
     name: string

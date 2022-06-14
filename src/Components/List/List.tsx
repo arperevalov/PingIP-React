@@ -1,19 +1,32 @@
 import React, { MouseEvent } from 'react';
 import { IServers, PopupType } from '../../Interfaces';
-import ListDescription from '../Common/ListDescription';
+import ListDescription from './ListDescription';
 
-interface ServerItemProps extends IServers {
+interface ListProps extends IServers {
     getPing: CallableFunction
     parentID?: number
     setPopup: CallableFunction
+    type: string
 }
 
-const ServerItem = (props:ServerItemProps) => {
+const List = (props:ListProps) => {
 
-    const togglePopup = (e:MouseEvent):void => {
+    const togglePopupServer = (e:MouseEvent):void => {
         e.preventDefault()
         props.setPopup({
             type: PopupType.updateServer,
+            id: props.id,
+            name: props.name,
+            ip_address: props.ip_address,
+            description: props.description,
+            parentID: props.parentID
+        })
+    }
+
+    const togglePopupCamera = (e:MouseEvent):void => {
+        e.preventDefault()
+        props.setPopup({
+            type: PopupType.updateCamera,
             id: props.id,
             name: props.name,
             ip_address: props.ip_address,
@@ -47,7 +60,7 @@ const ServerItem = (props:ServerItemProps) => {
             </span>
         </div>
         <div className='buttonWrapper'>
-            <button className='button button-3 button-list button-change' onClick={togglePopup}>
+            <button className='button button-3 button-list button-change' onClick={props.type === 'server' ? togglePopupServer : togglePopupCamera}>
                 Изменить
             </button>   
             <button className='button button-2 button-list button-ping' onClick={startPing}>
@@ -58,4 +71,4 @@ const ServerItem = (props:ServerItemProps) => {
 
 }
 
-export default ServerItem
+export default List

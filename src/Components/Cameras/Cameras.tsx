@@ -1,8 +1,8 @@
 import React from 'react';
-import { IServers, PopupType } from '../../Interfaces';
+import { IServers, ListType, PopupType } from '../../Interfaces';
 import AsideNav from '../Common/AsideNav';
 import Empty from '../Common/Empty';
-import CameraItem from './CameraItem';
+import ListCotnainer from '../List/ListContainer';
 
 interface CamerasProps {
     setPopup: CallableFunction
@@ -43,36 +43,11 @@ const Cameras = (props:CamerasProps) => {
         </div>
 
         <div className='list'>
-            <div className='list__legend'>
-                <span>Статус</span>
-                <span>Имя</span>
-                <span>IP</span>
-                <span>MAC</span>
-                <span>Последний пинг</span>
-            </div>
-            <ul className='list__items'>
-            {props.parent.children && props.parent.children.length > 0 ? props.parent.children
-            .sort((a,b) => { return a.id - b.id})
-            .map((i:IServers) => {
-                    return <li className='list__itemsWrapper' key={i.id}>
-                        <div className='item'>
-                            <CameraItem
-                                id={i.id}
-                                name={i.name}
-                                ip_address={i.ip_address}
-                                last_ping={i.last_ping}
-                                description={i.description ? i.description : false}
-                                status={i.status}
-                                getPing={props.getPing}
-                                parentID={props.parent.id}
-                                setPopup={props.setPopup}
-                                mac={i.mac}
-                            />
-                        </div>
-                    </li>
-                    }) : ''
-                }
-            </ul>
+            <ListCotnainer 
+                getPing={props.getPing}
+                setPopup={props.setPopup}
+                type={ListType.Cameras}
+                parent={props.parent}/>
         </div>
 
         <AsideNav items={props.servers}/>

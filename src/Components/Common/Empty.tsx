@@ -11,7 +11,7 @@ const Empty = (props: EmptyProps) => {
     <p className='empty__text'>
         {props.text ? props.text : 'Если вы уверены, что на этой странице должны быть компоненты, обратитесь к разработчикам сайта.'}
     </p>
-    {props.action ? <button className='button button-super empty__button' onClick={()=> {props.action()}}>+ Добавить сервер</button> : ''}
+    {props.action ? <button className='button button-super empty__button' onClick={()=> {props.action()}}>+ Добавить объект</button> : ''}
 </div>
 }
 
