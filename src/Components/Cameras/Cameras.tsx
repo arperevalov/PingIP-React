@@ -22,6 +22,8 @@ const Cameras = (props:CamerasProps) => {
         })
     }
 
+    if(props.parent === undefined) return <></>
+
     if(props.parent.children && props.parent.children.length < 1 && !props.isFetching) {
         return <main className='main'>
             <div className='main__top'>

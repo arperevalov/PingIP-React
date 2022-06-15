@@ -8,6 +8,7 @@ import SysMessagesProvider from '../Providers/SysMessagesProvider';
 import PreloaderProvider from '../Providers/PreloaderProvider';
 import PopupProvider from '../Providers/PopupProvider';
 import LogsPageContainer from './LogsPage/LogsPageContainer';
+import Page404 from './Common/Page404';
 
 interface AppProps {
     hasBearer: boolean
@@ -26,6 +27,7 @@ function App(props:AppProps) {
                         <Route path='/servers' element={<ServersContainer/>}/>
                         <Route path='/servers/:id' element={<CamerasContainer/>}/>
                         <Route path='/logs' element={<LogsPageContainer/>}/>
+                        <Route path="*" element={<Page404/>}/>
                     </Routes>
                 </> : 
                 <Routes>
