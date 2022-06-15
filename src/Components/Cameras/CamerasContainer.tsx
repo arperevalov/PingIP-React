@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router";
+import { useMatch, useParams } from "react-router";
 import { APIRouter, APIRouterActions } from "../../API/APIRouter";
 import { IServers, MessageType } from "../../Interfaces";
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider";
-import { setServerChilren, setCameraPing } from "../../Redux/ServersReducer";
+import { setServerChilren, setCameraPing, setServers } from "../../Redux/ServersReducer";
 import { setFetching } from "../../Redux/AppReducer";
 import { setPopup } from "../../Redux/AppReducer";
 import Cameras from "./Cameras";
@@ -13,6 +13,7 @@ interface ICamerasAPI {
     servers: IServers[]
     updates: number
     setCameraPing: CallableFunction
+    setServers: CallableFunction
     setServerChilren: CallableFunction
     setFetching: CallableFunction
     setPopup: CallableFunction
@@ -22,8 +23,8 @@ interface ICamerasAPI {
 const CamerasAPI = (props: ICamerasAPI) => {
     const message = useContext(SysMessagesContext)
 
-    const params:any = useParams();
-    const prodId:number = parseInt(params.id);
+    let match = useMatch("/servers/:id");
+    const prodId:number = parseInt(match.params.id);
 
     const getServerID = (id:number, servers:IServers[]) => {
         return servers.findIndex(i => {
@@ -66,7 +67,25 @@ const CamerasAPI = (props: ICamerasAPI) => {
 
     useEffect(()=>{
         if(prodId) {
+
+            if (props.servers.length < 1 || parent === undefined) {
+                props.setFetching(true)
+                APIRouter(APIRouterActions.getServers, {})
+                .then(r => {
+                    props.setServers(r)
+                    props.setFetching(false)
+                }).catch(e => {
+                    props.setFetching(false)
+                    message.notifyUser({
+                        type: MessageType.error,
+                        text: e
+                    })
+                    throw new Error(e)
+                }) 
+            }
+
             props.setFetching(true)
+
             APIRouter(APIRouterActions.getServerChildren, {id: prodId})
             .then(r => {
                 props.setServerChilren(prodId, r)
@@ -102,6 +121,7 @@ const MapStateToProps = (store: any) => {
 
 const CamerasContainer = connect(MapStateToProps,{
     setCameraPing,
+    setServers,
     setServerChilren,
     setFetching,
     setPopup
