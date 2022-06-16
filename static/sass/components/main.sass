@@ -1,5 +1,7 @@
 .main
     @include container
+    @media screen and (max-width: 768px)
+        margin-bottom: 2rem
 
     &__top
         display: flex
@@ -18,6 +20,22 @@
             display: flex
             justify-content: end
             flex-wrap: wrap
+            @media screen and (max-width: 768px)
+                position: fixed
+                z-index: 9
+                bottom: 0
+                left: 0
+                width: 100vw
+                justify-content: space-between
+                flex-wrap: nowrap
+                background: $card-color
+                box-shadow: 0 -2px 12px $shadow-color
             
             .button
                 margin-left: 8px
+                @media screen and (max-width: 768px)
+                    width: 50%
+                    margin-left: 0
+                    border-radius: 0
+                    height: initial
+                    padding: 8px

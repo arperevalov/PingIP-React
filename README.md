@@ -9,10 +9,9 @@ npm install && npm run start
 - [x] Make Create-server/camera-popup
 - [x] Create aside-servers view at Cameras Component
 - [x] Create logs-page
-- [ ] Refactor fetching
+- [x] Refactor fetching
 - [x] Write Ping-all-servers/cameras request
-- [ ] Write media queries
-- [ ] Masking to IP-address inputs
-- [ ] Validating IP-address inputs
-- [ ] Refactor TypeScript interfaces and enums
+- [x] Write media queries
+- [x] Validating IP-address inputs
+- [x] Refactor TypeScript interfaces and enums
 - [ ] Unit-tests
