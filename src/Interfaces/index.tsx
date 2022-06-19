@@ -24,7 +24,7 @@ export interface IServers {
     description?: string | boolean
     status: boolean
     last_ping?: string
-    mac: string
+    mac_address: string
     children?:IServers[]
 }
 

@@ -18,6 +18,7 @@ const List = (props:ListProps) => {
             id: props.id,
             name: props.name,
             ip_address: props.ip_address,
+            mac_address: props.mac_address,
             description: props.description,
             parentID: props.parentID
         })
@@ -30,6 +31,7 @@ const List = (props:ListProps) => {
             id: props.id,
             name: props.name,
             ip_address: props.ip_address,
+            mac_address: props.mac_address,
             description: props.description,
             parentID: props.parentID
         })
@@ -51,8 +53,7 @@ const List = (props:ListProps) => {
         <span className='item__descriptionMobile'>{props.description}</span>
         <div className='item__dataWrap'>
             <span className='item__data'> <span className='item__meaning'>IP</span> {props.ip_address}</span>
-            {/* <span className='item__data'> <span className='item__meaning'>MAC</span> {props.mac}</span> */}
-            <span className='item__data'> <span className='item__meaning'>MAC</span> 123.123.123.123</span>
+            <span className='item__data'> <span className='item__meaning'>MAC</span> {props.mac_address} </span>
             <span className='item__data'>
                 <span className='item__meaning'>Последний пинг</span>
                 {props.last_ping ? new Date(props.last_ping.replace(" ", "T")).toLocaleTimeString() : ''}

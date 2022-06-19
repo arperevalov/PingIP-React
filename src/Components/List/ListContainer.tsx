@@ -38,7 +38,7 @@ const ListCotnainer = (props: ListCotnainerProps) => {
                             status={i.status}
                             getPing={props.getPing}
                             setPopup={props.setPopup}
-                            mac={i.mac}
+                            mac_address={i.mac_address}
                             type="server"
                         />
                     </Link>
@@ -72,7 +72,7 @@ const ListCotnainer = (props: ListCotnainerProps) => {
                             getPing={props.getPing}
                             parentID={props.parent.id}
                             setPopup={props.setPopup}
-                            mac={i.mac}
+                            mac_address={i.mac_address}
                             type="string"
                         />
                     </div>

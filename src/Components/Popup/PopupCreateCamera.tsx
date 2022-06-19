@@ -20,6 +20,7 @@ const PopupCreateCamera = (props:PopupCreateCameraProps) => {
 
     const nameInput = useRef<HTMLInputElement>(null),
         ipInput = useRef<HTMLInputElement>(null),
+        macInput = useRef<HTMLInputElement>(null),
         descriptionInput = useRef<HTMLInputElement>(null),
         message = useContext(SysMessagesContext)
 
@@ -30,6 +31,7 @@ const PopupCreateCamera = (props:PopupCreateCameraProps) => {
             id: props.id,
             name: nameInput.current.value,
             ip_address: ipInput.current.value,
+            mac_address: macInput.current.value,
             description: descriptionInput.current.value,
             parentID: props.parentID})
         .then(r => {
@@ -68,6 +70,7 @@ const PopupCreateCamera = (props:PopupCreateCameraProps) => {
             <form className="popup__form" onSubmit={submitForm}>
                 <Input reference={nameInput} placeholder="Например, Камера #1" label="Имя" type="text" isRequired={true}/>
                 <Input reference={ipInput} placeholder="255.255.255.0" label="IP" type="text" isRequired={true}/>
+                <Input reference={macInput} placeholder="255.255.255.0" label="MAC" type="text" isRequired={false}/>
                 <Input reference={descriptionInput} placeholder="Короткое описание для важного объекта" label="Описание" type="text"/>
                 <div className="popup__buttonWrapperWide">  
                     <button className='button button-super' type="submit">Сохранить изменения</button>

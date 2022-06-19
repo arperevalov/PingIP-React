@@ -8,6 +8,7 @@ import cross from './../../../static/images/cross.svg'
 interface PopupUpdateServerProps {
     name: string
     ip_address: string
+    mac_address: string
     description: string
     id: number
     parentID: number
@@ -20,6 +21,7 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
 
     const nameInput = useRef<HTMLInputElement>(null),
         ipInput = useRef<HTMLInputElement>(null),
+        macInput = useRef<HTMLInputElement>(null),
         descriptionInput = useRef<HTMLInputElement>(null),
         deleteInput = useRef<HTMLInputElement>(null),
         message = useContext(SysMessagesContext),
@@ -33,6 +35,7 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
             id: props.id,
             name: nameInput.current.value,
             ip_address: ipInput.current.value,
+            mac_address: macInput.current.value,
             description: descriptionInput.current.value})
         .then(r => {
             props.setFetching(false)
@@ -124,6 +127,7 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
             <form className="popup__form" onSubmit={submitForm}>
                 <Input reference={nameInput} placeholder="Например, Сервер #1" label="Имя" type="text" isRequired={true} inputDefault={props.name}/>
                 <Input reference={ipInput} placeholder="255.255.255.0" label="IP" type="text" isRequired={true} inputDefault={props.ip_address}/>
+                <Input reference={macInput} placeholder="255.255.255.0" label="MAC" type="text" isRequired={false} inputDefault={props.mac_address}/>
                 <Input reference={descriptionInput} placeholder="Короткое описание для важного объекта" label="Описание" type="text" inputDefault={props.description ? props.description : ''}/>
                 <div className="popup__buttonWrapper">
                     <button className='button button-4' type="button" onClick={()=>{setDeleteStatePopup(true)}}>Удалить</button>   

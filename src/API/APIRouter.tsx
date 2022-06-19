@@ -23,6 +23,7 @@ interface IParams {
     parentID?: number,
     name?: string,
     ip_address?: string,
+    mac_address?: string,
     description?: string
 }
 
@@ -117,6 +118,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                     body: JSON.stringify({
                         name: params.name,
                         ip_address: params.ip_address,
+                        mac_address: params.mac_address,
                         description: params.description
                     })
                 })
@@ -141,6 +143,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                     body: JSON.stringify({
                         name: params.name,
                         ip_address: params.ip_address,
+                        mac_address: params.mac_address,
                         description: params.description
                     })
                 })
@@ -217,6 +220,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                     body: JSON.stringify({
                         name: params.name,
                         ip_address: params.ip_address,
+                        mac_address: params.mac_address,
                         description: params.description
                     })
                 })
@@ -241,6 +245,7 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                     body: JSON.stringify({
                         name: params.name,
                         ip_address: params.ip_address,
+                        mac_address: params.mac_address,
                         description: params.description
                     })
                 })
