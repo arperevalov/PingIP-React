@@ -41,7 +41,6 @@ const ServersReducer = (state = defaultValues, action: AnyAction) => {
 
         case Actions.setServerChilren:
             item = getServerID(action.id, state.servers)
-
             state.servers[item].children = [...action.children]
 
             return _.cloneDeep(state)

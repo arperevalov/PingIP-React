@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { Context, ContextType, useContext, useEffect } from "react";
 import { connect } from "react-redux";
 import { useMatch, useParams } from "react-router";
 import { APIRouter, APIRouterActions } from "../../API/APIRouter";
@@ -31,7 +31,7 @@ const CamerasAPI = (props: ICamerasAPI) => {
             return i.id === id
         })
     }
-    const parent = props.servers[getServerID(prodId, props.servers)]
+    const parent:IServers|undefined = props.servers[getServerID(prodId, props.servers)]
 
     const getPing = (id: number) => {
         props.setFetching(true)
@@ -67,8 +67,7 @@ const CamerasAPI = (props: ICamerasAPI) => {
 
     useEffect(()=>{
         if(prodId) {
-
-            if (props.servers.length < 1 || parent === undefined) {
+            if (props.servers.length < 1 && parent === undefined) {
                 props.setFetching(true)
                 APIRouter(APIRouterActions.getServers, {})
                 .then(r => {
@@ -85,7 +84,6 @@ const CamerasAPI = (props: ICamerasAPI) => {
             }
 
             props.setFetching(true)
-
             APIRouter(APIRouterActions.getServerChildren, {id: prodId})
             .then(r => {
                 props.setServerChilren(prodId, r)
