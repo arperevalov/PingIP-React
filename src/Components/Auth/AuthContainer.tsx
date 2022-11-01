@@ -4,6 +4,7 @@ import { APIRouter, APIRouterActions } from "../../API/APIRouter"
 import { MessageType } from "../../Interfaces"
 import { SysMessagesContext } from "../../Providers/SysMessagesProvider"
 import { setUser } from "../../Redux/AuthReducer"
+import { RootState } from "../../Redux/store"
 import Auth from "./Auth"
 
 interface IAuthAPI {
@@ -32,7 +33,7 @@ const AuthAPI = (props:IAuthAPI) => {
     return <Auth {...props} requestToken={requestToken}/>
 }
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = (state: RootState) => {
     return {
     }
 }

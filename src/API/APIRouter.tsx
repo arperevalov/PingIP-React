@@ -27,7 +27,7 @@ interface IParams {
     description?: string
 }
 
-async function handleRequest (response: any) {
+async function handleRequest (response: Response) {
     try {
         const data = await response.json();
         if (response.ok) return data
@@ -39,11 +39,9 @@ async function handleRequest (response: any) {
     }
 }
 
-async function handleRequestLinks (response: any, name: string|undefined) {
+async function handleRequestLinks (response: Response, name: string|undefined) {
     try {
         const data = await response.blob();
-        const dataJSON = await response.json();
-
         const url = window.URL.createObjectURL(
             new Blob([data]),
             );
@@ -58,6 +56,7 @@ async function handleRequestLinks (response: any, name: string|undefined) {
         link.parentNode?.removeChild(link);
 
         if (response.ok) return data
+        const dataJSON = await response.json();
         throw JSON.stringify(dataJSON.errors)
 
     } catch (e) {
@@ -110,10 +109,10 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
         case APIRouterActions.pingServer:
             response = await fetch(process.env.REACT_APP_API+`/api/v1/nodes/${params.id}/ping`, {
                 method: "POST",
-                headers: {
+                headers: new Headers({
                     'Authorization': 'Bearer ' + localStorage.getItem('Bearer')?.replace(/"/g, ''),
                     'Content-Type': 'application/json'
-                },
+                }),
                 body: JSON.stringify({
                 })
             })
@@ -280,8 +279,6 @@ export async function APIRouter(action: APIRouterActions, params:IParams) {
                     'Accept': 'application/json'
                 })
             })
-
-                
 
             return handleRequestLinks(response, params.name)
             break;

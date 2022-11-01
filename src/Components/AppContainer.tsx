@@ -1,8 +1,9 @@
 import { connect } from "react-redux"
 import App from "./App"
 import { logOut } from "../Redux/AuthReducer"
+import { RootState } from "../Redux/store"
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = (state: RootState) => {
     return {
         hasBearer: state.AuthPage.hasBearer
     }

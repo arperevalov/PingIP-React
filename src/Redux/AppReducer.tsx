@@ -26,7 +26,7 @@ const defaultValues: AppReducerState = {
     }
 }
 
-const AppReducer = (state = defaultValues, action:AnyAction) => {
+const AppReducer = (state = defaultValues, action: AnyAction) => {
     switch (action.type) {
         case Actions.setSysMessage:
             let messages = [];

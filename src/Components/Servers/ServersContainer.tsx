@@ -7,6 +7,7 @@ import { setPing, setServers } from "../../Redux/ServersReducer";
 import { setFetching } from "../../Redux/AppReducer";
 import { setPopup } from "../../Redux/AppReducer";
 import Servers from "./Servers";
+import { RootState } from "../../Redux/store";
 
 interface IServersAPI {
     servers: IServers[]
@@ -85,7 +86,7 @@ const ServersAPI = (props: IServersAPI) => {
 }
 
 
-const MapStateToProps = (store: any) => {
+const MapStateToProps = (store: RootState) => {
     return {
         servers: store.ServersPage.servers,
         updates: store.ServersPage.updates,

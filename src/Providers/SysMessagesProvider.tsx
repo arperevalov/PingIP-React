@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import SysMessage from "../Components/Common/SysMessage"
 import { IMessage } from "../Interfaces"
 import { setSysMessage, shiftMessage } from "../Redux/AppReducer"
+import { RootState } from "../Redux/store"
 
 const SysMessagesContext = createContext(null)
 
@@ -13,7 +14,7 @@ interface SysMessagesProviderAPIProps {
     children: any
 }
 
-const SysMessagesProviderAPI = (props:SysMessagesProviderAPIProps) => {
+const SysMessagesProviderAPI = (props: SysMessagesProviderAPIProps) => {
 
 
     const notifyUser = (message: IMessage) => {
@@ -37,7 +38,7 @@ const SysMessagesProviderAPI = (props:SysMessagesProviderAPIProps) => {
     </SysMessagesContext.Provider>
 }
 
-const mapStateToProps = (store:any) => {
+const mapStateToProps = (store: RootState) => {
     return {
         sysMessages: store.AppPage.SysMessages
     }

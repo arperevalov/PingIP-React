@@ -7,6 +7,7 @@ import PopupUpdateServer from "../Components/Popup/PopupUpdateServer"
 import { setPopup, setFetching } from "../Redux/AppReducer"
 import { PopupType } from "../Interfaces"
 import { setUpdates } from "../Redux/ServersReducer"
+import { RootState } from "../Redux/store"
 
 const PopupProviderAPI = (props: any) => {
 
@@ -57,7 +58,7 @@ const PopupProviderAPI = (props: any) => {
     }
 }
 
-const MapStateToProps = (store:any) => {
+const MapStateToProps = (store: RootState) => {
     return {
         popupData: store.AppPage.popupItem
     }

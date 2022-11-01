@@ -13,7 +13,7 @@ const defaultValues: LogsReducerState = {
     logs: []
 }
 
-const LogsReducer = (state = defaultValues, action:AnyAction) => {
+const LogsReducer = (state = defaultValues, action: AnyAction) => {
     switch (action.type) {
         case Actions.setLogs:
 

@@ -8,6 +8,7 @@ import { setServerChilren, setCameraPing, setServers } from "../../Redux/Servers
 import { setFetching } from "../../Redux/AppReducer";
 import { setPopup } from "../../Redux/AppReducer";
 import Cameras from "./Cameras";
+import { RootState } from "../../Redux/store";
 
 interface ICamerasAPI {
     servers: IServers[]
@@ -109,7 +110,7 @@ const CamerasAPI = (props: ICamerasAPI) => {
             />
 }
 
-const MapStateToProps = (store: any) => {
+const MapStateToProps = (store: RootState) => {
     return {
         servers: store.ServersPage.servers,
         updates: store.ServersPage.updates,

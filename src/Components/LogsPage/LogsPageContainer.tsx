@@ -7,6 +7,7 @@ import { SysMessagesContext } from "../../Providers/SysMessagesProvider";
 import { setLogs } from "../../Redux/LogsReducer";
 import { setFetching } from "../../Redux/AppReducer";
 import LogsPage from "./LogsPage";
+import { RootState } from "../../Redux/store";
 
 interface LogsPageAPIProps  {
     logs: ILogs[],
@@ -43,7 +44,7 @@ const LogsPageAPI = (props: LogsPageAPIProps) => {
 }
 
 
-const mapStateToProps = (store: any) => {
+const mapStateToProps = (store: RootState) => {
     return {
         logs: store.LogsPage.logs,
         isFetching: store.AppPage.isFetching
