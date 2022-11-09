@@ -14,4 +14,5 @@ npm install && npm run start
 - [x] Write media queries
 - [x] Validating IP-address inputs
 - [x] Refactor TypeScript interfaces and enums
+- [ ] Mock backend fully ready
 - [ ] Unit-tests
