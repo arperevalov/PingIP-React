@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { ILogs } from "../_OLD/src/Interfaces";
+import { ILogs } from "../common/Interfaces";
 
 enum Actions {
     setLogs = "SET_LOGS",

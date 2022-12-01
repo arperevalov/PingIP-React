@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { IMessage, IPopup, PopupType } from "../_OLD/src/Interfaces";
+import { IMessage, IPopup, PopupType } from "../common/Interfaces";
 
 enum Actions {
     setSysMessage = "SET_SYSMESSAGE",

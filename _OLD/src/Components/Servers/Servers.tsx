@@ -1,5 +1,5 @@
 import React from 'react';
-import { IServers, ListType, PopupType } from '../../Interfaces';
+import { IServers, ListType, PopupType } from '../../../../common/Interfaces';
 import Empty from '../Common/Empty';
 import ListCotnainer from '../../../../pages/common/List/ListContainer';
 

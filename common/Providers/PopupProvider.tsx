@@ -1,13 +1,13 @@
 import React, { useEffect } from "react"
 import { connect } from "react-redux"
-import PopupCreateCamera from "../Components/Popup/PopupCreateCamera"
-import PopupCreateServer from "../Components/Popup/PopupCreateServer"
-import PopupUpdateCamera from "../Components/Popup/PopupUpdateCamera"
-import PopupUpdateServer from "../Components/Popup/PopupUpdateServer"
-import { setPopup, setFetching } from "../../../Redux/AppReducer"
+import PopupCreateCamera from "../../_OLD/src/Components/Popup/PopupCreateCamera"
+import PopupCreateServer from "../../_OLD/src/Components/Popup/PopupCreateServer"
+import PopupUpdateCamera from "../../_OLD/src/Components/Popup/PopupUpdateCamera"
+import PopupUpdateServer from "../../_OLD/src/Components/Popup/PopupUpdateServer"
+import { setPopup, setFetching } from "../../Redux/AppReducer"
 import { PopupType } from "../Interfaces"
-import { setUpdates } from "../../../Redux/ServersReducer"
-import { RootState } from "../../../Redux/store"
+import { setUpdates } from "../../Redux/ServersReducer"
+import { RootState } from "../../Redux/store"
 
 const PopupProviderAPI = (props: any) => {
 

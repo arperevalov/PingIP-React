@@ -1,6 +1,6 @@
 var _ = require('lodash');
 import { AnyAction } from "redux";
-import { IServers } from "../_OLD/src/Interfaces"
+import { IServers } from "../common/Interfaces"
 
 enum Actions {
     setPing = 'SET_PING',

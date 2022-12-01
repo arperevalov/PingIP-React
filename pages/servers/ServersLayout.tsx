@@ -1,4 +1,4 @@
-import { IServers, ListType, PopupType } from "../../_OLD/src/Interfaces"
+import { IServers, ListType, PopupType } from "../../common/Interfaces"
 import Empty from "../../common/Empty"
 import ListCotnainer from "../../common/List/ListContainer"
 

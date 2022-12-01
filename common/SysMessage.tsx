@@ -1,5 +1,5 @@
 import React from "react"
-import { IMessage, MessageType } from "../../Interfaces"
+import { IMessage, MessageType } from "./Interfaces"
 
 
 const SysMessage = (props: IMessage) => {

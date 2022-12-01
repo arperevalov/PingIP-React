@@ -1,6 +1,6 @@
 import React from "react";
 // import { Link } from "react-router-dom";
-import { IServers, ListType } from "../../_OLD/src/Interfaces";
+import { IServers, ListType } from "../Interfaces";
 import List from "./List";
 
 interface ListCotnainerProps {

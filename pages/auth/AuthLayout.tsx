@@ -1,5 +1,5 @@
-import React, { FormEvent, useRef } from 'react';
-import Input from './../../common/Input';
+import React, { FormEvent, useRef, useEffect } from 'react';
+import Input from '../../common/Input';
 import logo from './../../public/images/logo.svg'
 
 interface AuthProps {
@@ -8,8 +8,8 @@ interface AuthProps {
 
 function Auth(props:AuthProps) {
 
-    let loginInput = useRef(null),
-    passwordInput = useRef(null)
+    const loginInput = useRef<HTMLInputElement>(document.createElement('input'));
+    const passwordInput = useRef<HTMLInputElement>(document.createElement('input'));
 
     const formSubmit = (e:FormEvent) => {
         e.preventDefault()

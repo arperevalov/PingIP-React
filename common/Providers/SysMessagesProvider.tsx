@@ -1,9 +1,9 @@
 import React, { createContext } from "react"
 import { connect } from "react-redux"
-import SysMessage from "../Components/Common/SysMessage"
+import SysMessage from "../SysMessage"
 import { IMessage } from "../Interfaces"
-import { setSysMessage, shiftMessage } from "../../../Redux/AppReducer"
-import { RootState } from "../../../Redux/store"
+import { setSysMessage, shiftMessage } from "../../Redux/AppReducer"
+import { RootState } from "../../Redux/store"
 
 const SysMessagesContext = createContext(null)
 

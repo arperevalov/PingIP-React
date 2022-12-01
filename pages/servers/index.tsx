@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { IServers } from "../../_OLD/src/Interfaces"
+import { IServers } from "../../common/Interfaces"
 import { RootState } from "../../Redux/store"
 import ServersLayout from "./ServersLayout"
 import { connect } from "react-redux"

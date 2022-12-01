@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { connect } from "react-redux";
 import { APIRouter, APIRouterActions } from "../../API/APIRouter";
-import { IServers, MessageType } from "../../Interfaces";
-import { SysMessagesContext } from "../../Providers/SysMessagesProvider";
+import { IServers, MessageType } from "../../../../common/Interfaces";
+import { SysMessagesContext } from "../../../../common/Providers/SysMessagesProvider";
 import { setPing, setServers } from "../../../../Redux/ServersReducer";
 import { setFetching } from "../../../../Redux/AppReducer";
 import { setPopup } from "../../../../Redux/AppReducer";

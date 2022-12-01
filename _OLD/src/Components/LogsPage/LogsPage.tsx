@@ -1,5 +1,5 @@
 import React from "react";
-import { ILogs } from "../../Interfaces";
+import { ILogs } from "../../../../common/Interfaces";
 import { APIRouter, APIRouterActions } from "../../API/APIRouter";
 import Empty from "../Common/Empty";
 

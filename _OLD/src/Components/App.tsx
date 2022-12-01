@@ -4,9 +4,9 @@ import Header from './Common/Header';
 import AuthContainer from './Auth';
 import ServersContainer from './Servers/ServersContainer';
 import CamerasContainer from './Cameras/CamerasContainer';
-import SysMessagesProvider from '../Providers/SysMessagesProvider';
-import PreloaderProvider from '../Providers/PreloaderProvider';
-import PopupProvider from '../Providers/PopupProvider';
+import SysMessagesProvider from '../../../common/Providers/SysMessagesProvider';
+import PreloaderProvider from '../../../common/Providers/PreloaderProvider';
+import PopupProvider from '../../../common/Providers/PopupProvider';
 import LogsPageContainer from './LogsPage/LogsPageContainer';
 import Page404 from './Common/Page404';
 

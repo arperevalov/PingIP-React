@@ -1,7 +1,7 @@
 import React, { FormEvent, useContext, useEffect, useRef, useState } from "react"
 import { APIRouter, APIRouterActions } from "../../API/APIRouter"
-import { MessageType, PopupType } from "../../Interfaces"
-import { SysMessagesContext } from "../../Providers/SysMessagesProvider"
+import { MessageType, PopupType } from "../../../../common/Interfaces"
+import { SysMessagesContext } from "../../../../common/Providers/SysMessagesProvider"
 import Input from "../Common/Input"
 import cross from './../../../static/images/cross.svg'
 

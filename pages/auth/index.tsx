@@ -1,9 +1,9 @@
 import React, { useContext } from "react"
 import { connect } from "react-redux"
-import { SysMessagesContext } from "./../../Providers/SysMessagesProvider"
+import { SysMessagesContext } from "./../../common/Providers/SysMessagesProvider"
 import { setUser } from "./../../Redux/AuthReducer"
 import { RootState } from "./../../Redux/store"
-import Auth from "./Auth"
+import Auth from "./AuthLayout"
 
 interface IAuthAPI {
     setUser: CallableFunction
@@ -11,7 +11,7 @@ interface IAuthAPI {
 
 const AuthAPI = (props:IAuthAPI) => {
 
-    // const message = useContext(SysMessagesContext)
+    const message = useContext(SysMessagesContext)
 
     const requestToken = (login:string, password: string) => {
         // APIRouter(APIRouterActions.getAuth, {

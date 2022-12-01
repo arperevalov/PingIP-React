@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { RootState } from "../../../Redux/store"
+import { RootState } from "../../Redux/store"
 
 interface PreloaderProviderAPIProps {
     isFetching: boolean
