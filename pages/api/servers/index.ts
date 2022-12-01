@@ -15,7 +15,7 @@ const apikey = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impv
       method: 'GET',
       headers: new Headers({
         //   'Authorization': 'Bearer ' + localStorage.getItem('Bearer')?.replace(/"/g, ''),
-            'Authorization': apikey,
+          'Authorization': apikey,
           'Accept': 'application/json'
       })
   })

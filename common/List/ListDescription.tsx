@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
-import mark from './../../../public/images/mark.svg'
-import markActive from './../../../public/images/mark-active.svg'
+import mark from '../../public/images/mark.svg'
+import markActive from '../../public/images/mark-active.svg'
 
 interface ListDescriptionProps {
     description: string | boolean

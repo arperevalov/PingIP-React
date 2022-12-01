@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react';
-import { IServers, PopupType } from '../../../_OLD/src/Interfaces';
+import { IServers, PopupType } from '../../_OLD/src/Interfaces';
 import ListDescription from './ListDescription';
 
 interface ListProps extends IServers {

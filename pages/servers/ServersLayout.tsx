@@ -1,6 +1,6 @@
 import { IServers, ListType, PopupType } from "../../_OLD/src/Interfaces"
-import Empty from "../common/Empty"
-import ListCotnainer from "../common/List/ListContainer"
+import Empty from "../../common/Empty"
+import ListCotnainer from "../../common/List/ListContainer"
 
 interface ServersProps {
     servers: IServers[]

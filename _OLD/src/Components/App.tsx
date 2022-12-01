@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Header from './Common/Header';
-import AuthContainer from './Auth/AuthContainer';
+import AuthContainer from './Auth';
 import ServersContainer from './Servers/ServersContainer';
 import CamerasContainer from './Cameras/CamerasContainer';
 import SysMessagesProvider from '../Providers/SysMessagesProvider';
