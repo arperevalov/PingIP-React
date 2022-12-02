@@ -1,6 +1,6 @@
 import React from "react";
 import { ILogs } from "../../../../common/Interfaces";
-import { APIRouter, APIRouterActions } from "../../API/APIRouter";
+import { APIRouter, APIRouterActions } from "../../../../common/API/APIRouter";
 import Empty from "../Common/Empty";
 
 interface LogsPageProps {

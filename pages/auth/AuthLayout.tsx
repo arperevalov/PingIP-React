@@ -8,8 +8,8 @@ interface AuthProps {
 
 function Auth(props:AuthProps) {
 
-    const loginInput = useRef<HTMLInputElement>(document.createElement('input'));
-    const passwordInput = useRef<HTMLInputElement>(document.createElement('input'));
+    const loginInput = useRef<HTMLInputElement>(null);
+    const passwordInput = useRef<HTMLInputElement>(null);
 
     const formSubmit = (e:FormEvent) => {
         e.preventDefault()

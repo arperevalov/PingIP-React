@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext, useEffect } from "react";
 import { connect } from "react-redux";
-import { APIRouter, APIRouterActions } from "../../API/APIRouter";
+import { APIRouter, APIRouterActions } from "../../../../common/API/APIRouter";
 import { ILogs, MessageType } from "../../../../common/Interfaces";
 import { SysMessagesContext } from "../../../../common/Providers/SysMessagesProvider";
 import { setLogs } from "../../../../Redux/LogsReducer";

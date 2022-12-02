@@ -65,7 +65,7 @@ async function handleRequestLinks (response: Response, name: string|undefined) {
 }
 
 export async function APIRouter(action: APIRouterActions, params:IParams) {
-
+    
     let response;
 
     switch (action) {

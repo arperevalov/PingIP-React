@@ -1,7 +1,7 @@
 import React, { Context, ContextType, useContext, useEffect } from "react";
 import { connect } from "react-redux";
 import { useMatch, useParams } from "react-router";
-import { APIRouter, APIRouterActions } from "../../API/APIRouter";
+import { APIRouter, APIRouterActions } from "../../../../common/API/APIRouter";
 import { IServers, MessageType } from "../../../../common/Interfaces";
 import { SysMessagesContext } from "../../../../common/Providers/SysMessagesProvider";
 import { setServerChilren, setCameraPing, setServers } from "../../../../Redux/ServersReducer";

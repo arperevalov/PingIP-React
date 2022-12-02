@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { connect } from "react-redux"
-import { APIRouter, APIRouterActions } from "../../API/APIRouter"
+import { APIRouter, APIRouterActions } from "../../../../common/API/APIRouter"
 import { MessageType } from "../../../../common/Interfaces"
 import { SysMessagesContext } from "../../../../common/Providers/SysMessagesProvider"
 import { setUser } from "../../../../Redux/AuthReducer"

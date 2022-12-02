@@ -1,21 +1,22 @@
 import React, { FormEvent, useContext, useEffect, useRef } from "react"
-import { APIRouter, APIRouterActions } from "../../API/APIRouter"
-import { MessageType, PopupType } from "../../../../common/Interfaces"
-import { SysMessagesContext } from "../../../../common/Providers/SysMessagesProvider"
-import Input from "../Common/Input"
-import cross from './../../../static/images/cross.svg'
+import { APIRouter, APIRouterActions } from "../API/APIRouter"
+import { MessageType, PopupType } from "../Interfaces"
+import { SysMessagesContext } from "./../../common/Providers/SysMessagesProvider"
+import Input from "../Input"
+import cross from './../../public/images/cross.svg'
 
-interface PopupCreateServerProps {
+interface PopupCreateCameraProps {
     name: string
     ip_address: string
     description: string
     id: number
+    parentID: number
     setPopup: CallableFunction
     setUpdates: CallableFunction
     setFetching: CallableFunction
 }
 
-const PopupCreateServer = (props:PopupCreateServerProps) => {
+const PopupCreateCamera = (props:PopupCreateCameraProps) => {
 
     const nameInput = useRef<HTMLInputElement>(null),
         ipInput = useRef<HTMLInputElement>(null),
@@ -26,12 +27,13 @@ const PopupCreateServer = (props:PopupCreateServerProps) => {
     const submitForm = (e:FormEvent) => {
         e.preventDefault()
         props.setFetching(true)
-        APIRouter(APIRouterActions.createServer, { 
+        APIRouter(APIRouterActions.createCamera, { 
             id: props.id,
             name: nameInput.current.value,
             ip_address: ipInput.current.value,
             mac_address: macInput.current.value,
-            description: descriptionInput.current.value})
+            description: descriptionInput.current.value,
+            parentID: props.parentID})
         .then(r => {
             props.setFetching(false)
             props.setUpdates()
@@ -55,10 +57,10 @@ const PopupCreateServer = (props:PopupCreateServerProps) => {
     return <div className="popup">
         <div className="popup__overlay" onClick={()=>{
             props.setPopup({type: PopupType.default})
-            }}/>
+        }}/>
         <div className="popup__container">
             <div className="popup__top">
-                <h2 className="h2">Добавить сервер</h2>
+                <h2 className="h2">Добавить камеру</h2>
                 <button className="popup__cross" onClick={()=>{
                     props.setPopup({type: PopupType.default})
                     }}>
@@ -70,7 +72,7 @@ const PopupCreateServer = (props:PopupCreateServerProps) => {
                 <Input reference={ipInput} placeholder="255.255.255.0" label="IP" type="text" isRequired={true}/>
                 <Input reference={macInput} placeholder="255.255.255.0" label="MAC" type="text" isRequired={false}/>
                 <Input reference={descriptionInput} placeholder="Короткое описание для важного объекта" label="Описание" type="text"/>
-                <div className="popup__buttonWrapperWide">
+                <div className="popup__buttonWrapperWide">  
                     <button className='button button-super' type="submit">Сохранить изменения</button>
                 </div>
             </form>
@@ -78,4 +80,4 @@ const PopupCreateServer = (props:PopupCreateServerProps) => {
     </div>
 }
 
-export default PopupCreateServer
+export default PopupCreateCamera

@@ -1,28 +1,28 @@
 import React, { FormEvent, useContext, useEffect, useRef, useState } from "react"
-import { APIRouter, APIRouterActions } from "../../API/APIRouter"
-import { MessageType, PopupType } from "../../../../common/Interfaces"
-import { SysMessagesContext } from "../../../../common/Providers/SysMessagesProvider"
-import Input from "../Common/Input"
-import cross from './../../../static/images/cross.svg'
+import { APIRouter, APIRouterActions } from "../API/APIRouter"
+import { MessageType, PopupType } from "../Interfaces"
+import { SysMessagesContext } from "./../../common/Providers/SysMessagesProvider"
+import Input from "../Input"
+import cross from './../../public/images/cross.svg'
 
-interface PopupUpdateServerProps {
+interface PopupUpdateCameraProps {
     name: string
     ip_address: string
-    mac_address: string
     description: string
     id: number
+    mac_address: string
     parentID: number
     setPopup: CallableFunction
     setUpdates: CallableFunction
     setFetching: CallableFunction
 }
 
-const PopupUpdateServer = (props:PopupUpdateServerProps) => {
+const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
 
     const nameInput = useRef<HTMLInputElement>(null),
         ipInput = useRef<HTMLInputElement>(null),
-        macInput = useRef<HTMLInputElement>(null),
         descriptionInput = useRef<HTMLInputElement>(null),
+        macInput = useRef<HTMLInputElement>(null),
         deleteInput = useRef<HTMLInputElement>(null),
         message = useContext(SysMessagesContext),
         [deleteStatePopup, setDeleteStatePopup] = useState(false),
@@ -31,7 +31,7 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
     const submitForm = (e:FormEvent) => {
         e.preventDefault()
         props.setFetching(true)
-        APIRouter(APIRouterActions.updateServer, {
+        APIRouter(APIRouterActions.updateCamera, {parentID: props.parentID, 
             id: props.id,
             name: nameInput.current.value,
             ip_address: ipInput.current.value,
@@ -51,6 +51,7 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
         })
     }
 
+
     const deleteInputChange = () => {
         setDisabledDeleteBtn(true)
         if (deleteInput.current.value === props.name.toString()) setDisabledDeleteBtn(false)
@@ -59,7 +60,9 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
     const submitDeleteForm = (e:FormEvent) => {
         e.preventDefault()
         props.setFetching(true)
-        APIRouter(APIRouterActions.deleteServer, {id: props.id})
+        APIRouter(APIRouterActions.deleteCamera, {
+            parentID: props.parentID,
+            id: props.id})
         .then(r => {
             props.setFetching(false)
             props.setUpdates()
@@ -80,6 +83,7 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
         formChild.focus()
     },[])
 
+
     if(deleteStatePopup) {
         return <div className="popup">
             <div className="popup__overlay" onClick={()=>{
@@ -98,13 +102,13 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
                 <form className="popup__form" onSubmit={submitDeleteForm}>
                     <Input  reference={deleteInput} 
                             placeholder=" " 
-                            label="Введите название сервера" 
+                            label="Введите название камеры" 
                             type="text" 
                             isRequired={true}
                             onChangeAction={deleteInputChange}/>
                     <div className="popup__buttonWrapperWide">
                         <button className='button button-1' type="button" onClick={()=>{setDeleteStatePopup(false)}}>Отменить</button>   
-                        <button className='button button-5' type="submit" disabled={disabledDeleteBtn ? true : false}>Удалить сервер</button>
+                        <button className='button button-5' type="submit" disabled={disabledDeleteBtn ? true : false}>Удалить камеру</button>
                     </div>
                 </form>
             </div>
@@ -125,7 +129,7 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
                 </button>
             </div>
             <form className="popup__form" onSubmit={submitForm}>
-                <Input reference={nameInput} placeholder="Например, Сервер #1" label="Имя" type="text" isRequired={true} inputDefault={props.name}/>
+                <Input reference={nameInput} placeholder="Например, Камера #1" label="Имя" type="text" isRequired={true} inputDefault={props.name}/>
                 <Input reference={ipInput} placeholder="255.255.255.0" label="IP" type="text" isRequired={true} inputDefault={props.ip_address}/>
                 <Input reference={macInput} placeholder="255.255.255.0" label="MAC" type="text" isRequired={false} inputDefault={props.mac_address}/>
                 <Input reference={descriptionInput} placeholder="Короткое описание для важного объекта" label="Описание" type="text" inputDefault={props.description ? props.description : ''}/>
@@ -138,4 +142,4 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
     </div>
 }
 
-export default PopupUpdateServer
+export default PopupUpdateCamera
