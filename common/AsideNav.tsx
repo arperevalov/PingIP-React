@@ -1,6 +1,6 @@
+import Link from "next/link"
 import React, { useEffect, useRef, useState } from "react"
-import { NavLink } from "react-router-dom"
-import { IServers } from "../../_OLD/src/Interfaces"
+import { IServers } from "./Interfaces"
 
 
 interface AsideNavProps {
@@ -34,12 +34,12 @@ const AsideNav = (props:AsideNavProps) => {
                 .sort((a,b) => { return a.id - b.id})
                 .map((i:IServers) => {
                     return <li className='item' key={i.id}>
-                            <NavLink to={`/servers/${i.id}`}
+                            <Link href={`/servers/${i.id}`}
                                 className={({ isActive }) => (isActive ? "asideNav__link active" : "asideNav__link")}
                             >
                                 <span className={`item__status ${i.status === true ? ' works' : ' notWorks'}`} />
                                 <span className='item__name'>{i.name}</span>
-                            </NavLink>
+                            </Link>
                         </li>
                 })}
             </ul>

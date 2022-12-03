@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 // import { Link } from "react-router-dom";
 import { IServers, ListType } from "../Interfaces";
@@ -29,7 +30,7 @@ const ListCotnainer = (props: ListCotnainerProps) => {
             .sort((a,b) => { return a.id - b.id})
             .map((i:IServers) => {
                 return <li className='list__itemsWrapper' key={i.id}>
-                    {/* <Link to={'/servers/'+i.id} className='item'> */}
+                    <Link href={'/servers/'+i.id} className='item'>
                         <List
                             id={i.id}
                             name={i.name}
@@ -42,7 +43,7 @@ const ListCotnainer = (props: ListCotnainerProps) => {
                             mac_address={i.mac_address}
                             type="server"
                         />
-                    {/* </Link> */}
+                    </Link>
                 </li>
                 }) : ''
             }

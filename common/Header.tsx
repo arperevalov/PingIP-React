@@ -1,6 +1,6 @@
+import Link from 'next/link'
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import logo from './../../../static/images/logo.svg'
+import logo from './../public/images/logo.svg'
 
 interface HeaderProps {
     logOut: CallableFunction
@@ -9,22 +9,22 @@ interface HeaderProps {
 const Header = (props:HeaderProps) => {
     return <header className='header'>
         <div className='header__inner'>
-            <Link to='/'><img className='header__logo' src={logo} alt="" /></Link>
+            <Link href='/'><img className='header__logo' src={logo} alt="" /></Link>
             <nav className='nav'>
                 <ul className='menu'>
                     <li className='menu__item'>
-                        <NavLink to="/servers"
+                        <Link href="/servers"
                             className={({ isActive }) => 
                                 (isActive ? "link active" : "link")}>
                                 Серверы
-                        </NavLink>
+                        </Link>
                     </li>
                     <li className='menu__item'>
-                        <NavLink to="/logs"
+                        <Link href="/logs"
                             className={({ isActive }) => 
                                 (isActive ? "link active" : "link")}>
                                 Логи
-                        </NavLink>
+                        </Link>
                     </li>
                 </ul>
             </nav>
