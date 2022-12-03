@@ -11,57 +11,71 @@ interface ListProps extends IServers {
 
 const List = (props:ListProps) => {
 
+    const {
+        getPing,
+        parentID,
+        setPopup,
+        type,
+        description,
+        id,
+        name,
+        ip_address,
+        mac_address,
+        status,
+        last_ping
+    } = props;
+
     const togglePopupServer = (e:MouseEvent):void => {
         e.preventDefault()
-        props.setPopup({
+        setPopup({
             type: PopupType.updateServer,
-            id: props.id,
-            name: props.name,
-            ip_address: props.ip_address,
-            mac_address: props.mac_address,
-            description: props.description,
-            parentID: props.parentID
+            id: id,
+            name: name,
+            ip_address: ip_address,
+            mac_address: mac_address,
+            description: description,
+            parentID: parentID
         })
     }
 
     const togglePopupCamera = (e:MouseEvent):void => {
         e.preventDefault()
-        props.setPopup({
+        setPopup({
             type: PopupType.updateCamera,
-            id: props.id,
-            name: props.name,
-            ip_address: props.ip_address,
-            mac_address: props.mac_address,
-            description: props.description,
-            parentID: props.parentID
+            id: id,
+            name: name,
+            ip_address: ip_address,
+            mac_address: mac_address,
+            description: description,
+            parentID: parentID
         })
     }
 
     const startPing = (e:MouseEvent):void => {
         e.preventDefault()
-        props.getPing(props.id)
+        getPing(id)
     }
 
     return <>
-        <span className={`item__status ${props.status === true ? 'works' : 'notWorks'}`}>
-            {props.status === true ? 'Работает' : 'Не работает'}
+        <span className={`item__status ${status === true ? 'works' : 'notWorks'}`}>
+            {status === true ? 'Работает' : 'Не работает'}
         </span>
         <span className='item__name'>
-            <ListDescription description={props.description}/>
-            {props.name}
+            <ListDescription description={description}/>
+            {name}
         </span>
-        <span className='item__descriptionMobile'>{props.description}</span>
+        <span className='item__descriptionMobile'>{description}</span>
         <div className='item__dataWrap'>
-            <span className='item__data'> <span className='item__meaning'>IP</span> {props.ip_address}</span>
-            <span className='item__data'> <span className='item__meaning'>MAC</span> {props.mac_address} </span>
+            <span className='item__data'> <span className='item__meaning'>IP</span> {ip_address}</span>
+            <span className='item__data'> <span className='item__meaning'>MAC</span> {mac_address} </span>
             <span className='item__data'>
                 <span className='item__meaning'>Последний пинг</span>
-                {props.last_ping ? new Date(props.last_ping.replace(" ", "T")).toLocaleTimeString() : ''}
-                <span className='item__lastPingDate'>{props.last_ping ? ' ' + new Date(props.last_ping.replace(" ", "T")).toLocaleDateString() : ''}</span>
+                {last_ping ? new Date(last_ping.replace(" ", "T")).toLocaleTimeString() : ''}
+                <span className='item__lastPingDate'>{last_ping ? ' ' + new Date(last_ping.replace(" ", "T")).toLocaleDateString() : ''}</span>
             </span>
         </div>
         <div className='buttonWrapper'>
-            <button className='button button-3 button-list button-change' onClick={props.type === 'server' ? togglePopupServer : togglePopupCamera}>
+            <button className='button button-3 button-list button-change' onClick={type === 'server' ? togglePopupServer : togglePopupCamera}>
                 Изменить
             </button>   
             <button className='button button-2 button-list button-ping' onClick={startPing}>

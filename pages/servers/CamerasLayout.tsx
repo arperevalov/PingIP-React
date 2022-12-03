@@ -13,7 +13,7 @@ interface CamerasProps {
     isFetching: boolean
 }
 
-const Cameras = (props:CamerasProps) => {
+const CamerasLayout = (props:CamerasProps) => {
 
     const togglePopup = () => {
         props.setPopup({
@@ -57,4 +57,4 @@ const Cameras = (props:CamerasProps) => {
     
 }
 
-export default Cameras
+export default CamerasLayout

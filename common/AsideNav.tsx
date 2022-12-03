@@ -1,5 +1,6 @@
 import Link from "next/link"
 import React, { useEffect, useRef, useState } from "react"
+import CustomLink from "./CustomLink"
 import { IServers } from "./Interfaces"
 
 
@@ -34,12 +35,13 @@ const AsideNav = (props:AsideNavProps) => {
                 .sort((a,b) => { return a.id - b.id})
                 .map((i:IServers) => {
                     return <li className='item' key={i.id}>
-                            <Link href={`/servers/${i.id}`}
-                                className={({ isActive }) => (isActive ? "asideNav__link active" : "asideNav__link")}
+                            <CustomLink href={`/servers/${i.id}`}
+                                className="asideNav__link"
+                                activeClassName="active"
                             >
                                 <span className={`item__status ${i.status === true ? ' works' : ' notWorks'}`} />
                                 <span className='item__name'>{i.name}</span>
-                            </Link>
+                            </CustomLink>
                         </li>
                 })}
             </ul>

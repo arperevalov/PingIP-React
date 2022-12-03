@@ -1,6 +1,5 @@
-import Link from "next/link";
 import React from "react";
-// import { Link } from "react-router-dom";
+import CustomLink from "../CustomLink";
 import { IServers, ListType } from "../Interfaces";
 import List from "./List";
 
@@ -16,8 +15,18 @@ interface ListCotnainerProps {
 
 const ListCotnainer = (props: ListCotnainerProps) => {
 
+    const {
+        type,
+        getPing,
+        parentID,
+        setPopup,
+        parent,
+        servers,
+        cameras
+    } = props;
 
-    if(!props.parent && props.type === ListType.Servers) return <>
+
+    if(!parent && type === ListType.Servers) return <>
         <div className='list__legend'>
             <span>Статус</span>
             <span>Имя</span>
@@ -26,31 +35,31 @@ const ListCotnainer = (props: ListCotnainerProps) => {
             <span>Последний пинг</span>
         </div>
         <ul className='list__items'>
-            {props.servers ? props.servers
+            {servers ? servers
             .sort((a,b) => { return a.id - b.id})
             .map((i:IServers) => {
                 return <li className='list__itemsWrapper' key={i.id}>
-                    <Link href={'/servers/'+i.id} className='item'>
+                    <CustomLink activeClassName="" href={'/servers/'+i.id} className='item'>
                         <List
                             id={i.id}
                             name={i.name}
                             ip_address={i.ip_address}
                             last_ping={i.last_ping}
-                            description={i.description ? i.description : false}
+                            description={i.description ? i.description : ""}
                             status={i.status}
-                            getPing={props.getPing}
-                            setPopup={props.setPopup}
+                            getPing={getPing}
+                            setPopup={setPopup}
                             mac_address={i.mac_address}
                             type="server"
                         />
-                    </Link>
+                    </CustomLink>
                 </li>
                 }) : ''
             }
         </ul>
     </>
 
-    if(props.type === ListType.Cameras) return <>
+    if(type === ListType.Cameras) return <>
         <div className='list__legend'>
             <span>Статус</span>
             <span>Имя</span>
@@ -59,7 +68,7 @@ const ListCotnainer = (props: ListCotnainerProps) => {
             <span>Последний пинг</span>
         </div>
         <ul className='list__items'>
-        { props.parent.children && props.parent.children.length > 0 ? props.parent.children
+        { parent.children && parent.children.length > 0 ? parent.children
             .sort((a,b) => { return a.id - b.id})
             .map((i:IServers) => {
                 return <li className='list__itemsWrapper' key={i.id}>
@@ -69,11 +78,11 @@ const ListCotnainer = (props: ListCotnainerProps) => {
                             name={i.name}
                             ip_address={i.ip_address}
                             last_ping={i.last_ping}
-                            description={i.description ? i.description : false}
+                            description={i.description ? i.description : ''}
                             status={i.status}
-                            getPing={props.getPing}
-                            parentID={props.parent.id}
-                            setPopup={props.setPopup}
+                            getPing={getPing}
+                            parentID={parent.id}
+                            setPopup={setPopup}
                             mac_address={i.mac_address}
                             type="string"
                         />

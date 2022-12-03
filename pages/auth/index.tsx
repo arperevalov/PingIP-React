@@ -1,10 +1,10 @@
 import React, { useContext } from "react"
 import { connect } from "react-redux"
 import { APIRouter, APIRouterActions } from "../../common/API/APIRouter"
-import { SysMessagesContext } from "./../../common/Providers/SysMessagesProvider"
-import { setUser } from "./../../Redux/AuthReducer"
-import { RootState } from "./../../Redux/store"
-import Auth from "./AuthLayout"
+import { SysMessagesContext } from "../../common/Providers/SysMessagesProvider"
+import { setUser } from "../../Redux/AuthReducer"
+import { RootState } from "../../Redux/store"
+import AuthLayout from "./AuthLayout"
 
 interface IAuthAPI {
     setUser: CallableFunction
@@ -21,15 +21,15 @@ const AuthAPI = (props:IAuthAPI) => {
         }).then((r) => {
             props.setUser(r)})
         .catch(e => {
-            // message.notifyUser({
-            //     type: MessageType.error,
-            //     text: e
-            // })
+            message.notifyUser({
+                type: MessageType.error,
+                text: e
+            })
             throw new Error(e)
         })
     }
 
-    return <Auth {...props} requestToken={requestToken}/>
+    return <AuthLayout {...props} requestToken={requestToken}/>
 }
 
 const mapStateToProps = (state: RootState) => {

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { FormEvent, useRef } from 'react';
 import Input from '../Common/Input';
 import logo from './../../../static/images/logo.svg'
@@ -17,7 +18,7 @@ function Auth(props:AuthProps) {
     }
 
     return <div className='authPage'>
-    <img src={logo} alt="logo" className='authPage__logo'/>
+    <Image src={logo} alt="logo" className='authPage__logo'/>
     <form onSubmit={formSubmit} className="authForm" >
         <Input reference={loginInput} placeholder=" " label="Логин" type="text" isRequired={true}/>
         <Input reference={passwordInput} placeholder=" " label="Пароль" type="password" isRequired={true}/>

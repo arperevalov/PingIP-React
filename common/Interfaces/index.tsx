@@ -21,7 +21,7 @@ export interface IServers {
     id: number
     name: string
     ip_address: string
-    description?: string | boolean
+    description?: string
     status: boolean
     last_ping?: string
     mac_address: string

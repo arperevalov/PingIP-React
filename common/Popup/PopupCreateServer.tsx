@@ -4,6 +4,7 @@ import { MessageType, PopupType } from "../Interfaces"
 import { SysMessagesContext } from "./../../common/Providers/SysMessagesProvider"
 import Input from "../Input"
 import cross from './../../public/images/cross.svg'
+import Image from "next/image"
 
 interface PopupCreateServerProps {
     name: string
@@ -62,7 +63,7 @@ const PopupCreateServer = (props:PopupCreateServerProps) => {
                 <button className="popup__cross" onClick={()=>{
                     props.setPopup({type: PopupType.default})
                     }}>
-                    <img src={cross} alt="" />
+                    <Image src={cross} alt="" />
                 </button>
             </div>
             <form className="popup__form" onSubmit={submitForm}>

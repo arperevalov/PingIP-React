@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { FormEvent, useRef, useEffect } from 'react';
 import Input from '../../common/Input';
 import logo from './../../public/images/logo.svg'
@@ -6,7 +7,7 @@ interface AuthProps {
     requestToken: CallableFunction
 }
 
-function Auth(props:AuthProps) {
+const AuthLayout = (props:AuthProps) => {
 
     const loginInput = useRef<HTMLInputElement>(null);
     const passwordInput = useRef<HTMLInputElement>(null);
@@ -17,7 +18,7 @@ function Auth(props:AuthProps) {
     }
 
     return <div className='authPage'>
-    <img src={logo} alt="logo" className='authPage__logo'/>
+    <Image src={logo} alt="logo" className='authPage__logo'/>
     <form onSubmit={formSubmit} className="authForm" >
         <Input reference={loginInput} placeholder=" " label="Логин" type="text" isRequired={true}/>
         <Input reference={passwordInput} placeholder=" " label="Пароль" type="password" isRequired={true}/>
@@ -26,4 +27,4 @@ function Auth(props:AuthProps) {
     </div>
 }
 
-export default Auth;
+export default AuthLayout;
