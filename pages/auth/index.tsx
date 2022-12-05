@@ -1,6 +1,8 @@
+import { useRouter } from "next/router"
 import React, { useContext } from "react"
 import { connect } from "react-redux"
 import { APIRouter, APIRouterActions } from "../../common/API/APIRouter"
+import withAuth from "../../common/HOC/withAuth"
 import { SysMessagesContext } from "../../common/Providers/SysMessagesProvider"
 import { setUser } from "../../Redux/AuthReducer"
 import { RootState } from "../../Redux/store"
@@ -19,7 +21,10 @@ const AuthAPI = (props:IAuthAPI) => {
             login,
             password
         }).then((r) => {
-            props.setUser(r)})
+            props.setUser(r)
+            const router = useRouter();
+            router.push('/servers')
+        })
         .catch(e => {
             message.notifyUser({
                 type: MessageType.error,
@@ -41,4 +46,4 @@ const AuthContainer = connect(mapStateToProps,{
     setUser
 })(AuthAPI)
 
-export default AuthContainer
+export default withAuth(AuthContainer)

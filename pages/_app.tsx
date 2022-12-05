@@ -11,7 +11,16 @@ function logOut () {
   return ''
 }
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps, ...appRoutes }: AppProps) {
+  
+  if (appRoutes.router.pathname.includes('/auth')) return <Provider store={store}>
+    <SysMessagesProvider>
+        <PopupProvider />
+        <Component {...pageProps} />
+    </SysMessagesProvider>
+  </Provider>
+  
+
   return <Provider store={store}>
     <SysMessagesProvider>
         <Header logOut={logOut}></Header>

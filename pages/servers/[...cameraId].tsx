@@ -9,6 +9,7 @@ import { setPopup } from "../../Redux/AppReducer";
 import { RootState } from "../../Redux/store";
 import { useRouter } from "next/router";
 import CamerasLayout from "./CamerasLayout";
+import withAuth from "../../common/HOC/withAuth";
 
 interface ICamerasAPI {
     servers: IServers[]
@@ -127,4 +128,4 @@ const CamerasContainer = connect(MapStateToProps,{
     setPopup
 })(CamerasAPI)
 
-export default CamerasContainer
+export default withAuth(CamerasContainer)

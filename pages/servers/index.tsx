@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react"
-import { IServers } from "../../common/Interfaces"
+import { useEffect, useContext } from "react"
+import { IServers, MessageType } from "../../common/Interfaces"
 import { RootState } from "../../Redux/store"
 import ServersLayout from "./ServersLayout"
 import { connect } from "react-redux"
 import { setPing, setServers } from "../../Redux/ServersReducer"
 import { setFetching, setPopup } from "../../Redux/AppReducer"
 import { APIRouter, APIRouterActions } from "../../common/API/APIRouter"
+import withAuth from "../../common/HOC/withAuth"
+import { SysMessagesContext } from "../../common/Providers/SysMessagesProvider"
 
 interface IServersAPI {
     servers: IServers[]
@@ -19,8 +21,7 @@ interface IServersAPI {
 
 const ServersAPI = (props: IServersAPI) => {
 
-    const [servers, setServers] = useState(props.servers);
-    // const message = useContext(SysMessagesContext)
+    const message = useContext(SysMessagesContext)
 
     const getServers = async () => {
         
@@ -32,10 +33,10 @@ const ServersAPI = (props: IServersAPI) => {
             props.setFetching(false)
         }).catch(e => {
             props.setFetching(false)
-            // message.notifyUser({
-            //     type: MessageType.error,
-            //     text: e
-            // })
+            message.notifyUser({
+                type: MessageType.error,
+                text: e
+            })
             throw new Error(e)
         })  
 
@@ -49,10 +50,10 @@ const ServersAPI = (props: IServersAPI) => {
             props.setServers(r)
         }).catch(e => {
             props.setFetching(false)
-            // message.notifyUser({
-            //     type: MessageType.error,
-            //     text: e
-            // })
+            message.notifyUser({
+                type: MessageType.error,
+                text: e
+            })
             throw new Error(e)
         })   
     }
@@ -66,10 +67,10 @@ const ServersAPI = (props: IServersAPI) => {
             props.setFetching(false)
         }).catch(e => {
             props.setFetching(false)
-            // message.notifyUser({
-            //     type: MessageType.error,
-            //     text: e
-            // })
+            message.notifyUser({
+                type: MessageType.error,
+                text: e
+            })
             throw new Error(e)
         })   
     }
@@ -103,4 +104,4 @@ const ServersContainer = connect(MapStateToProps,{
     setPopup
 })(ServersAPI)
 
-export default ServersContainer
+export default withAuth(ServersContainer)

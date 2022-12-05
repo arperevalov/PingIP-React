@@ -8,6 +8,7 @@ import { setLogs } from "../../Redux/LogsReducer";
 import { setFetching } from "../../Redux/AppReducer";
 import { RootState } from "../../Redux/store";
 import LogsLayout from "./LogsLayout";
+import withAuth from "../../common/HOC/withAuth";
 
 interface LogsPageAPIProps  {
     logs: ILogs[],
@@ -56,4 +57,4 @@ const LogsPageContainer = connect(mapStateToProps,{
     setLogs
 })(LogsPageAPI)
 
-export default LogsPageContainer
+export default withAuth(LogsPageContainer)
