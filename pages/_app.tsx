@@ -5,17 +5,14 @@ import './../src/sass/index.sass'
 import PopupProvider from '../common/Providers/PopupProvider'
 import Header from '../common/Header'
 import SysMessagesProvider from '../common/Providers/SysMessagesProvider'
-
-// TEMPORARY FUNCTION. DELETE
-function logOut () {
-  return ''
-}
+import PreloaderProvider from '../common/Providers/PreloaderProvider'
 
 export default function App({ Component, pageProps, ...appRoutes }: AppProps) {
   
   if (appRoutes.router.pathname.includes('/auth')) return <Provider store={store}>
     <SysMessagesProvider>
         <PopupProvider />
+        <PreloaderProvider/>
         <Component {...pageProps} />
     </SysMessagesProvider>
   </Provider>
@@ -23,8 +20,9 @@ export default function App({ Component, pageProps, ...appRoutes }: AppProps) {
 
   return <Provider store={store}>
     <SysMessagesProvider>
-        <Header logOut={logOut}></Header>
+        <Header/>
         <PopupProvider />
+        <PreloaderProvider/>
         <Component {...pageProps} />
     </SysMessagesProvider>
   </Provider>

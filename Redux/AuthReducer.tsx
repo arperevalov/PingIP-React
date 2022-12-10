@@ -1,6 +1,6 @@
 import { AnyAction } from "redux"
 
-enum Actions {
+export enum Actions {
     SET_BEARER,
     LOG_OUT
 }

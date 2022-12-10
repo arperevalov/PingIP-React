@@ -67,8 +67,11 @@ const ServersReducer = (state = defaultValues, action: AnyAction) => {
 
         case Actions.setCameraPing:
             let parentServerID = getServerID(action.parentID, state.servers),
-            parentServer = state.servers[parentServerID],
-            childID = getServerID(action.id, parentServer.children)
+            parentServer = state.servers[parentServerID];
+            
+            if (!parentServer.children) parentServer.children = []
+
+            let childID = getServerID(action.id, parentServer.children)
 
             parentServer.children[childID] = {
                 ...parentServer.children[childID],

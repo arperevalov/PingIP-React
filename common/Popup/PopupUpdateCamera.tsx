@@ -132,7 +132,7 @@ const PopupUpdateCamera = (props:PopupUpdateCameraProps) => {
             <form className="popup__form" onSubmit={submitForm}>
                 <Input reference={nameInput} placeholder="Например, Камера #1" label="Имя" type="text" isRequired={true} inputDefault={props.name}/>
                 <Input reference={ipInput} placeholder="255.255.255.0" label="IP" type="text" isRequired={true} inputDefault={props.ip_address}/>
-                <Input reference={macInput} placeholder="255.255.255.0" label="MAC" type="text" isRequired={false} inputDefault={props.mac_address}/>
+                <Input reference={macInput} placeholder="MM:MM:MM:SS:SS:SS" label="MAC" type="text" isRequired={false} inputDefault={props.mac_address}/>
                 <Input reference={descriptionInput} placeholder="Короткое описание для важного объекта" label="Описание" type="text" inputDefault={props.description ? props.description : ''}/>
                 <div className="popup__buttonWrapper">
                     <button className='button button-4' type="button" onClick={()=>{setDeleteStatePopup(true)}}>Удалить</button>   
