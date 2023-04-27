@@ -7,12 +7,10 @@ export enum Actions {
 
 interface AuthReducerState {
     hasBearer: boolean
-    username: string | null
 }
 
 const defaultValues: AuthReducerState = {
     hasBearer: false,
-    username: null
 }
 
 const AuthReducer = (state = defaultValues, action: AnyAction) => {
@@ -23,7 +21,6 @@ const AuthReducer = (state = defaultValues, action: AnyAction) => {
             return {
                 ...state,
                 hasBearer: true,
-                username: action.user.username
             }
             break;
         case Actions.LOG_OUT:
@@ -31,7 +28,6 @@ const AuthReducer = (state = defaultValues, action: AnyAction) => {
             return {
                 ...state,
                 hasBearer: false,
-                username: null
             }
             break;
     
