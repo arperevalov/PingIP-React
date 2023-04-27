@@ -1,17 +1,12 @@
 import Image from 'next/image'
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Actions, logOut } from '../Redux/AuthReducer'
-import { RootState } from '../Redux/store'
+import { useDispatch } from 'react-redux'
+import { Actions } from '../Redux/AuthReducer'
 import logo from './../public/images/logo.svg'
 import CustomLink from './CustomLink'
 
-interface HeaderProps {
-}
+const Header = () => {
 
-const Header = (props:HeaderProps) => {
-
-    const hasBearer = useSelector((store:RootState)=> {return store.AuthPage.hasBearer});
     const dispatch = useDispatch()
     const logOutAction = () => {
         dispatch({type: Actions.LOG_OUT})
