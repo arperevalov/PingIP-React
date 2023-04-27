@@ -7,7 +7,7 @@ import { setPing, setServers } from "../../Redux/ServersReducer"
 import { setFetching, setPopup } from "../../Redux/AppReducer"
 import { APIRouter, APIRouterActions } from "../../common/API/APIRouter"
 import withAuth from "../../common/HOC/withAuth"
-import { SysMessagesContext } from "../../common/Providers/SysMessagesProvider"
+import { SysMessageType, SysMessagesContext } from "../../common/Providers/SysMessagesProvider"
 
 interface IServersAPI {
     servers: IServers[]
@@ -21,7 +21,7 @@ interface IServersAPI {
 
 const ServersAPI = (props: IServersAPI) => {
 
-    const message = useContext(SysMessagesContext)
+    const message = useContext(SysMessagesContext) as SysMessageType;
 
     const getServers = async () => {
         
