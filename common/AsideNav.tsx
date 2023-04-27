@@ -10,11 +10,11 @@ interface AsideNavProps {
 
 const AsideNav = (props:AsideNavProps) => {
 
-    const [displayBlock, setDisplayBlock] = useState(false),
-    showNavButton = useRef(null)
+    const [displayBlock, setDisplayBlock] = useState(false)
+    const showNavButton = useRef<HTMLButtonElement | null>(null)
 
     const handleOutsideClick = (event: Event) => {
-        if (showNavButton.current && !showNavButton.current.contains(event.target)){
+        if (event.target !== showNavButton.current) {
             setDisplayBlock(false)
         }
     }
