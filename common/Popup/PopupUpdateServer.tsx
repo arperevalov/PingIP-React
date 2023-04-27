@@ -120,24 +120,20 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
                 </button>
             </div>
             <form className="popup__form" onSubmit={handleSubmit(submitForm)}>
-                {/* <Input reference={nameInput} placeholder="Например, Сервер #1" label="Имя" type="text" isRequired={true} inputDefault={props.name}/>
-                <Input reference={ipInput} placeholder="255.255.255.0" label="IP" type="text" isRequired={true} inputDefault={props.ip_address}/>
-                <Input reference={macInput} placeholder="MM:MM:MM:SS:SS:SS" label="MAC" type="text" isRequired={false} inputDefault={props.mac_address}/>
-                <Input reference={descriptionInput} placeholder="Короткое описание для важного объекта" label="Описание" type="text" inputDefault={props.description ? props.description : ''}/> */}
                 <label className="input">
-                    <input {...register("name")} className="input__input" placeholder="Например, Камера #1" type="text" required={true}/>
+                    <input {...register("name")} className="input__input" placeholder="Например, Камера #1" type="text" required={true} defaultValue={props.name}/>
                     <span className="input__label" >Имя</span>
                 </label>
                 <label className="input">
-                    <input {...register("ip_address")} className="input__input" placeholder="255.255.255.0" type="text" required={true}/>
+                    <input {...register("ip_address")} className="input__input" placeholder="255.255.255.0" type="text" required={true} defaultValue={props.ip_address}/>
                     <span className="input__label">IP</span>
                 </label>
                 <label className="input">
-                    <input {...register("mac_address")} className="input__input" placeholder="MM:MM:MM:SS:SS:SS" type="text"/>
+                    <input {...register("mac_address")} className="input__input" placeholder="MM:MM:MM:SS:SS:SS" type="text" defaultValue={props.mac_address}/>
                     <span className="input__label">MAC</span>
                 </label>
                 <label className="input">
-                    <input {...register("description")} className="input__input" placeholder="Короткое описание для важного объекта" type="text"/>
+                    <input {...register("description")} className="input__input" placeholder="Короткое описание для важного объекта" type="text" defaultValue={props.description}/>
                     <span className="input__label">Описание</span>
                 </label>
                 <div className="popup__buttonWrapper">
