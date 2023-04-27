@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { connect } from "react-redux";
 import { APIRouter, APIRouterActions } from "../../common/API/APIRouter";
 import { IServers, MessageType } from "../../common/Interfaces";
-import { SysMessagesContext } from "../../common/Providers/SysMessagesProvider";
+import { SysMessageType, SysMessagesContext } from "../../common/Providers/SysMessagesProvider";
 import { setServerChilren, setCameraPing, setServers } from "../../Redux/ServersReducer";
 import { setFetching } from "../../Redux/AppReducer";
 import { setPopup } from "../../Redux/AppReducer";
@@ -23,11 +23,12 @@ interface ICamerasAPI {
 }
 
 const CamerasAPI = (props: ICamerasAPI) => {
-    const message = useContext(SysMessagesContext)
+    const message = useContext(SysMessagesContext) as SysMessageType;
 
     const router = useRouter()
-    const { cameraId } = router.query;
-    const prodId:number = parseInt(cameraId);
+    const { serverId } = router.query;
+    
+    const prodId:number = parseInt(serverId);
 
     const getServerID = (id:number, servers:IServers[]) => {
         return servers.findIndex(i => {
