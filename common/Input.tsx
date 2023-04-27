@@ -1,23 +1,28 @@
 interface IInput {
     type: string
     placeholder: string
-    label: string
+    label: string,
+    name?: string,
     isRequired?: boolean
-    reference: any
     inputDefault?: string | number
-    onChangeAction?: any
+    onChange: any
+    onBlur?: React.ChangeEventHandler<HTMLInputElement>
+    reference: any
 }
 
 
 const Input = (props:IInput) => {
+    debugger
     return <label className="input">
-        <input className="input__input" 
-            ref={props.reference} 
+        <input className="input__input"
+            ref={props.reference}
+            name={props.name}
             type={props.type} 
             placeholder={props.placeholder}
             required={props.isRequired ? true : false}
             defaultValue={props.inputDefault}
-            onInput={props.onChangeAction}
+            onChange={props.onChange}
+            onBlur={props.onBlur}
             />
             
         <span className="input__label">{props.label}</span>

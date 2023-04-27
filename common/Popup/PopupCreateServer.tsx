@@ -1,8 +1,8 @@
-import React, { FormEvent, useContext, useEffect, useRef } from "react"
+import React, { useContext, useEffect } from "react"
 import { APIRouter, APIRouterActions } from "../API/APIRouter"
 import { MessageType, PopupType } from "../Interfaces"
-import { SysMessagesContext } from "./../../common/Providers/SysMessagesProvider"
-import Input from "../Input"
+import { SysMessageType, SysMessagesContext } from "./../../common/Providers/SysMessagesProvider"
+import { useForm } from "react-hook-form";
 import cross from './../../public/images/cross.svg'
 import Image from "next/image"
 
@@ -18,21 +18,14 @@ interface PopupCreateServerProps {
 
 const PopupCreateServer = (props:PopupCreateServerProps) => {
 
-    const nameInput = useRef<HTMLInputElement>(null),
-        ipInput = useRef<HTMLInputElement>(null),
-        macInput = useRef<HTMLInputElement>(null),
-        descriptionInput = useRef<HTMLInputElement>(null),
-        message = useContext(SysMessagesContext)
+    const { register, handleSubmit } = useForm();
+    const message = useContext(SysMessagesContext) as SysMessageType
 
-    const submitForm = (e:FormEvent) => {
-        e.preventDefault()
+    const submitForm = (formData: any) => {
         props.setFetching(true)
         APIRouter(APIRouterActions.createServer, { 
             id: props.id,
-            name: nameInput.current.value,
-            ip_address: ipInput.current.value,
-            mac_address: macInput.current.value,
-            description: descriptionInput.current.value})
+            ...formData})
         .then(r => {
             props.setFetching(false)
             props.setUpdates()
@@ -66,11 +59,23 @@ const PopupCreateServer = (props:PopupCreateServerProps) => {
                     <Image src={cross} alt="" />
                 </button>
             </div>
-            <form className="popup__form" onSubmit={submitForm}>
-                <Input reference={nameInput} placeholder="Например, Камера #1" label="Имя" type="text" isRequired={true}/>
-                <Input reference={ipInput} placeholder="255.255.255.0" label="IP" type="text" isRequired={true}/>
-                <Input reference={macInput} placeholder="MM:MM:MM:SS:SS:SS" label="MAC" type="text" isRequired={false}/>
-                <Input reference={descriptionInput} placeholder="Короткое описание для важного объекта" label="Описание" type="text"/>
+            <form className="popup__form" onSubmit={handleSubmit(submitForm)}>
+                <label className="input">
+                    <input {...register("name")} className="input__input" placeholder="Например, Сервер #1" type="text" required={true}/>
+                    <span className="input__label" >Имя</span>
+                </label>
+                <label className="input">
+                    <input {...register("ip_address")} className="input__input" placeholder="255.255.255.0" type="text" required={true}/>
+                    <span className="input__label" >IP</span>
+                </label>
+                <label className="input">
+                    <input {...register("mac_address")} className="input__input" placeholder="MM:MM:MM:SS:SS:SS" type="text"/>
+                    <span className="input__label" >MAC</span>
+                </label>
+                <label className="input">
+                    <input {...register("description")} className="input__input" placeholder="Короткое описание для важного объекта" type="text"/>
+                    <span className="input__label" >Описание</span>
+                </label>
                 <div className="popup__buttonWrapperWide">
                     <button className='button button-super' type="submit">Сохранить изменения</button>
                 </div>

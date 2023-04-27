@@ -1,10 +1,11 @@
 import React, { FormEvent, useContext, useEffect, useRef, useState } from "react"
 import { APIRouter, APIRouterActions } from "../API/APIRouter"
 import { MessageType, PopupType } from "../Interfaces"
-import { SysMessagesContext } from "./../../common/Providers/SysMessagesProvider"
-import Input from "../Input"
+import { SysMessageType, SysMessagesContext } from "./../../common/Providers/SysMessagesProvider"
 import cross from './../../public/images/cross.svg'
 import Image from "next/image"
+import { useForm } from "react-hook-form"
+import Input from "../Input"
 
 interface PopupUpdateServerProps {
     name: string
@@ -20,24 +21,17 @@ interface PopupUpdateServerProps {
 
 const PopupUpdateServer = (props:PopupUpdateServerProps) => {
 
-    const nameInput = useRef<HTMLInputElement>(null),
-        ipInput = useRef<HTMLInputElement>(null),
-        macInput = useRef<HTMLInputElement>(null),
-        descriptionInput = useRef<HTMLInputElement>(null),
-        deleteInput = useRef<HTMLInputElement>(null),
-        message = useContext(SysMessagesContext),
+    const { register, handleSubmit } = useForm();
+    const deleteInput = useRef<HTMLInputElement>(null),
+        message = useContext(SysMessagesContext) as SysMessageType,
         [deleteStatePopup, setDeleteStatePopup] = useState(false),
         [disabledDeleteBtn, setDisabledDeleteBtn] = useState(true)
 
-    const submitForm = (e:FormEvent) => {
-        e.preventDefault()
+    const submitForm = (formData: any) => {
         props.setFetching(true)
         APIRouter(APIRouterActions.updateServer, {
             id: props.id,
-            name: nameInput.current.value,
-            ip_address: ipInput.current.value,
-            mac_address: macInput.current.value,
-            description: descriptionInput.current.value})
+            ...formData,})
         .then(r => {
             props.setFetching(false)
             props.setUpdates()
@@ -102,7 +96,7 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
                             label="Введите название сервера" 
                             type="text" 
                             isRequired={true}
-                            onChangeAction={deleteInputChange}/>
+                            onChange={deleteInputChange}/>
                     <div className="popup__buttonWrapperWide">
                         <button className='button button-1' type="button" onClick={()=>{setDeleteStatePopup(false)}}>Отменить</button>   
                         <button className='button button-5' type="submit" disabled={disabledDeleteBtn ? true : false}>Удалить сервер</button>
@@ -125,11 +119,27 @@ const PopupUpdateServer = (props:PopupUpdateServerProps) => {
                     <Image src={cross} alt="" />
                 </button>
             </div>
-            <form className="popup__form" onSubmit={submitForm}>
-                <Input reference={nameInput} placeholder="Например, Сервер #1" label="Имя" type="text" isRequired={true} inputDefault={props.name}/>
+            <form className="popup__form" onSubmit={handleSubmit(submitForm)}>
+                {/* <Input reference={nameInput} placeholder="Например, Сервер #1" label="Имя" type="text" isRequired={true} inputDefault={props.name}/>
                 <Input reference={ipInput} placeholder="255.255.255.0" label="IP" type="text" isRequired={true} inputDefault={props.ip_address}/>
                 <Input reference={macInput} placeholder="MM:MM:MM:SS:SS:SS" label="MAC" type="text" isRequired={false} inputDefault={props.mac_address}/>
-                <Input reference={descriptionInput} placeholder="Короткое описание для важного объекта" label="Описание" type="text" inputDefault={props.description ? props.description : ''}/>
+                <Input reference={descriptionInput} placeholder="Короткое описание для важного объекта" label="Описание" type="text" inputDefault={props.description ? props.description : ''}/> */}
+                <label className="input">
+                    <input {...register("name")} className="input__input" placeholder="Например, Камера #1" type="text" required={true}/>
+                    <span className="input__label" >Имя</span>
+                </label>
+                <label className="input">
+                    <input {...register("ip_address")} className="input__input" placeholder="255.255.255.0" type="text" required={true}/>
+                    <span className="input__label">IP</span>
+                </label>
+                <label className="input">
+                    <input {...register("mac_address")} className="input__input" placeholder="MM:MM:MM:SS:SS:SS" type="text"/>
+                    <span className="input__label">MAC</span>
+                </label>
+                <label className="input">
+                    <input {...register("description")} className="input__input" placeholder="Короткое описание для важного объекта" type="text"/>
+                    <span className="input__label">Описание</span>
+                </label>
                 <div className="popup__buttonWrapper">
                     <button className='button button-4' type="button" onClick={()=>{setDeleteStatePopup(true)}}>Удалить</button>   
                     <button className='button button-super' type="submit">Сохранить изменения</button>

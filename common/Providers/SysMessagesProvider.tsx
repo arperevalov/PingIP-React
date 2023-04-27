@@ -5,7 +5,11 @@ import { IMessage } from "../Interfaces"
 import { setSysMessage, shiftMessage } from "../../Redux/AppReducer"
 import { RootState } from "../../Redux/store"
 
-const SysMessagesContext = createContext(null)
+export type SysMessageType = {
+    notifyUser: CallableFunction
+}
+
+const SysMessagesContext = createContext <SysMessageType | null> (null)
 
 interface SysMessagesProviderAPIProps {
     sysMessages: IMessage[]
@@ -15,8 +19,6 @@ interface SysMessagesProviderAPIProps {
 }
 
 const SysMessagesProviderAPI = (props: SysMessagesProviderAPIProps) => {
-
-
     const notifyUser = (message: IMessage) => {
         props.setSysMessage(message)
         setTimeout(()=>{
