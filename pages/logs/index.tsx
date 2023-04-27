@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react";
 import { connect } from "react-redux";
 import { APIRouter, APIRouterActions } from "../../common/API/APIRouter";
 import { ILogs, MessageType } from "../../common/Interfaces";
-import { SysMessagesContext } from "../../common/Providers/SysMessagesProvider";
+import { SysMessageType, SysMessagesContext } from "../../common/Providers/SysMessagesProvider";
 import { setLogs } from "../../Redux/LogsReducer";
 import { setFetching } from "../../Redux/AppReducer";
 import { RootState } from "../../Redux/store";
@@ -19,7 +19,7 @@ interface LogsPageAPIProps  {
 
 const LogsPageAPI = (props: LogsPageAPIProps) => {
     
-    const message = useContext(SysMessagesContext)
+    const message = useContext(SysMessagesContext) as SysMessageType;
 
     const getLogs = () => {
         props.setFetching(true)

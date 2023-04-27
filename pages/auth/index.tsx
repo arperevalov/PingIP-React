@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import { APIRouter, APIRouterActions } from "../../common/API/APIRouter"
 import withAuth from "../../common/HOC/withAuth"
 import { MessageType } from "../../common/Interfaces"
-import { SysMessagesContext } from "../../common/Providers/SysMessagesProvider"
+import { SysMessageType, SysMessagesContext } from "../../common/Providers/SysMessagesProvider"
 import { setUser } from "../../Redux/AuthReducer"
 import { RootState } from "../../Redux/store"
 import AuthLayout from "./AuthLayout"
@@ -15,7 +15,7 @@ interface IAuthAPI {
 
 const AuthAPI = (props:IAuthAPI) => {
 
-    const message = useContext(SysMessagesContext)
+    const message = useContext(SysMessagesContext) as SysMessageType;
     const router = useRouter();
 
     const requestToken = (login:string, password: string) => {
